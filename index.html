@@ -60,7 +60,61 @@
   }
   .fs-btn:active{ transform:scale(.9); }
   .fs-btn.is-on{ color:var(--accent); border-color:var(--accent-dim); }
-  .fs-btn svg, .close-btn svg{ width:18px; height:18px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+  .fs-btn svg, .close-btn svg{ width:18px; height:18px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; pointer-events:none; }
+  .close-btn svg{ width:16px; height:16px; }
+
+  /* ---------- Background texture ---------- */
+  #stage::before{
+    content:""; position:absolute; inset:0; pointer-events:none; z-index:0;
+    opacity:.5; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+  }
+  .screen, .icon-row{ position:relative; z-index:1; }
+
+  /* ---------- Header icon row / clock ---------- */
+  .icon-row{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; justify-content:flex-end; }
+  .clock-pill{ color:var(--text-dim); font-size:13px; font-variant-numeric:tabular-nums; min-width:44px; text-align:right; }
+
+  /* ---------- Sleep mode ---------- */
+  #sleep-overlay{
+    position:fixed; inset:0; z-index:50; background:#000;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    opacity:0; pointer-events:none; transition: opacity .5s ease;
+  }
+  #sleep-overlay.active{ opacity:1; pointer-events:auto; }
+  .sleep-clock{ font-size:64px; font-weight:800; color:#2a2a2a; letter-spacing:-0.02em; transition:color .6s ease; }
+  .sleep-clock.dim{ color:#1c1c1c; }
+  .sleep-date{ font-size:14px; color:#333; margin-top:8px; }
+  .sleep-hint{ position:absolute; bottom:40px; font-size:12px; color:#2a2a2a; letter-spacing:.04em; }
+
+  /* ---------- Stats screen ---------- */
+  .stat-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:18px; }
+  .stat-box{ background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:16px; }
+  .stat-box .v{ font-size:26px; font-weight:800; }
+  .stat-box .l{ font-size:11.5px; color:var(--text-dim); font-weight:700; margin-top:2px; }
+  .chart-box{ background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:16px; margin-top:14px; }
+  .chart-box .l{ font-size:11.5px; color:var(--text-dim); font-weight:700; margin-bottom:10px; }
+  .chart-bars{ display:flex; align-items:flex-end; gap:6px; height:90px; }
+  .chart-bars i{ flex:1; background:var(--accent); border-radius:4px 4px 0 0; min-height:3px; opacity:.9; transition:height .4s ease; }
+  .chart-bars i.empty{ background:var(--line); }
+  .log-list{ margin-top:14px; display:flex; flex-direction:column; gap:8px; overflow-y:auto; flex:1; padding-bottom:10px; }
+  .log-row{ background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:12px 14px; display:flex; justify-content:space-between; align-items:center; }
+  .log-row .t{ font-weight:700; font-size:14px; }
+  .log-row .d{ font-size:12px; color:var(--text-dim); margin-top:2px; }
+  .log-row .v{ font-weight:800; color:var(--accent); font-size:14px; text-align:right; }
+  .log-row .v small{ display:block; color:var(--text-dim); font-weight:600; font-size:11px; }
+  .empty-note{ color:var(--text-dim); font-size:13.5px; margin-top:18px; text-align:center; }
+
+  /* ---------- Settings / sync panel ---------- */
+  .settings-panel{ background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:16px; margin-top:14px; }
+  .settings-panel .l{ font-size:11.5px; color:var(--text-dim); font-weight:700; margin-bottom:8px; }
+  .settings-panel input{
+    width:100%; background:var(--bg); border:1px solid var(--line); border-radius:10px;
+    color:var(--text); padding:11px 12px; font-size:13.5px; margin-bottom:8px; font-family:inherit;
+  }
+  .settings-panel .status{ font-size:12px; color:var(--text-dim); margin-top:6px; }
+  .settings-panel .status.ok{ color:var(--accent); }
+  .settings-panel .status.err{ color:var(--rest); }
 
   /* ---------- Screen management ---------- */
   .screen{
@@ -239,10 +293,13 @@
   <div class="screen active" id="screen-home">
     <div class="brand">
       <h1>RACK<span>ED</span></h1>
-      <div style="display:flex; align-items:center; gap:8px;">
+      <div class="icon-row">
+        <div class="clock-pill" id="clock-pill"></div>
         <div class="date-pill" id="today-pill"></div>
-        <div class="fs-btn is-on" id="sound-btn" title="Toggle sound"></div>
-        <div class="fs-btn" id="fs-btn" title="Toggle fullscreen"></div>
+        <div class="fs-btn" id="stats-btn" title="Stats & log"><svg viewBox="0 0 24 24"><line x1="18" x2="18" y1="20" y2="10"/><line x1="12" x2="12" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="14"/></svg></div>
+        <div class="fs-btn is-on" id="sound-btn" title="Toggle sound"><svg viewBox="0 0 24 24"><path d="M11 5 6 9H2v6h4l5 4V5Z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg></div>
+        <div class="fs-btn" id="fs-btn" title="Toggle fullscreen"><svg viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg></div>
+        <div class="fs-btn" id="sleep-btn" title="Sleep mode"><svg viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></div>
       </div>
     </div>
 
@@ -274,7 +331,7 @@
         <div class="wk-exercise wk-exercise-swap" id="wk-exercise">Bench Press</div>
         <div class="wk-progress-txt" id="wk-progress-txt">Set 1 of 4</div>
       </div>
-      <div class="close-btn" id="close-btn"></div>
+      <div class="close-btn" id="close-btn"><svg viewBox="0 0 24 24"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg></div>
     </div>
 
     <div class="barwrap" id="set-dots"></div>
@@ -349,21 +406,50 @@
     <button class="btn btn-primary" id="done-btn">Back Home</button>
   </div>
 
+  <!-- STATS / LOG -->
+  <div class="screen" id="screen-stats" style="overflow-y:auto;">
+    <div class="wk-top">
+      <div>
+        <div class="wk-tag">YOUR PROGRESS</div>
+        <div class="wk-exercise" style="font-size:28px;">Stats & Log</div>
+      </div>
+      <div class="close-btn" id="stats-close-btn"><svg viewBox="0 0 24 24"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg></div>
+    </div>
+
+    <div class="stat-grid" id="stat-grid"></div>
+
+    <div class="chart-box">
+      <div class="l">VOLUME · LAST 8 WORKOUTS</div>
+      <div class="chart-bars" id="chart-bars"></div>
+    </div>
+
+    <div class="section-label">Recent sessions</div>
+    <div class="log-list" id="log-list"></div>
+    <div class="empty-note" id="log-empty" style="display:none;">No workouts logged yet — finish one to see it here.</div>
+
+    <div class="section-label">Cloud sync (optional, free)</div>
+    <div class="settings-panel">
+      <div class="l">SUPABASE PROJECT URL</div>
+      <input type="text" id="sb-url" placeholder="https://xxxx.supabase.co" autocomplete="off">
+      <div class="l">SUPABASE ANON KEY</div>
+      <input type="text" id="sb-key" placeholder="public anon key" autocomplete="off">
+      <button class="btn btn-ghost" id="sb-save" style="width:100%; margin-top:4px;">Save & Sync</button>
+      <div class="status" id="sb-status">Not connected — data is stored on this device only.</div>
+    </div>
+  </div>
+
+  <!-- SLEEP OVERLAY -->
+  <div id="sleep-overlay">
+    <div class="sleep-clock" id="sleep-clock">12:00</div>
+    <div class="sleep-date" id="sleep-date">Monday, Sep 7</div>
+    <div class="sleep-hint">Tap to wake</div>
+  </div>
+
 </div>
 
 <script>
 (function(){
   "use strict";
-
-  /* ================= Icons (inline SVG, replaces emoji glyphs) ================= */
-  const ICONS = {
-    volumeOn: '<svg viewBox="0 0 24 24"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>',
-    volumeOff: '<svg viewBox="0 0 24 24"><path d="M11 5 6 9H2v6h4l5 4z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>',
-    expand: '<svg viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>',
-    collapse: '<svg viewBox="0 0 24 24"><path d="M9 3v4a2 2 0 0 1-2 2H3"/><path d="M15 3v4a2 2 0 0 0 2 2h4"/><path d="M9 21v-4a2 2 0 0 0-2-2H3"/><path d="M15 21v-4a2 2 0 0 1 2-2h4"/></svg>',
-    close: '<svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>',
-  };
-  document.getElementById("close-btn").innerHTML = ICONS.close;
 
   /* ================= CSV DATA (minimal-code data source) ================= */
   // day,exercise,tag,sets,reps_range,reps_default,weight
@@ -451,9 +537,14 @@ Lower B,Core,body,3,-,30,0`;
     };
   })();
 
+  const ICON_VOLUME_ON = '<svg viewBox="0 0 24 24"><path d="M11 5 6 9H2v6h4l5 4V5Z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>';
+  const ICON_VOLUME_OFF = '<svg viewBox="0 0 24 24"><path d="M11 5 6 9H2v6h4l5 4V5Z"/><line x1="22" x2="16" y1="9" y2="15"/><line x1="16" x2="22" y1="9" y2="15"/></svg>';
+  const ICON_MAXIMIZE = '<svg viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>';
+  const ICON_MINIMIZE = '<svg viewBox="0 0 24 24"><path d="M8 3v3a2 2 0 0 1-2 2H3"/><path d="M21 8h-3a2 2 0 0 1-2-2V3"/><path d="M3 16h3a2 2 0 0 1 2 2v3"/><path d="M16 21v-3a2 2 0 0 1 2-2h3"/></svg>';
+
   const soundBtn = document.getElementById("sound-btn");
   function syncSoundBtn(){
-    soundBtn.innerHTML = Sound.isEnabled() ? ICONS.volumeOn : ICONS.volumeOff;
+    soundBtn.innerHTML = Sound.isEnabled() ? ICON_VOLUME_ON : ICON_VOLUME_OFF;
     soundBtn.classList.toggle("is-on", Sound.isEnabled());
   }
   syncSoundBtn();
@@ -463,7 +554,7 @@ Lower B,Core,body,3,-,30,0`;
   const fsBtn = document.getElementById("fs-btn");
   function isFullscreen(){ return !!(document.fullscreenElement || document.webkitFullscreenElement); }
   function syncFsBtn(){
-    fsBtn.innerHTML = isFullscreen() ? ICONS.collapse : ICONS.expand;
+    fsBtn.innerHTML = isFullscreen() ? ICON_MINIMIZE : ICON_MAXIMIZE;
     fsBtn.classList.toggle("is-on", isFullscreen());
   }
   fsBtn.addEventListener("click", ()=>{
@@ -491,6 +582,53 @@ Lower B,Core,body,3,-,30,0`;
   }
   function saveHistory(h){ localStorage.setItem(HISTORY_KEY, JSON.stringify(h)); }
   let history = loadHistory();
+
+  /* ================= Workout log + stats ================= */
+  const LOG_KEY = "racked_log_v1";
+  const SB_KEY = "racked_sb_v1"; // {url, key}
+  function loadLog(){ try{ return JSON.parse(localStorage.getItem(LOG_KEY)) || []; }catch(e){ return []; } }
+  function saveLog(l){ localStorage.setItem(LOG_KEY, JSON.stringify(l)); }
+  let workoutLog = loadLog();
+
+  function loadSbConfig(){ try{ return JSON.parse(localStorage.getItem(SB_KEY)) || null; }catch(e){ return null; } }
+  function saveSbConfig(c){ localStorage.setItem(SB_KEY, JSON.stringify(c)); }
+
+  function addLogEntry(entry){
+    workoutLog.push(entry);
+    saveLog(workoutLog);
+    syncToSupabase([entry]).catch(()=>{});
+  }
+
+  /* ---- optional free backend: Supabase REST (no SDK needed) ---- */
+  async function syncToSupabase(entries){
+    const cfg = loadSbConfig();
+    if(!cfg || !cfg.url || !cfg.key) return;
+    const url = cfg.url.replace(/\/$/,"") + "/rest/v1/racked_logs";
+    await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "apikey": cfg.key,
+        "Authorization": "Bearer " + cfg.key,
+        "Prefer": "resolution=merge-duplicates,return=minimal"
+      },
+      body: JSON.stringify(entries.map(e=>({ id:e.id, date:e.date, type:e.type, sets:e.sets, volume:e.volume, minutes:e.minutes, exercises:e.exercises })))
+    });
+  }
+  async function pullFromSupabase(){
+    const cfg = loadSbConfig();
+    if(!cfg || !cfg.url || !cfg.key) return null;
+    const url = cfg.url.replace(/\/$/,"") + "/rest/v1/racked_logs?select=*&order=date.asc";
+    const res = await fetch(url, { headers: { "apikey": cfg.key, "Authorization": "Bearer " + cfg.key } });
+    if(!res.ok) throw new Error("HTTP " + res.status);
+    return res.json();
+  }
+  function mergeLogs(remote){
+    const byId = {};
+    [...workoutLog, ...remote].forEach(e=>{ byId[e.id] = e; });
+    workoutLog = Object.values(byId).sort((a,b)=> new Date(a.date) - new Date(b.date));
+    saveLog(workoutLog);
+  }
 
   function prevFor(exerciseName, fallbackWeight, fallbackReps){
     const h = history[exerciseName];
@@ -527,6 +665,7 @@ Lower B,Core,body,3,-,30,0`;
     workout: document.getElementById("screen-workout"),
     rest: document.getElementById("screen-rest"),
     done: document.getElementById("screen-done"),
+    stats: document.getElementById("screen-stats"),
   };
   function show(name){
     Object.values(screens).forEach(s=>s.classList.remove("active"));
@@ -818,6 +957,16 @@ Lower B,Core,body,3,-,30,0`;
     doneVolume.textContent = Math.round(volume).toLocaleString();
     doneTime.textContent = minutes;
 
+    addLogEntry({
+      id: "w_" + Date.now() + "_" + Math.random().toString(36).slice(2,7),
+      date: new Date().toISOString(),
+      type: session.type,
+      sets: totalSets,
+      volume: Math.round(volume),
+      minutes,
+      exercises: session.results.map(r=>({ exercise:r.exercise, weight:r.weight, reps:r.reps }))
+    });
+
     show("done");
     Sound.finish();
     fireConfetti();
@@ -843,8 +992,142 @@ Lower B,Core,body,3,-,30,0`;
     }
   }
 
+  /* ================= Stats & log screen ================= */
+  const statGrid = document.getElementById("stat-grid");
+  const chartBars = document.getElementById("chart-bars");
+  const logList = document.getElementById("log-list");
+  const logEmpty = document.getElementById("log-empty");
+  const statsBtn = document.getElementById("stats-btn");
+  const statsCloseBtn = document.getElementById("stats-close-btn");
+  const sbUrlInput = document.getElementById("sb-url");
+  const sbKeyInput = document.getElementById("sb-key");
+  const sbSaveBtn = document.getElementById("sb-save");
+  const sbStatus = document.getElementById("sb-status");
+
+  function computeStreak(log){
+    if(!log.length) return 0;
+    const days = new Set(log.map(e=> new Date(e.date).toDateString()));
+    let streak = 0;
+    let cursor = new Date();
+    // allow today to be "not yet worked out" without breaking streak
+    if(!days.has(cursor.toDateString())) cursor.setDate(cursor.getDate()-1);
+    while(days.has(cursor.toDateString())){
+      streak++;
+      cursor.setDate(cursor.getDate()-1);
+    }
+    return streak;
+  }
+
+  function renderStats(){
+    const log = workoutLog.slice().sort((a,b)=> new Date(a.date)-new Date(b.date));
+    const totalWorkouts = log.length;
+    const totalVolume = log.reduce((s,e)=>s+e.volume,0);
+    const weekAgo = Date.now() - 7*24*60*60*1000;
+    const weekVolume = log.filter(e=> new Date(e.date).getTime() >= weekAgo).reduce((s,e)=>s+e.volume,0);
+    const streak = computeStreak(log);
+
+    statGrid.innerHTML = `
+      <div class="stat-box"><div class="v">${totalWorkouts}</div><div class="l">TOTAL WORKOUTS</div></div>
+      <div class="stat-box"><div class="v">${streak}</div><div class="l">DAY STREAK</div></div>
+      <div class="stat-box"><div class="v">${totalVolume.toLocaleString()}</div><div class="l">LIFETIME VOLUME (LB)</div></div>
+      <div class="stat-box"><div class="v">${weekVolume.toLocaleString()}</div><div class="l">THIS WEEK (LB)</div></div>
+    `;
+
+    const last8 = log.slice(-8);
+    const maxV = Math.max(1, ...last8.map(e=>e.volume));
+    const slots = 8 - last8.length;
+    chartBars.innerHTML =
+      Array.from({length:slots}).map(()=>`<i class="empty" style="height:6%"></i>`).join("") +
+      last8.map(e=>`<i style="height:${Math.max(6, Math.round(e.volume/maxV*100))}%" title="${Math.round(e.volume)} lb"></i>`).join("");
+
+    const recent = log.slice().reverse().slice(0,12);
+    logEmpty.style.display = recent.length ? "none" : "block";
+    logList.innerHTML = recent.map(e=>{
+      const d = new Date(e.date);
+      return `<div class="log-row">
+        <div>
+          <div class="t">${e.type}</div>
+          <div class="d">${d.toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'})}</div>
+        </div>
+        <div class="v">${e.volume.toLocaleString()} lb<small>${e.sets} sets · ${e.minutes} min</small></div>
+      </div>`;
+    }).join("");
+
+    const cfg = loadSbConfig();
+    if(cfg){ sbUrlInput.value = cfg.url || ""; sbKeyInput.value = cfg.key || ""; }
+    sbStatus.textContent = cfg && cfg.url ? "Connected — syncing to your Supabase project." : "Not connected — data is stored on this device only.";
+    sbStatus.className = "status" + (cfg && cfg.url ? " ok" : "");
+  }
+
+  statsBtn.addEventListener("click", ()=>{ Sound.tap(); renderStats(); show("stats"); });
+  statsCloseBtn.addEventListener("click", ()=>{ Sound.tap(); show("home"); renderHome(); });
+
+  sbSaveBtn.addEventListener("click", async ()=>{
+    Sound.tap();
+    const url = sbUrlInput.value.trim();
+    const key = sbKeyInput.value.trim();
+    if(!url || !key){
+      saveSbConfig(null);
+      sbStatus.textContent = "Not connected — data is stored on this device only.";
+      sbStatus.className = "status";
+      return;
+    }
+    saveSbConfig({ url, key });
+    sbStatus.textContent = "Syncing…";
+    sbStatus.className = "status";
+    try{
+      await syncToSupabase(workoutLog);
+      const remote = await pullFromSupabase();
+      if(remote) mergeLogs(remote);
+      sbStatus.textContent = "Connected — synced " + workoutLog.length + " workouts.";
+      sbStatus.className = "status ok";
+      renderStats();
+    }catch(e){
+      sbStatus.textContent = "Couldn't connect. Check the URL/key and that the racked_logs table exists.";
+      sbStatus.className = "status err";
+    }
+  });
+
+  /* ================= Clock ================= */
+  const clockPill = document.getElementById("clock-pill");
+  const sleepClock = document.getElementById("sleep-clock");
+  const sleepDate = document.getElementById("sleep-date");
+  function tickClock(){
+    const now = new Date();
+    const timeStr = now.toLocaleTimeString(undefined,{ hour:'numeric', minute:'2-digit' });
+    clockPill.textContent = timeStr;
+    sleepClock.textContent = timeStr;
+    sleepDate.textContent = now.toLocaleDateString(undefined,{ weekday:'long', month:'short', day:'numeric' });
+  }
+  tickClock();
+  setInterval(tickClock, 1000);
+
+  /* ================= Sleep mode ================= */
+  const sleepBtn = document.getElementById("sleep-btn");
+  const sleepOverlay = document.getElementById("sleep-overlay");
+
+  function enterSleep(){
+    sleepOverlay.classList.add("active");
+    sleepClock.classList.remove("dim");
+  }
+  function exitSleep(){
+    sleepOverlay.classList.remove("active");
+  }
+  sleepBtn.addEventListener("click", ()=>{ Sound.tap(); enterSleep(); });
+  sleepOverlay.addEventListener("click", exitSleep);
+  // subtle breathing dim while asleep
+  setInterval(()=>{
+    if(sleepOverlay.classList.contains("active")) sleepClock.classList.toggle("dim");
+  }, 2200);
+
   /* ================= init ================= */
   renderHome();
+  (async ()=>{
+    try{
+      const remote = await pullFromSupabase();
+      if(remote) mergeLogs(remote);
+    }catch(e){ /* offline or not configured */ }
+  })();
 })();
 </script>
 </body>
