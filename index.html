@@ -427,14 +427,14 @@
     <div class="log-list" id="log-list"></div>
     <div class="empty-note" id="log-empty" style="display:none;">No workouts logged yet — finish one to see it here.</div>
 
-    <div class="section-label">Cloud sync (optional, free)</div>
+    <div class="section-label">Cloud sync</div>
     <div class="settings-panel">
       <div class="l">SUPABASE PROJECT URL</div>
       <input type="text" id="sb-url" placeholder="https://xxxx.supabase.co" autocomplete="off">
       <div class="l">SUPABASE ANON KEY</div>
       <input type="text" id="sb-key" placeholder="public anon key" autocomplete="off">
       <button class="btn btn-ghost" id="sb-save" style="width:100%; margin-top:4px;">Save & Sync</button>
-      <div class="status" id="sb-status">Not connected — data is stored on this device only.</div>
+      <div class="status ok" id="sb-status">Connected — syncing to your Supabase project.</div>
     </div>
   </div>
 
@@ -585,13 +585,26 @@ Lower B,Core,body,3,-,30,0`;
 
   /* ================= Workout log + stats ================= */
   const LOG_KEY = "racked_log_v1";
-  const SB_KEY = "racked_sb_v1"; // {url, key}
+  const SB_KEY = "racked_sb_v1"; // {url, key} — only set if user overrides the built-in project
+  const DEFAULT_SB = {
+    url: "https://euhijmxntwbclsjoguiu.supabase.co",
+    key: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV1aGlqbXhudHdiY2xzam9ndWl1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg3ODYyODAsImV4cCI6MjEwNDM2MjI4MH0.W5w3XJgkKNRlwWFAFi3jL0xhZdrKE-jtudFKN9257Wg"
+  };
   function loadLog(){ try{ return JSON.parse(localStorage.getItem(LOG_KEY)) || []; }catch(e){ return []; } }
   function saveLog(l){ localStorage.setItem(LOG_KEY, JSON.stringify(l)); }
   let workoutLog = loadLog();
 
-  function loadSbConfig(){ try{ return JSON.parse(localStorage.getItem(SB_KEY)) || null; }catch(e){ return null; } }
-  function saveSbConfig(c){ localStorage.setItem(SB_KEY, JSON.stringify(c)); }
+  function loadSbConfig(){
+    try{
+      const stored = JSON.parse(localStorage.getItem(SB_KEY));
+      if(stored && stored.url && stored.key) return stored;
+    }catch(e){}
+    return DEFAULT_SB;
+  }
+  function saveSbConfig(c){
+    if(c) localStorage.setItem(SB_KEY, JSON.stringify(c));
+    else localStorage.removeItem(SB_KEY);
+  }
 
   function addLogEntry(entry){
     workoutLog.push(entry);
@@ -1067,9 +1080,12 @@ Lower B,Core,body,3,-,30,0`;
     const url = sbUrlInput.value.trim();
     const key = sbKeyInput.value.trim();
     if(!url || !key){
-      saveSbConfig(null);
-      sbStatus.textContent = "Not connected — data is stored on this device only.";
-      sbStatus.className = "status";
+      saveSbConfig(null); // reverts to the built-in project
+      sbUrlInput.value = DEFAULT_SB.url;
+      sbKeyInput.value = DEFAULT_SB.key;
+      sbStatus.textContent = "Reverted to the built-in project.";
+      sbStatus.className = "status ok";
+      renderStats();
       return;
     }
     saveSbConfig({ url, key });
