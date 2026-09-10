@@ -316,7 +316,7 @@
       <p>Today's scheduled day is a rest day. Recovery is part of the program — but you can still train below if you want.</p>
     </div>
 
-    <div class="section-label">This week's split</div>
+    <div class="section-label">Your rotation</div>
     <div class="day-row" id="day-row"></div>
 
     <div class="section-label">Or pick a workout</div>
@@ -648,14 +648,32 @@ Lower B,Core,body,3,-,30,0`;
     return h ? h : { weight: fallbackWeight, reps: fallbackReps };
   }
 
-  /* ================= Schedule ================= */
-  // 4-day upper/lower split with rest days between: Mon Upper A, Tue Lower A,
-  // Wed rest, Thu Upper B, Fri Lower B, Sat/Sun rest.
-  const SCHEDULE = ["Upper A","Lower A","Rest","Upper B","Lower B","Rest","Rest"]; // Sun..Sat
-  const DAY_NAMES = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+  /* ================= Rotation (progress-based, not calendar-based) ================= */
+  // The order you cycle through. No "Rest" in here — since you won't be around
+  // to tap Complete on a rest day, rest days aren't a slot the app waits on.
+  // Whatever the last *logged* workout was, the next one up is next in this list.
+  const ROTATION = ["Upper A","Lower A","Upper B","Lower B"];
+  const ROTATION_KEY = "racked_rotation_v1";
 
+  function loadRotationIndex(){
+    const raw = localStorage.getItem(ROTATION_KEY);
+    const i = raw === null ? 0 : parseInt(raw,10);
+    return Number.isFinite(i) ? ((i % ROTATION.length) + ROTATION.length) % ROTATION.length : 0;
+  }
+  function saveRotationIndex(i){
+    localStorage.setItem(ROTATION_KEY, String(((i % ROTATION.length) + ROTATION.length) % ROTATION.length));
+  }
+  function advanceRotation(completedType){
+    // Whatever you just finished — suggested or manually picked — becomes the
+    // new "last completed" slot, and the rotation queues up the one right after it.
+    // e.g. finish Lower A -> Upper B is next, even if Upper A was queued before.
+    const completedIdx = ROTATION.indexOf(completedType);
+    if(completedIdx !== -1){
+      saveRotationIndex(completedIdx + 1);
+    }
+  }
   function todayType(){
-    return SCHEDULE[new Date().getDay()];
+    return ROTATION[loadRotationIndex()];
   }
 
   /* ================= Real-weight math ================= */
@@ -697,33 +715,30 @@ Lower B,Core,body,3,-,30,0`;
   const dayRow = document.getElementById("day-row");
   const pickRow = document.getElementById("pick-row");
 
-  let suggestedType = todayType();
+  let suggestedType = todayType(); // refreshed in renderHome() from the rotation pointer
   let activePlan = null; // the day type currently loaded into the workout screen
 
   function renderHome(){
     const now = new Date();
     todayPill.textContent = now.toLocaleDateString(undefined,{ weekday:'long', month:'short', day:'numeric' });
 
-    if(suggestedType === "Rest"){
-      heroCard.style.display = "none";
-      restNote.style.display = "flex";
-    } else {
-      heroCard.style.display = "block";
-      restNote.style.display = "none";
-      const plan = workouts[suggestedType] || [];
-      const totalSets = plan.reduce((s,r)=>s+r.sets,0);
-      heroEyebrow.textContent = "TODAY'S SUGGESTED SESSION";
-      heroTitle.textContent = suggestedType + " Body";
-      heroSub.textContent = `${plan.length} exercises · ${totalSets} sets`;
-      heroList.innerHTML = plan.map(r=>{
-        const p = prevFor(r.exercise, r.weight, r.reps_default);
-        return `<div class="li"><span>${r.exercise}</span><b>${p.weight} lb × ${p.reps}</b></div>`;
-      }).join("");
-    }
+    suggestedType = todayType();
+    heroCard.style.display = "block";
+    restNote.style.display = "none";
+    const plan = workouts[suggestedType] || [];
+    const totalSets = plan.reduce((s,r)=>s+r.sets,0);
+    heroEyebrow.textContent = "UP NEXT";
+    heroTitle.textContent = suggestedType + " Body";
+    heroSub.textContent = `${plan.length} exercises · ${totalSets} sets`;
+    heroList.innerHTML = plan.map(r=>{
+      const p = prevFor(r.exercise, r.weight, r.reps_default);
+      return `<div class="li"><span>${r.exercise}</span><b>${p.weight} lb × ${p.reps}</b></div>`;
+    }).join("");
 
-    dayRow.innerHTML = SCHEDULE.map((t,i)=>{
-      const isToday = i === now.getDay();
-      return `<div class="day-chip ${isToday?'is-today':''}">${DAY_NAMES[i]}<small>${t}</small></div>`;
+    const curIdx = loadRotationIndex();
+    dayRow.innerHTML = ROTATION.map((t,i)=>{
+      const isUp = i === curIdx;
+      return `<div class="day-chip ${isUp?'is-today':''}">${t}<small>${isUp ? 'Up next' : (workouts[t]||[]).length + ' ex'}</small></div>`;
     }).join("");
 
     pickRow.innerHTML = Object.keys(workouts).map(t=>
@@ -979,6 +994,8 @@ Lower B,Core,body,3,-,30,0`;
       minutes,
       exercises: session.results.map(r=>({ exercise:r.exercise, weight:r.weight, reps:r.reps }))
     });
+
+    advanceRotation(session.type);
 
     show("done");
     Sound.finish();
