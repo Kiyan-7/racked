@@ -62,6 +62,7 @@
   .fs-btn.is-on{ color:var(--accent); border-color:var(--accent-dim); }
   .fs-btn svg, .close-btn svg{ width:18px; height:18px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; pointer-events:none; }
   .close-btn svg{ width:16px; height:16px; }
+  .btn-icon{ width:17px; height:17px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; flex:none; }
 
   /* ---------- Background texture ---------- */
   #stage::before{
@@ -430,7 +431,10 @@
         <div class="l" id="real-weight-label">= 95 lb total on bar</div>
         <div class="v" id="real-weight-val">95 lb</div>
       </div>
-      <button class="btn btn-ghost" id="plate-open-btn" style="width:100%; margin-top:12px; height:44px; font-size:13.5px;">🏋️ Open Plate Visualizer</button>
+      <button class="btn btn-ghost" id="plate-open-btn" style="width:100%; margin-top:12px; height:44px; font-size:13.5px;">
+        <svg class="btn-icon" viewBox="0 0 24 24"><path d="M4 9v6M2 10v4M7 7v10"/><path d="M20 9v6M22 10v4M17 7v10"/><line x1="7" y1="12" x2="17" y2="12"/></svg>
+        Open Plate Visualizer
+      </button>
     </div>
 
     <div class="control-card">
@@ -542,7 +546,7 @@
         <div class="bar-sleeve bar-sleeve-left" id="sleeve-left"></div>
         <div class="bar-sleeve bar-sleeve-right" id="sleeve-right"></div>
       </div>
-      <div class="plate-hint">Drag a plate onto either sleeve to load it. Drag a loaded plate off, or tap it, to remove.</div>
+      <div class="plate-hint" id="plate-hint">Drag a plate onto either sleeve to load it. Drag a loaded plate off, or tap it, to remove.</div>
 
       <div class="plate-tray" id="plate-tray"></div>
 
@@ -730,12 +734,10 @@ Lower B,Core,body,3,-,30,0`;
     return typeOverrides[row.exercise] || row.tag;
   }
   const TAG_INFO = {
-    bar:      { label:"Barbell",   desc:"Plates added, +45 lb bar" },
-    cable:    { label:"Cable",     desc:"Stack setting, ÷2 pulley ratio" },
-    dumbbell: { label:"Dumbbell",  desc:"Per-dumbbell, doubled for the pair" },
-    plate:    { label:"Plate/Machine", desc:"Weight as shown, no adjustment" },
-    body:     { label:"Bodyweight", desc:"Plus any added load" },
-    none:     { label:"None",      desc:"No load — just reps" }
+    bar:      { label:"Barbell",  desc:"Plates added, +45 lb bar" },
+    cable:    { label:"Cable",    desc:"Stack setting, ÷2 pulley ratio" },
+    dumbbell: { label:"Dumbbell", desc:"Per-dumbbell, doubled for the pair" },
+    none:     { label:"None",     desc:"Weight as shown, no adjustment" }
   };
 
   /* ================= Workout log + stats ================= */
@@ -989,11 +991,11 @@ Lower B,Core,body,3,-,30,0`;
     updatePlateAffordance();
   }
 
-  // The plate visualizer only makes physical sense for a loaded barbell —
-  // hide the shortcut button for cable stacks, dumbbells, bodyweight, etc.
+  // Show the plate-loading shortcut for everything except dumbbells — a
+  // paired, per-hand implement isn't something you load plates onto here.
   function updatePlateAffordance(){
-    const isBar = currentEx.tag === "bar" || currentEx.tag === "plate";
-    plateOpenBtn.style.display = isBar ? "flex" : "none";
+    const showPlates = currentEx.tag !== "dumbbell";
+    plateOpenBtn.style.display = showPlates ? "flex" : "none";
   }
 
   function bump(el){ el.classList.remove("bump"); void el.offsetWidth; el.classList.add("bump"); }
@@ -1081,11 +1083,15 @@ Lower B,Core,body,3,-,30,0`;
   const plateTray = document.getElementById("plate-tray");
   const plateCloseBtn = document.getElementById("plate-close-btn");
   const plateDoneBtn = document.getElementById("plate-done-btn");
+  const plateHint = document.getElementById("plate-hint");
 
-  // Plates loaded on the visualizer bar (one side shown = the "per side" total;
-  // the app already treats the slider value as total plates added, so we mirror
-  // whatever's on the LEFT sleeve to both sides for the readout, gym-style).
-  let plateLoaded = []; // array of lb values currently on the (mirrored) sleeve
+  // Plates loaded on each sleeve independently. For a true barbell ("bar"),
+  // both sides are kept mirrored since a real bar has to stay symmetric.
+  // For anything else (cable stack, single-sided loading, etc.) the two
+  // sides are tracked and edited independently — no mirroring assumed.
+  let plateLoadedLeft = [];
+  let plateLoadedRight = [];
+  function requiresSymmetry(){ return currentEx && currentEx.tag === "bar"; }
 
   function plateDiscEl(lb, small){
     const info = PLATE_SET.find(p=>p.lb===lb) || { lb, color:"#93907F", size:small?52:60 };
@@ -1112,7 +1118,16 @@ Lower B,Core,body,3,-,30,0`;
         disc.classList.add("dragging");
       });
       disc.addEventListener("dragend", ()=> disc.classList.remove("dragging"));
-      disc.addEventListener("click", ()=>{ addPlate(p.lb); }); // tap-to-add on touch devices
+      // Tap-to-add on touch devices: symmetric exercises add to both sides
+      // at once; asymmetric ones add to whichever side has less on it so a
+      // single tap still does something sensible without a drag gesture.
+      disc.addEventListener("click", ()=>{
+        if(requiresSymmetry()){ addPlate("left", p.lb); addPlate("right", p.lb); }
+        else{
+          const side = plateTotalFor("left") <= plateTotalFor("right") ? "left" : "right";
+          addPlate(side, p.lb);
+        }
+      });
       const lbl = document.createElement("div");
       lbl.className = "lbl";
       lbl.textContent = p.lb + " lb";
@@ -1124,46 +1139,72 @@ Lower B,Core,body,3,-,30,0`;
   function renderSleeves(){
     sleeveLeft.innerHTML = "";
     sleeveRight.innerHTML = "";
-    plateLoaded.forEach(lb=>{
-      const l = plateDiscEl(lb, false);
-      const r = plateDiscEl(lb, false);
-      [l, r].forEach(el=>{
-        el.addEventListener("click", ()=> removePlate(lb));
-      });
-      sleeveLeft.appendChild(l);
-      sleeveRight.appendChild(r);
+    plateLoadedLeft.forEach(lb=>{
+      const el = plateDiscEl(lb, false);
+      el.addEventListener("click", ()=> removePlate("left", lb));
+      sleeveLeft.appendChild(el);
+    });
+    plateLoadedRight.forEach(lb=>{
+      const el = plateDiscEl(lb, false);
+      el.addEventListener("click", ()=> removePlate("right", lb));
+      sleeveRight.appendChild(el);
     });
   }
 
-  function plateTotalPerSide(){
-    return plateLoaded.reduce((s,lb)=>s+lb, 0);
-  }
+  function sleeveArr(side){ return side === "left" ? plateLoadedLeft : plateLoadedRight; }
+  function plateTotalFor(side){ return sleeveArr(side).reduce((s,lb)=>s+lb, 0); }
 
   function refreshPlateReadout(){
-    // per-side total × 2 = plates added to the bar (the app's "weight" value)
-    const perSide = plateTotalPerSide();
-    const totalAdded = perSide * 2;
-    plateReadoutLabel.textContent = currentEx && currentEx.tag === "plate" ? "WEIGHT (BOTH SIDES SHOWN)" : "PLATES ADDED (BOTH SIDES)";
-    plateReadoutVal.textContent = totalAdded;
+    const tag = currentEx && currentEx.tag;
+    let total;
+    if(requiresSymmetry()){
+      // symmetric: one side's total × 2 = total plates added to the bar
+      total = plateTotalFor("left") * 2;
+      plateReadoutLabel.textContent = "PLATES ADDED (BOTH SIDES)";
+    } else {
+      // asymmetric: sides can differ, so just add what's actually loaded
+      total = plateTotalFor("left") + plateTotalFor("right");
+      plateReadoutLabel.textContent = "TOTAL LOAD (BOTH SIDES SHOWN)";
+    }
+    plateReadoutVal.textContent = total;
   }
 
-  function addPlate(lb){
-    plateLoaded.push(lb);
-    plateLoaded.sort((a,b)=>b-a);
+  function addPlate(side, lb){
+    if(requiresSymmetry()){
+      plateLoadedLeft.push(lb); plateLoadedLeft.sort((a,b)=>b-a);
+      plateLoadedRight.push(lb); plateLoadedRight.sort((a,b)=>b-a);
+    } else {
+      const arr = sleeveArr(side);
+      arr.push(lb);
+      arr.sort((a,b)=>b-a);
+    }
     renderSleeves();
     refreshPlateReadout();
     Sound.step();
-    const last = sleeveLeft.lastElementChild;
+    const sleeveEl = side === "left" ? sleeveLeft : sleeveRight;
+    const last = sleeveEl.lastElementChild;
     if(last){ last.classList.add("pop"); setTimeout(()=>last.classList.remove("pop"), 220); }
   }
-  function removePlate(lb){
-    const idx = plateLoaded.indexOf(lb);
-    if(idx !== -1){ plateLoaded.splice(idx,1); renderSleeves(); refreshPlateReadout(); Sound.step(); }
+  function removePlate(side, lb){
+    if(requiresSymmetry()){
+      // keep both sides in lockstep for a real barbell
+      const li = plateLoadedLeft.indexOf(lb);
+      const ri = plateLoadedRight.indexOf(lb);
+      if(li !== -1) plateLoadedLeft.splice(li,1);
+      if(ri !== -1) plateLoadedRight.splice(ri,1);
+    } else {
+      const arr = sleeveArr(side);
+      const idx = arr.indexOf(lb);
+      if(idx !== -1) arr.splice(idx,1);
+    }
+    renderSleeves();
+    refreshPlateReadout();
+    Sound.step();
   }
 
-  // Break an arbitrary weight value down into the fewest standard plates per side.
-  function decomposeToPlates(perSideTarget){
-    let remaining = Math.max(0, perSideTarget);
+  // Break an arbitrary weight value down into the fewest standard plates.
+  function decomposeToPlates(target){
+    let remaining = Math.max(0, target);
     const out = [];
     for(const p of PLATE_SET){
       while(remaining + 1e-6 >= p.lb){
@@ -1174,14 +1215,14 @@ Lower B,Core,body,3,-,30,0`;
     return out;
   }
 
-  [sleeveLeft, sleeveRight].forEach(sleeve=>{
+  [ [sleeveLeft, "left"], [sleeveRight, "right"] ].forEach(([sleeve, side])=>{
     sleeve.addEventListener("dragover", (e)=>{ e.preventDefault(); sleeve.classList.add("drag-over"); });
     sleeve.addEventListener("dragleave", ()=> sleeve.classList.remove("drag-over"));
     sleeve.addEventListener("drop", (e)=>{
       e.preventDefault();
       sleeve.classList.remove("drag-over");
       const lb = parseFloat(e.dataTransfer.getData("text/plain"));
-      if(!isNaN(lb)) addPlate(lb);
+      if(!isNaN(lb)) addPlate(side, lb);
     });
   });
 
@@ -1190,7 +1231,18 @@ Lower B,Core,body,3,-,30,0`;
     Sound.tap();
     plateModalExercise.textContent = currentEx.exercise;
     const currentTotal = parseFloat(weightSlider.value) || 0;
-    plateLoaded = decomposeToPlates(currentTotal / 2);
+    if(requiresSymmetry()){
+      const perSide = decomposeToPlates(currentTotal / 2);
+      plateLoadedLeft = perSide.slice();
+      plateLoadedRight = perSide.slice();
+      plateHint.textContent = "Drag a plate onto either sleeve to load it — both sides stay matched. Tap a plate to remove it.";
+    } else {
+      // no assumed symmetry — seed one side with the full current value and
+      // leave the other empty; the person can redistribute freely
+      plateLoadedLeft = decomposeToPlates(currentTotal);
+      plateLoadedRight = [];
+      plateHint.textContent = "Each side loads independently — drag plates onto whichever sleeve you actually loaded. Tap a plate to remove it.";
+    }
     renderTray();
     renderSleeves();
     refreshPlateReadout();
@@ -1202,12 +1254,14 @@ Lower B,Core,body,3,-,30,0`;
   plateCloseBtn.addEventListener("click", ()=>{ Sound.tap(); closePlateModal(); });
   plateOverlay.addEventListener("click", (e)=>{ if(e.target === plateOverlay) closePlateModal(); });
   document.getElementById("weight-value-tap").addEventListener("click", ()=>{
-    if(currentEx && (currentEx.tag === "bar" || currentEx.tag === "plate")) openPlateModal();
+    if(currentEx && currentEx.tag !== "dumbbell") openPlateModal();
   });
 
   plateDoneBtn.addEventListener("click", ()=>{
     Sound.tap();
-    const total = plateTotalPerSide() * 2;
+    const total = requiresSymmetry()
+      ? plateTotalFor("left") * 2
+      : plateTotalFor("left") + plateTotalFor("right");
     weightSlider.value = Math.min(400, total);
     updateWeightUI();
     closePlateModal();
