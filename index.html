@@ -284,6 +284,78 @@
     .hero-card,.control-card,.day-row .day-chip,.wk-exercise-swap,.done-badge{ animation:none !important; }
     .rest-count.urgent{ animation:none !important; }
   }
+
+  /* ---------- Modal overlays (plate visualizer / type picker / peek) ---------- */
+  .modal-overlay{
+    position:fixed; inset:0; z-index:40; background:rgba(10,9,6,.72);
+    display:flex; align-items:flex-end; justify-content:center;
+    opacity:0; pointer-events:none; transition:opacity .25s ease;
+  }
+  .modal-overlay.active{ opacity:1; pointer-events:auto; }
+  .modal-sheet{
+    width:100%; max-width:640px; max-height:88vh; overflow-y:auto;
+    background:var(--surface); border:1px solid var(--line);
+    border-radius:26px 26px 0 0; padding:20px 22px max(20px, env(safe-area-inset-bottom));
+    transform:translateY(24px); transition:transform .3s cubic-bezier(.2,.8,.2,1);
+  }
+  .modal-overlay.active .modal-sheet{ transform:translateY(0); }
+  .modal-sheet-small{ max-height:70vh; }
+  .modal-head{ display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:14px; }
+  .modal-eyebrow{ font-size:12px; color:var(--accent); font-weight:700; letter-spacing:.02em; }
+  .modal-title{ font-size:22px; font-weight:800; letter-spacing:-0.02em; margin-top:3px; }
+
+  /* plate visualizer */
+  .plate-readout{ display:flex; justify-content:space-between; align-items:center; background:var(--surface-2); border-radius:12px; padding:12px 16px; margin-bottom:18px; }
+  .plate-readout .l{ font-size:11.5px; color:var(--text-dim); font-weight:700; }
+  .plate-readout .v{ font-size:22px; font-weight:800; color:var(--accent); }
+  .bar-rig{ position:relative; height:130px; display:flex; align-items:center; justify-content:center; margin:6px 0 4px; touch-action:none; }
+  .bar-shaft{ position:absolute; left:6%; right:6%; height:10px; border-radius:5px; background:linear-gradient(180deg, #59554A, #38352A); top:50%; transform:translateY(-50%); }
+  .bar-sleeve{
+    position:absolute; top:50%; transform:translateY(-50%);
+    width:44%; height:100%; display:flex; align-items:center; min-height:100%;
+    border-radius:10px; transition:background .15s ease;
+  }
+  .bar-sleeve-left{ left:2%; flex-direction:row-reverse; justify-content:flex-start; }
+  .bar-sleeve-right{ right:2%; justify-content:flex-start; }
+  .bar-sleeve.drag-over{ background:rgba(199,242,61,.12); }
+  .plate-disc{
+    flex:none; border-radius:6px; display:flex; align-items:center; justify-content:center;
+    color:#141308; font-weight:800; font-size:11px; cursor:grab;
+    box-shadow: inset 0 0 0 2px rgba(0,0,0,.18);
+  }
+  .plate-disc:active{ cursor:grabbing; }
+  .bar-sleeve .plate-disc + .plate-disc{ margin-left:-4px; }
+  .bar-sleeve-left .plate-disc + .plate-disc{ margin-left:0; margin-right:-4px; }
+  .plate-hint{ font-size:12px; color:var(--text-dim); text-align:center; line-height:1.4; margin-top:8px; }
+  .plate-tray{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:18px; padding-top:16px; border-top:1px dashed var(--line); }
+  .tray-plate{ display:flex; flex-direction:column; align-items:center; gap:6px; }
+  .tray-plate .plate-disc{ width:52px; height:52px; }
+  .tray-plate .lbl{ font-size:10.5px; color:var(--text-dim); font-weight:700; }
+  .plate-disc.dragging{ opacity:.35; }
+  .plate-disc.pop{ animation:platePop .22s cubic-bezier(.2,1.4,.4,1); }
+  @keyframes platePop{ 0%{ transform:scale(.5); } 60%{ transform:scale(1.12); } 100%{ transform:scale(1); } }
+
+  /* exercise type picker */
+  .type-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .type-option{
+    background:var(--surface-2); border:1px solid var(--line); border-radius:14px;
+    padding:14px 12px; text-align:left; cursor:pointer;
+  }
+  .type-option .t{ font-weight:800; font-size:14.5px; }
+  .type-option .d{ font-size:11.5px; color:var(--text-dim); margin-top:2px; line-height:1.35; }
+  .type-option.is-selected{ border-color:var(--accent); background:rgba(199,242,61,.08); }
+  .type-option.is-selected .t{ color:var(--accent); }
+
+  /* peek-ahead sheet */
+  .peek-list{ display:flex; flex-direction:column; gap:8px; }
+  .peek-row{ display:flex; justify-content:space-between; align-items:center; background:var(--surface-2); border-radius:14px; padding:12px 16px; border:1px solid transparent; }
+  .peek-row.is-current{ border-color:var(--accent); }
+  .peek-row.is-done{ opacity:.5; }
+  .peek-row .name{ font-weight:700; font-size:14.5px; }
+  .peek-row .meta{ font-size:12px; color:var(--text-dim); margin-top:2px; }
+  .peek-row .badge{ font-size:11px; font-weight:800; padding:4px 10px; border-radius:20px; background:var(--surface); color:var(--text-dim); flex:none; }
+  .peek-row.is-current .badge{ background:var(--accent); color:#141308; }
+  .peek-row.is-done .badge{ color:var(--accent-dim); }
 </style>
 </head>
 <body>
@@ -331,7 +403,10 @@
         <div class="wk-exercise wk-exercise-swap" id="wk-exercise">Bench Press</div>
         <div class="wk-progress-txt" id="wk-progress-txt">Set 1 of 4</div>
       </div>
-      <div class="close-btn" id="close-btn"><svg viewBox="0 0 24 24"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg></div>
+      <div class="icon-row" style="gap:8px;">
+        <div class="fs-btn" id="peek-btn" title="Peek at full workout"><svg viewBox="0 0 24 24"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/><circle cx="12" cy="12" r="3"/></svg></div>
+        <div class="close-btn" id="close-btn"><svg viewBox="0 0 24 24"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg></div>
+      </div>
     </div>
 
     <div class="barwrap" id="set-dots"></div>
@@ -343,8 +418,8 @@
 
     <div class="control-card">
       <div class="control-head">
-        <div class="control-label" id="weight-tag-label">PLATES ADDED</div>
-        <div class="control-value"><span id="weight-val">95</span><span>lb</span></div>
+        <div class="control-label" id="weight-tag-label" style="cursor:pointer; text-decoration:underline dotted; text-underline-offset:3px;" title="Tap to change exercise type">PLATES ADDED</div>
+        <div class="control-value" id="weight-value-tap" style="cursor:pointer;"><span id="weight-val">95</span><span>lb</span></div>
       </div>
       <div class="stepper">
         <div class="step-btn" id="w-minus">–</div>
@@ -355,6 +430,7 @@
         <div class="l" id="real-weight-label">= 95 lb total on bar</div>
         <div class="v" id="real-weight-val">95 lb</div>
       </div>
+      <button class="btn btn-ghost" id="plate-open-btn" style="width:100%; margin-top:12px; height:44px; font-size:13.5px;">🏋️ Open Plate Visualizer</button>
     </div>
 
     <div class="control-card">
@@ -443,6 +519,64 @@
     <div class="sleep-clock" id="sleep-clock">12:00</div>
     <div class="sleep-date" id="sleep-date">Monday, Sep 7</div>
     <div class="sleep-hint">Tap to wake</div>
+  </div>
+
+  <!-- PLATE VISUALIZER MODAL -->
+  <div class="modal-overlay" id="plate-overlay">
+    <div class="modal-sheet">
+      <div class="modal-head">
+        <div>
+          <div class="modal-eyebrow">PLATE LOADER</div>
+          <div class="modal-title" id="plate-modal-exercise">Bench Press</div>
+        </div>
+        <div class="close-btn" id="plate-close-btn"><svg viewBox="0 0 24 24"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg></div>
+      </div>
+
+      <div class="plate-readout">
+        <div class="l" id="plate-readout-label">PLATES ADDED (PER SIDE SHOWN)</div>
+        <div class="v"><span id="plate-readout-val">95</span> lb</div>
+      </div>
+
+      <div class="bar-rig" id="bar-rig">
+        <div class="bar-shaft"></div>
+        <div class="bar-sleeve bar-sleeve-left" id="sleeve-left"></div>
+        <div class="bar-sleeve bar-sleeve-right" id="sleeve-right"></div>
+      </div>
+      <div class="plate-hint">Drag a plate onto either sleeve to load it. Drag a loaded plate off, or tap it, to remove.</div>
+
+      <div class="plate-tray" id="plate-tray"></div>
+
+      <button class="btn btn-primary" id="plate-done-btn" style="margin-top:16px;">Use This Weight</button>
+    </div>
+  </div>
+
+  <!-- EXERCISE TYPE PICKER MODAL -->
+  <div class="modal-overlay" id="type-overlay">
+    <div class="modal-sheet modal-sheet-small">
+      <div class="modal-head">
+        <div>
+          <div class="modal-eyebrow">EXERCISE TYPE</div>
+          <div class="modal-title" id="type-modal-exercise">Bench Press</div>
+        </div>
+        <div class="close-btn" id="type-close-btn"><svg viewBox="0 0 24 24"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg></div>
+      </div>
+      <div class="type-grid" id="type-grid"></div>
+      <div class="plate-hint" style="margin-top:2px;">Changes how the real load is calculated (bar +45, cable ÷2, dumbbell ×2, etc). Saved for this exercise.</div>
+    </div>
+  </div>
+
+  <!-- PEEK-AHEAD MODAL -->
+  <div class="modal-overlay" id="peek-overlay">
+    <div class="modal-sheet">
+      <div class="modal-head">
+        <div>
+          <div class="modal-eyebrow">FULL WORKOUT</div>
+          <div class="modal-title" id="peek-modal-title">Upper A</div>
+        </div>
+        <div class="close-btn" id="peek-close-btn"><svg viewBox="0 0 24 24"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg></div>
+      </div>
+      <div class="peek-list" id="peek-list"></div>
+    </div>
   </div>
 
 </div>
@@ -583,6 +717,27 @@ Lower B,Core,body,3,-,30,0`;
   function saveHistory(h){ localStorage.setItem(HISTORY_KEY, JSON.stringify(h)); }
   let history = loadHistory();
 
+  /* ================= Manual exercise-type overrides ================= */
+  // Lets you correct the CSV's guess (barbell/cable/dumbbell/plate/body/none)
+  // per exercise name, persisted across sessions.
+  const TYPE_OVERRIDES_KEY = "racked_type_overrides_v1";
+  function loadTypeOverrides(){
+    try{ return JSON.parse(localStorage.getItem(TYPE_OVERRIDES_KEY)) || {}; }catch(e){ return {}; }
+  }
+  function saveTypeOverrides(o){ localStorage.setItem(TYPE_OVERRIDES_KEY, JSON.stringify(o)); }
+  let typeOverrides = loadTypeOverrides();
+  function effectiveTag(row){
+    return typeOverrides[row.exercise] || row.tag;
+  }
+  const TAG_INFO = {
+    bar:      { label:"Barbell",   desc:"Plates added, +45 lb bar" },
+    cable:    { label:"Cable",     desc:"Stack setting, ÷2 pulley ratio" },
+    dumbbell: { label:"Dumbbell",  desc:"Per-dumbbell, doubled for the pair" },
+    plate:    { label:"Plate/Machine", desc:"Weight as shown, no adjustment" },
+    body:     { label:"Bodyweight", desc:"Plus any added load" },
+    none:     { label:"None",      desc:"No load — just reps" }
+  };
+
   /* ================= Workout log + stats ================= */
   const LOG_KEY = "racked_log_v1";
   const SB_KEY = "racked_sb_v1"; // {url, key} — only set if user overrides the built-in project
@@ -687,7 +842,7 @@ Lower B,Core,body,3,-,30,0`;
     }
   }
   function weightTagLabel(tag){
-    return { bar:"PLATES ADDED", cable:"STACK SETTING", dumbbell:"PER DUMBBELL", plate:"WEIGHT", body:"ADDED LOAD" }[tag] || "WEIGHT";
+    return { bar:"PLATES ADDED", cable:"STACK SETTING", dumbbell:"PER DUMBBELL", plate:"WEIGHT", body:"ADDED LOAD", none:"LOAD" }[tag] || "WEIGHT";
   }
 
   /* ================= View switching ================= */
@@ -760,7 +915,9 @@ Lower B,Core,body,3,-,30,0`;
   */
 
   function buildSession(type){
-    const exercises = workouts[type];
+    // clone rows (with any manual type override applied) so we never mutate
+    // the shared `workouts` data just because this session's tag was edited
+    const exercises = workouts[type].map(ex => ({ ...ex, tag: effectiveTag(ex) }));
     const flatSets = [];
     exercises.forEach((ex, exIndex)=>{
       for(let s=0; s<ex.sets; s++) flatSets.push({ exIndex, setIndex:s });
@@ -793,6 +950,8 @@ Lower B,Core,body,3,-,30,0`;
   const completeBtn = document.getElementById("complete-btn");
   const closeBtn = document.getElementById("close-btn");
   const flash = document.getElementById("flash");
+  const plateOpenBtn = document.getElementById("plate-open-btn");
+  const peekBtn = document.getElementById("peek-btn");
 
   let currentEx = null;
 
@@ -827,6 +986,14 @@ Lower B,Core,body,3,-,30,0`;
     repsSlider.value = prev.reps;
     updateWeightUI();
     updateRepsUI();
+    updatePlateAffordance();
+  }
+
+  // The plate visualizer only makes physical sense for a loaded barbell —
+  // hide the shortcut button for cable stacks, dumbbells, bodyweight, etc.
+  function updatePlateAffordance(){
+    const isBar = currentEx.tag === "bar" || currentEx.tag === "plate";
+    plateOpenBtn.style.display = isBar ? "flex" : "none";
   }
 
   function bump(el){ el.classList.remove("bump"); void el.offsetWidth; el.classList.add("bump"); }
@@ -857,6 +1024,224 @@ Lower B,Core,body,3,-,30,0`;
   document.getElementById("r-plus").addEventListener("click", (e)=>{ Sound.step(); pressFx(e.currentTarget); repsSlider.value = Math.min(30, parseInt(repsSlider.value)+1); updateRepsUI(); });
 
   closeBtn.addEventListener("click", ()=>{ Sound.tap(); session = null; show("home"); renderHome(); });
+
+  /* ================= Exercise type picker (manual edit) ================= */
+  const typeOverlay = document.getElementById("type-overlay");
+  const typeModalExercise = document.getElementById("type-modal-exercise");
+  const typeGrid = document.getElementById("type-grid");
+  const typeCloseBtn = document.getElementById("type-close-btn");
+  const weightTagLabelBtn = document.getElementById("weight-tag-label");
+
+  function openTypeModal(){
+    if(!currentEx) return;
+    Sound.tap();
+    typeModalExercise.textContent = currentEx.exercise;
+    typeGrid.innerHTML = Object.entries(TAG_INFO).map(([key, info])=> `
+      <div class="type-option ${key===currentEx.tag ? 'is-selected':''}" data-tag="${key}">
+        <div class="t">${info.label}</div>
+        <div class="d">${info.desc}</div>
+      </div>
+    `).join("");
+    typeGrid.querySelectorAll(".type-option").forEach(el=>{
+      el.addEventListener("click", ()=>{
+        const tag = el.getAttribute("data-tag");
+        Sound.step();
+        typeOverrides[currentEx.exercise] = tag;
+        saveTypeOverrides(typeOverrides);
+        currentEx.tag = tag; // update the live session row too
+        weightTagLabelEl.textContent = weightTagLabel(currentEx.tag);
+        updateWeightUI();
+        updatePlateAffordance();
+        closeTypeModal();
+      });
+    });
+    typeOverlay.classList.add("active");
+  }
+  function closeTypeModal(){ typeOverlay.classList.remove("active"); }
+  weightTagLabelBtn.addEventListener("click", openTypeModal);
+  typeCloseBtn.addEventListener("click", ()=>{ Sound.tap(); closeTypeModal(); });
+  typeOverlay.addEventListener("click", (e)=>{ if(e.target === typeOverlay) closeTypeModal(); });
+
+  /* ================= Plate visualizer (tap to open, drag plates) ================= */
+  // Standard gym plate set. `lb` doubles as the internal id; color/size are just visual weight cues.
+  const PLATE_SET = [
+    { lb:45, color:"#C7F23D", size:78 },
+    { lb:35, color:"#FF9036", size:70 },
+    { lb:25, color:"#7FD9FF", size:62 },
+    { lb:10, color:"#EDEAE1", size:52 },
+    { lb:5,  color:"#8C6CFF", size:44 },
+    { lb:2.5,color:"#FF5A36", size:38 }
+  ];
+  const plateOverlay = document.getElementById("plate-overlay");
+  const plateModalExercise = document.getElementById("plate-modal-exercise");
+  const plateReadoutLabel = document.getElementById("plate-readout-label");
+  const plateReadoutVal = document.getElementById("plate-readout-val");
+  const sleeveLeft = document.getElementById("sleeve-left");
+  const sleeveRight = document.getElementById("sleeve-right");
+  const plateTray = document.getElementById("plate-tray");
+  const plateCloseBtn = document.getElementById("plate-close-btn");
+  const plateDoneBtn = document.getElementById("plate-done-btn");
+
+  // Plates loaded on the visualizer bar (one side shown = the "per side" total;
+  // the app already treats the slider value as total plates added, so we mirror
+  // whatever's on the LEFT sleeve to both sides for the readout, gym-style).
+  let plateLoaded = []; // array of lb values currently on the (mirrored) sleeve
+
+  function plateDiscEl(lb, small){
+    const info = PLATE_SET.find(p=>p.lb===lb) || { lb, color:"#93907F", size:small?52:60 };
+    const size = small ? 52 : info.size;
+    const el = document.createElement("div");
+    el.className = "plate-disc";
+    el.style.width = size+"px";
+    el.style.height = size+"px";
+    el.style.background = info.color;
+    el.textContent = lb;
+    el.draggable = true;
+    el.setAttribute("data-lb", lb);
+    return el;
+  }
+
+  function renderTray(){
+    plateTray.innerHTML = "";
+    PLATE_SET.forEach(p=>{
+      const wrap = document.createElement("div");
+      wrap.className = "tray-plate";
+      const disc = plateDiscEl(p.lb, true);
+      disc.addEventListener("dragstart", (e)=>{
+        e.dataTransfer.setData("text/plain", String(p.lb));
+        disc.classList.add("dragging");
+      });
+      disc.addEventListener("dragend", ()=> disc.classList.remove("dragging"));
+      disc.addEventListener("click", ()=>{ addPlate(p.lb); }); // tap-to-add on touch devices
+      const lbl = document.createElement("div");
+      lbl.className = "lbl";
+      lbl.textContent = p.lb + " lb";
+      wrap.appendChild(disc); wrap.appendChild(lbl);
+      plateTray.appendChild(wrap);
+    });
+  }
+
+  function renderSleeves(){
+    sleeveLeft.innerHTML = "";
+    sleeveRight.innerHTML = "";
+    plateLoaded.forEach(lb=>{
+      const l = plateDiscEl(lb, false);
+      const r = plateDiscEl(lb, false);
+      [l, r].forEach(el=>{
+        el.addEventListener("click", ()=> removePlate(lb));
+      });
+      sleeveLeft.appendChild(l);
+      sleeveRight.appendChild(r);
+    });
+  }
+
+  function plateTotalPerSide(){
+    return plateLoaded.reduce((s,lb)=>s+lb, 0);
+  }
+
+  function refreshPlateReadout(){
+    // per-side total × 2 = plates added to the bar (the app's "weight" value)
+    const perSide = plateTotalPerSide();
+    const totalAdded = perSide * 2;
+    plateReadoutLabel.textContent = currentEx && currentEx.tag === "plate" ? "WEIGHT (BOTH SIDES SHOWN)" : "PLATES ADDED (BOTH SIDES)";
+    plateReadoutVal.textContent = totalAdded;
+  }
+
+  function addPlate(lb){
+    plateLoaded.push(lb);
+    plateLoaded.sort((a,b)=>b-a);
+    renderSleeves();
+    refreshPlateReadout();
+    Sound.step();
+    const last = sleeveLeft.lastElementChild;
+    if(last){ last.classList.add("pop"); setTimeout(()=>last.classList.remove("pop"), 220); }
+  }
+  function removePlate(lb){
+    const idx = plateLoaded.indexOf(lb);
+    if(idx !== -1){ plateLoaded.splice(idx,1); renderSleeves(); refreshPlateReadout(); Sound.step(); }
+  }
+
+  // Break an arbitrary weight value down into the fewest standard plates per side.
+  function decomposeToPlates(perSideTarget){
+    let remaining = Math.max(0, perSideTarget);
+    const out = [];
+    for(const p of PLATE_SET){
+      while(remaining + 1e-6 >= p.lb){
+        out.push(p.lb);
+        remaining -= p.lb;
+      }
+    }
+    return out;
+  }
+
+  [sleeveLeft, sleeveRight].forEach(sleeve=>{
+    sleeve.addEventListener("dragover", (e)=>{ e.preventDefault(); sleeve.classList.add("drag-over"); });
+    sleeve.addEventListener("dragleave", ()=> sleeve.classList.remove("drag-over"));
+    sleeve.addEventListener("drop", (e)=>{
+      e.preventDefault();
+      sleeve.classList.remove("drag-over");
+      const lb = parseFloat(e.dataTransfer.getData("text/plain"));
+      if(!isNaN(lb)) addPlate(lb);
+    });
+  });
+
+  function openPlateModal(){
+    if(!currentEx) return;
+    Sound.tap();
+    plateModalExercise.textContent = currentEx.exercise;
+    const currentTotal = parseFloat(weightSlider.value) || 0;
+    plateLoaded = decomposeToPlates(currentTotal / 2);
+    renderTray();
+    renderSleeves();
+    refreshPlateReadout();
+    plateOverlay.classList.add("active");
+  }
+  function closePlateModal(){ plateOverlay.classList.remove("active"); }
+
+  plateOpenBtn.addEventListener("click", openPlateModal);
+  plateCloseBtn.addEventListener("click", ()=>{ Sound.tap(); closePlateModal(); });
+  plateOverlay.addEventListener("click", (e)=>{ if(e.target === plateOverlay) closePlateModal(); });
+  document.getElementById("weight-value-tap").addEventListener("click", ()=>{
+    if(currentEx && (currentEx.tag === "bar" || currentEx.tag === "plate")) openPlateModal();
+  });
+
+  plateDoneBtn.addEventListener("click", ()=>{
+    Sound.tap();
+    const total = plateTotalPerSide() * 2;
+    weightSlider.value = Math.min(400, total);
+    updateWeightUI();
+    closePlateModal();
+  });
+
+  /* ================= Peek ahead (view full workout mid-session) ================= */
+  const peekOverlay = document.getElementById("peek-overlay");
+  const peekModalTitle = document.getElementById("peek-modal-title");
+  const peekList = document.getElementById("peek-list");
+  const peekCloseBtn = document.getElementById("peek-close-btn");
+
+  function renderPeek(){
+    if(!session) return;
+    peekModalTitle.textContent = session.type;
+    const { exIndex: curExIdx } = session.flatSets[session.cursor];
+    peekList.innerHTML = session.exercises.map((ex, i)=>{
+      const done = i < curExIdx;
+      const isCurrent = i === curExIdx;
+      const prev = prevFor(ex.exercise, ex.weight, ex.reps_default);
+      const badge = done ? "DONE" : (isCurrent ? "NOW" : `#${i+1}`);
+      return `<div class="peek-row ${isCurrent?'is-current':''} ${done?'is-done':''}">
+        <div>
+          <div class="name">${ex.exercise}</div>
+          <div class="meta">${ex.sets} sets · ${ex.reps_range === '-' ? 'to failure' : ex.reps_range} reps · ~${prev.weight} lb</div>
+        </div>
+        <div class="badge">${badge}</div>
+      </div>`;
+    }).join("");
+    peekOverlay.classList.add("active");
+  }
+  function closePeek(){ peekOverlay.classList.remove("active"); }
+  peekBtn.addEventListener("click", ()=>{ Sound.tap(); renderPeek(); });
+  peekCloseBtn.addEventListener("click", ()=>{ Sound.tap(); closePeek(); });
+  peekOverlay.addEventListener("click", (e)=>{ if(e.target === peekOverlay) closePeek(); });
 
   /* ---- completing a set ---- */
   const REST_SECONDS_DEFAULT = 90;
