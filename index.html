@@ -93,17 +93,51 @@
   .stat-box{ background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:16px; }
   .stat-box .v{ font-size:26px; font-weight:800; }
   .stat-box .l{ font-size:11.5px; color:var(--text-dim); font-weight:700; margin-top:2px; }
-  .chart-box{ background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:16px; margin-top:14px; }
-  .chart-box .l{ font-size:11.5px; color:var(--text-dim); font-weight:700; margin-bottom:10px; }
-  .chart-bars{ display:flex; align-items:flex-end; gap:6px; height:90px; }
-  .chart-bars i{ flex:1; background:var(--accent); border-radius:4px 4px 0 0; min-height:3px; opacity:.9; transition:height .4s ease; }
-  .chart-bars i.empty{ background:var(--line); }
-  .log-list{ margin-top:14px; display:flex; flex-direction:column; gap:8px; overflow-y:auto; flex:1; padding-bottom:10px; }
-  .log-row{ background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:12px 14px; display:flex; justify-content:space-between; align-items:center; }
+
+  /* ---------- Data viewing: tabs + panes ---------- */
+  #screen-stats{ overflow:hidden; }
+  .data-tabs{ display:flex; gap:6px; margin-top:18px; background:var(--surface-2); border-radius:14px; padding:4px; flex:none; }
+  .data-tab{ flex:1; text-align:center; font-size:13px; font-weight:700; color:var(--text-dim); padding:9px 0; border-radius:11px; cursor:pointer; transition:background .15s ease, color .15s ease; }
+  .data-tab.is-active{ background:var(--surface); color:var(--text); }
+  .data-pane{ display:none; flex-direction:column; flex:1; min-height:0; overflow-y:auto; padding-bottom:10px; margin-top:4px; }
+  .data-pane.is-active{ display:flex; }
+
+  .chart-box{ background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:16px; margin-top:14px; flex:none; }
+  .chart-box-head{ display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
+  .chart-box .l{ font-size:11.5px; color:var(--text-dim); font-weight:700; }
+  .chart-range{ display:flex; gap:4px; background:var(--surface-2); border-radius:8px; padding:3px; }
+  .chart-range-opt{ font-size:10.5px; font-weight:800; color:var(--text-dim); padding:3px 8px; border-radius:6px; cursor:pointer; }
+  .chart-range-opt.is-active{ background:var(--accent); color:#141308; }
+  .chart-bars{ display:flex; align-items:flex-end; gap:4px; height:90px; }
+  .chart-bars i{ flex:1; background:var(--accent); border-radius:4px 4px 0 0; min-height:3px; opacity:.9; transition:height .4s ease; cursor:pointer; }
+  .chart-bars i.empty{ background:var(--line); cursor:default; }
+  .chart-axis{ display:flex; justify-content:space-between; margin-top:6px; font-size:10px; color:var(--text-dim); }
+
+  .pr-list{ display:flex; flex-direction:column; gap:8px; margin-top:2px; }
+  .pr-row{ background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:12px 14px; display:flex; justify-content:space-between; align-items:center; }
+  .pr-row .t{ font-weight:700; font-size:14px; }
+  .pr-row .d{ font-size:11.5px; color:var(--text-dim); margin-top:2px; }
+  .pr-row .v{ font-weight:800; color:var(--accent); font-size:15px; }
+
+  .filter-row{ display:flex; gap:8px; overflow-x:auto; padding:2px 0 4px; flex:none; }
+  .filter-chip{ flex:none; font-size:12.5px; font-weight:700; color:var(--text-dim); background:var(--surface); border:1px solid var(--line); padding:7px 14px; border-radius:20px; cursor:pointer; white-space:nowrap; }
+  .filter-chip.is-active{ background:var(--accent); color:#141308; border-color:var(--accent); }
+
+  .log-list{ margin-top:10px; display:flex; flex-direction:column; gap:8px; }
+  .log-row{ background:var(--surface); border:1px solid var(--line); border-radius:14px; overflow:hidden; }
+  .log-row-head{ padding:12px 14px; display:flex; justify-content:space-between; align-items:center; cursor:pointer; }
   .log-row .t{ font-weight:700; font-size:14px; }
   .log-row .d{ font-size:12px; color:var(--text-dim); margin-top:2px; }
   .log-row .v{ font-weight:800; color:var(--accent); font-size:14px; text-align:right; }
   .log-row .v small{ display:block; color:var(--text-dim); font-weight:600; font-size:11px; }
+  .log-row-detail{ max-height:0; overflow:hidden; transition:max-height .25s ease; border-top:1px solid transparent; }
+  .log-row.is-open .log-row-detail{ max-height:600px; border-top-color:var(--line); }
+  .log-row-detail-inner{ padding:4px 14px 12px; display:flex; flex-direction:column; gap:6px; }
+  .log-ex-row{ display:flex; justify-content:space-between; font-size:12.5px; }
+  .log-ex-row .n{ color:var(--text); }
+  .log-ex-row .w{ color:var(--text-dim); }
+  .log-row-head .chev{ width:16px; height:16px; stroke:var(--text-dim); fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; transition:transform .2s ease; flex:none; margin-left:10px; }
+  .log-row.is-open .log-row-head .chev{ transform:rotate(180deg); }
   .empty-note{ color:var(--text-dim); font-size:13.5px; margin-top:18px; text-align:center; }
 
   /* ---------- Settings / sync panel ---------- */
@@ -487,7 +521,7 @@
   </div>
 
   <!-- STATS / LOG -->
-  <div class="screen" id="screen-stats" style="overflow-y:auto;">
+  <div class="screen" id="screen-stats">
     <div class="wk-top">
       <div>
         <div class="wk-tag">YOUR PROGRESS</div>
@@ -496,25 +530,61 @@
       <div class="close-btn" id="stats-close-btn"><svg viewBox="0 0 24 24"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg></div>
     </div>
 
-    <div class="stat-grid" id="stat-grid"></div>
-
-    <div class="chart-box">
-      <div class="l">VOLUME · LAST 8 WORKOUTS</div>
-      <div class="chart-bars" id="chart-bars"></div>
+    <div class="data-tabs" id="data-tabs">
+      <div class="data-tab is-active" data-tab="overview">Overview</div>
+      <div class="data-tab" data-tab="history">History</div>
+      <div class="data-tab" data-tab="sync">Sync</div>
     </div>
 
-    <div class="section-label">Recent sessions</div>
-    <div class="log-list" id="log-list"></div>
-    <div class="empty-note" id="log-empty" style="display:none;">No workouts logged yet — finish one to see it here.</div>
+    <!-- OVERVIEW -->
+    <div class="data-pane is-active" id="pane-overview">
+      <div class="stat-grid" id="stat-grid"></div>
 
-    <div class="section-label">Cloud sync</div>
-    <div class="settings-panel">
-      <div class="l">SUPABASE PROJECT URL</div>
-      <input type="text" id="sb-url" placeholder="https://xxxx.supabase.co" autocomplete="off">
-      <div class="l">SUPABASE ANON KEY</div>
-      <input type="text" id="sb-key" placeholder="public anon key" autocomplete="off">
-      <button class="btn btn-ghost" id="sb-save" style="width:100%; margin-top:4px;">Save & Sync</button>
-      <div class="status ok" id="sb-status">Connected — syncing to your Supabase project.</div>
+      <div class="chart-box">
+        <div class="chart-box-head">
+          <div class="l">VOLUME</div>
+          <div class="chart-range" id="chart-range">
+            <span class="chart-range-opt is-active" data-range="8">8</span>
+            <span class="chart-range-opt" data-range="20">20</span>
+            <span class="chart-range-opt" data-range="all">ALL</span>
+          </div>
+        </div>
+        <div class="chart-bars" id="chart-bars"></div>
+        <div class="chart-axis" id="chart-axis"></div>
+      </div>
+
+      <div class="section-label">Personal records</div>
+      <div class="pr-list" id="pr-list"></div>
+      <div class="empty-note" id="pr-empty" style="display:none;">No records yet — finish a workout to start tracking PRs.</div>
+    </div>
+
+    <!-- HISTORY -->
+    <div class="data-pane" id="pane-history">
+      <div class="filter-row" id="filter-row"></div>
+      <div class="log-list" id="log-list"></div>
+      <div class="empty-note" id="log-empty" style="display:none;">No workouts logged yet — finish one to see it here.</div>
+    </div>
+
+    <!-- SYNC -->
+    <div class="data-pane" id="pane-sync">
+      <div class="section-label" style="margin-top:4px;">Cloud sync</div>
+      <div class="settings-panel">
+        <div class="l">SUPABASE PROJECT URL</div>
+        <input type="text" id="sb-url" placeholder="https://xxxx.supabase.co" autocomplete="off">
+        <div class="l">SUPABASE ANON KEY</div>
+        <input type="text" id="sb-key" placeholder="public anon key" autocomplete="off">
+        <button class="btn btn-ghost" id="sb-save" style="width:100%; margin-top:4px;">Save & Sync</button>
+        <div class="status ok" id="sb-status">Connected — syncing to your Supabase project.</div>
+      </div>
+
+      <div class="section-label">Local data</div>
+      <div class="settings-panel">
+        <div class="l">EXPORT / RESET</div>
+        <div style="display:flex; gap:10px;">
+          <button class="btn btn-ghost" id="export-btn" style="flex:1;">Export JSON</button>
+          <button class="btn btn-ghost" id="reset-btn" style="flex:1; color:var(--rest); border-color:rgba(255,90,54,.35);">Clear log</button>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -1464,14 +1534,26 @@ Lower B,Core,body,3,-,30,0`;
   /* ================= Stats & log screen ================= */
   const statGrid = document.getElementById("stat-grid");
   const chartBars = document.getElementById("chart-bars");
+  const chartAxis = document.getElementById("chart-axis");
+  const chartRange = document.getElementById("chart-range");
+  const prList = document.getElementById("pr-list");
+  const prEmpty = document.getElementById("pr-empty");
+  const filterRow = document.getElementById("filter-row");
   const logList = document.getElementById("log-list");
   const logEmpty = document.getElementById("log-empty");
   const statsBtn = document.getElementById("stats-btn");
   const statsCloseBtn = document.getElementById("stats-close-btn");
+  const dataTabs = document.getElementById("data-tabs");
   const sbUrlInput = document.getElementById("sb-url");
   const sbKeyInput = document.getElementById("sb-key");
   const sbSaveBtn = document.getElementById("sb-save");
   const sbStatus = document.getElementById("sb-status");
+  const exportBtn = document.getElementById("export-btn");
+  const resetBtn = document.getElementById("reset-btn");
+
+  let chartRangeSize = 8;   // 8 | 20 | 'all'
+  let historyFilter = "All";
+  let openLogRowId = null;  // which history row is expanded, if any
 
   function computeStreak(log){
     if(!log.length) return 0;
@@ -1487,8 +1569,20 @@ Lower B,Core,body,3,-,30,0`;
     return streak;
   }
 
-  function renderStats(){
-    const log = workoutLog.slice().sort((a,b)=> new Date(a.date)-new Date(b.date));
+  /* ---- tab switching ---- */
+  function switchDataTab(tab){
+    dataTabs.querySelectorAll(".data-tab").forEach(el=> el.classList.toggle("is-active", el.getAttribute("data-tab")===tab));
+    document.querySelectorAll(".data-pane").forEach(el=> el.classList.toggle("is-active", el.id === "pane-"+tab));
+  }
+  dataTabs.addEventListener("click", (e)=>{
+    const tab = e.target.closest(".data-tab");
+    if(!tab) return;
+    Sound.tap();
+    switchDataTab(tab.getAttribute("data-tab"));
+  });
+
+  /* ---- overview: stat cards + chart ---- */
+  function renderOverview(log){
     const totalWorkouts = log.length;
     const totalVolume = log.reduce((s,e)=>s+e.volume,0);
     const weekAgo = Date.now() - 7*24*60*60*1000;
@@ -1502,33 +1596,153 @@ Lower B,Core,body,3,-,30,0`;
       <div class="stat-box"><div class="v">${weekVolume.toLocaleString()}</div><div class="l">THIS WEEK (LB)</div></div>
     `;
 
-    const last8 = log.slice(-8);
-    const maxV = Math.max(1, ...last8.map(e=>e.volume));
-    const slots = 8 - last8.length;
-    chartBars.innerHTML =
-      Array.from({length:slots}).map(()=>`<i class="empty" style="height:6%"></i>`).join("") +
-      last8.map(e=>`<i style="height:${Math.max(6, Math.round(e.volume/maxV*100))}%" title="${Math.round(e.volume)} lb"></i>`).join("");
+    renderChart(log);
+    renderPRs(log);
+  }
 
-    const recent = log.slice().reverse().slice(0,12);
-    logEmpty.style.display = recent.length ? "none" : "block";
-    logList.innerHTML = recent.map(e=>{
-      const d = new Date(e.date);
-      return `<div class="log-row">
+  function renderChart(log){
+    const n = chartRangeSize === "all" ? log.length : chartRangeSize;
+    const slice = n ? log.slice(-n) : [];
+    const maxV = Math.max(1, ...slice.map(e=>e.volume));
+    const fillerSlots = chartRangeSize === "all" ? 0 : Math.max(0, chartRangeSize - slice.length);
+
+    chartBars.innerHTML =
+      Array.from({length:fillerSlots}).map(()=>`<i class="empty" style="height:6%"></i>`).join("") +
+      slice.map(e=>{
+        const d = new Date(e.date);
+        const label = `${e.type} · ${Math.round(e.volume).toLocaleString()} lb · ${d.toLocaleDateString(undefined,{month:'short',day:'numeric'})}`;
+        return `<i style="height:${Math.max(6, Math.round(e.volume/maxV*100))}%" title="${label}"></i>`;
+      }).join("");
+
+    if(slice.length){
+      const first = new Date(slice[0].date);
+      const last = new Date(slice[slice.length-1].date);
+      chartAxis.innerHTML = `<span>${first.toLocaleDateString(undefined,{month:'short',day:'numeric'})}</span><span>${last.toLocaleDateString(undefined,{month:'short',day:'numeric'})}</span>`;
+    } else {
+      chartAxis.innerHTML = "";
+    }
+  }
+
+  chartRange.addEventListener("click", (e)=>{
+    const opt = e.target.closest(".chart-range-opt");
+    if(!opt) return;
+    Sound.tap();
+    chartRangeSize = opt.getAttribute("data-range") === "all" ? "all" : parseInt(opt.getAttribute("data-range"),10);
+    chartRange.querySelectorAll(".chart-range-opt").forEach(el=> el.classList.toggle("is-active", el===opt));
+    renderChart(workoutLog.slice().sort((a,b)=> new Date(a.date)-new Date(b.date)));
+  });
+
+  /* ---- personal records: best logged weight per exercise ---- */
+  function renderPRs(log){
+    const best = {}; // exercise -> { weight, reps, date }
+    log.forEach(e=>{
+      (e.exercises||[]).forEach(x=>{
+        const cur = best[x.exercise];
+        if(!cur || x.weight > cur.weight){
+          best[x.exercise] = { weight:x.weight, reps:x.reps, date:e.date };
+        }
+      });
+    });
+    const rows = Object.entries(best).sort((a,b)=> b[1].weight - a[1].weight);
+    prEmpty.style.display = rows.length ? "none" : "block";
+    prList.innerHTML = rows.map(([name, r])=>{
+      const d = new Date(r.date);
+      return `<div class="pr-row">
         <div>
-          <div class="t">${e.type}</div>
-          <div class="d">${d.toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'})}</div>
+          <div class="t">${name}</div>
+          <div class="d">${d.toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'})}</div>
         </div>
-        <div class="v">${e.volume.toLocaleString()} lb<small>${e.sets} sets · ${e.minutes} min</small></div>
+        <div class="v">${r.weight} lb × ${r.reps}</div>
       </div>`;
     }).join("");
+  }
 
+  /* ---- history: filter chips + expandable rows ---- */
+  function renderFilters(log){
+    const types = ["All", ...ROTATION.filter(t=> log.some(e=>e.type===t))];
+    filterRow.innerHTML = types.map(t=>
+      `<div class="filter-chip ${t===historyFilter ? 'is-active':''}" data-type="${t}">${t}</div>`
+    ).join("");
+  }
+  filterRow.addEventListener("click", (e)=>{
+    const chip = e.target.closest(".filter-chip");
+    if(!chip) return;
+    Sound.tap();
+    historyFilter = chip.getAttribute("data-type");
+    renderHistory();
+  });
+
+  function renderHistory(){
+    const log = workoutLog.slice().sort((a,b)=> new Date(b.date)-new Date(a.date));
+    renderFilters(log);
+    const filtered = historyFilter === "All" ? log : log.filter(e=>e.type===historyFilter);
+    logEmpty.style.display = filtered.length ? "none" : "block";
+    logList.innerHTML = filtered.map(e=>{
+      const d = new Date(e.date);
+      const isOpen = e.id === openLogRowId;
+      const exRows = (e.exercises||[]).map(x=>
+        `<div class="log-ex-row"><span class="n">${x.exercise}</span><span class="w">${x.weight} lb × ${x.reps}</span></div>`
+      ).join("") || `<div class="log-ex-row"><span class="w">No exercise detail saved for this session.</span></div>`;
+      return `<div class="log-row ${isOpen?'is-open':''}" data-id="${e.id}">
+        <div class="log-row-head">
+          <div>
+            <div class="t">${e.type}</div>
+            <div class="d">${d.toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'})}</div>
+          </div>
+          <div style="display:flex; align-items:center;">
+            <div class="v">${e.volume.toLocaleString()} lb<small>${e.sets} sets · ${e.minutes} min</small></div>
+            <svg class="chev" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="log-row-detail"><div class="log-row-detail-inner">${exRows}</div></div>
+      </div>`;
+    }).join("");
+  }
+  logList.addEventListener("click", (e)=>{
+    const head = e.target.closest(".log-row-head");
+    if(!head) return;
+    Sound.tap();
+    const row = head.closest(".log-row");
+    const id = row.getAttribute("data-id");
+    openLogRowId = (openLogRowId === id) ? null : id;
+    renderHistory();
+  });
+
+  /* ---- sync pane ---- */
+  function renderSyncPane(){
     const cfg = loadSbConfig();
     if(cfg){ sbUrlInput.value = cfg.url || ""; sbKeyInput.value = cfg.key || ""; }
     sbStatus.textContent = cfg && cfg.url ? "Connected — syncing to your Supabase project." : "Not connected — data is stored on this device only.";
     sbStatus.className = "status" + (cfg && cfg.url ? " ok" : "");
   }
 
-  statsBtn.addEventListener("click", ()=>{ Sound.tap(); renderStats(); show("stats"); });
+  exportBtn.addEventListener("click", ()=>{
+    Sound.tap();
+    const blob = new Blob([JSON.stringify(workoutLog, null, 2)], { type:"application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "racked-log-" + new Date().toISOString().slice(0,10) + ".json";
+    document.body.appendChild(a); a.click(); a.remove();
+    URL.revokeObjectURL(url);
+  });
+  resetBtn.addEventListener("click", ()=>{
+    Sound.tap();
+    if(!confirm("Clear your entire local workout log? This can't be undone.")) return;
+    workoutLog = [];
+    saveLog(workoutLog);
+    openLogRowId = null;
+    renderStats();
+  });
+
+  function renderStats(){
+    const log = workoutLog.slice().sort((a,b)=> new Date(a.date)-new Date(b.date));
+    renderOverview(log);
+    renderHistory();
+    renderSyncPane();
+  }
+
+  statsBtn.addEventListener("click", ()=>{ Sound.tap(); switchDataTab("overview"); renderStats(); show("stats"); });
   statsCloseBtn.addEventListener("click", ()=>{ Sound.tap(); show("home"); renderHome(); });
 
   sbSaveBtn.addEventListener("click", async ()=>{
