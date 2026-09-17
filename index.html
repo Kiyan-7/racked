@@ -2,8 +2,21 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover, interactive-widget=resizes-content">
 <title>RACKED — Workout Tracker</title>
+
+<!-- iOS home-screen app -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="RACKED">
+<meta name="theme-color" content="#16150F">
+<meta name="format-detection" content="telephone=no">
+<meta name="color-scheme" content="dark">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAAIO0lEQVR42u2dz29cVxXHz7n3vjfjGY/HdhKrpDVxfjRNW5Ba2CCkCqkbfogFouIvoFIlhFh10UUXLCqQkNigsqIgkEBCIFToBgU2UCTaoEpENKpak2Dyw07stLYz8Yxn3rv3HBbjkCYZOzP25D37+fvR88Yz0tx33ufde969993LU4fqBEAvDEIAIAeAHAByAMgBIAeAHAByAMgBIAeAHABADgA5AOQAkANADgA5AOQAkANADgA5AIAcAHIAyAEgB4AcAHIAyAEgB4AcAHIAADkA5ACQA0AOADkA5ACQA0AOADkA5AD7F5fjbzNv9anq/rgCTFuEQTf+9pMczMSGfaoqm566i5gNSyiyI9ay9xo2P0dj2TkOOQXB5WJG8LreDJNTUVxmkV5BMbRy3aeJVGpGpbByNFZ8bdyOTbjNgtBshMaKr47ZfSEHM/lUR6r2he8+/MxXx13Mqne3L6pkDF29mPziB1fP/LlRGTVSRD/SRL/xramvPX+oNm5Fegfh5mr4/WvX//CzD6OYc7iNM941gZmSjn7/18ef/dLEast3G92eCUdcYsP04nPn3z7dqNZtkdoXa7mx4r/58uFvv/zIjba/14yP+1Evu1dfufLTVxbGJlzG7UumchjLN1fDs89NfO+Xx1aWvXNb3Q0h1dq4PfeP5ne+MhvFXJj8lJnSjk5Nx6/99ZSLOXhls2kcVNQ69ok+/4X3ly4nUSnTOJiM4yJeT3xqhJQME2952Ig7Hf3ETDx+0PlUmYsih+Ek0ekTpWrdBk/G8hZBMJaDp2rdTp8oJclWGhWknyP4fq80M0ko5jOtBNqsSb33Wff297MlBzkGqgMKU2H0vOQP8Pt7VA6wV4AcAHIAyAEgB4AcAHIAyAH2GMMZlWUm4l7TUphI9820nWzJIOZuKKVME5VAxtxRVCYSIWOpSMNmu8eMDGLudl7KTlsfOhJ97oujLmKVWx29SmzIp/r26bVrF9NSGX4M04xsYu52WEqf6qHD7usvTI6O27tG1FTJOj48E//21Y+WF72LGNd1KGYMFPOd+GF2WNA00ZNPj9Qm7VpDko521m8fSUfXGlKbtCefHkkTZbgxvAYlm5gPIedQpW7jt5EifVw9U9gx93zJJuZmWDpv4yOwy2OOfg4AOQDkAJADQA4AOQDkAJADQA4AOQDkAAByAMgBIAeAHAByAMgB9ghu9xeRb1GMiO+hc8l+qcmB4+J98N4TF+TlBqPsfZABV88UkeyVyloO732/GhGpqrX2M0892bpBJspzoedh3h6G2k167FEWkf4vd7Va8aGRcRrgsqwz0jSdOfLIkemHvaZ93gfMfGByohqzscWRo1Ph8XqqerOfpb6YKYTw5KlHlx4fm5s/b40pmhzM7H2YmBj/9MlTzrWV0oEqmzRlo8WRI03Z+8GWBxSRE8dnglm/ePEKsylazUFEx49+0hgOIQwqVoHy0e4Co9s5nyRNj81MX7u21FlPCvUoKyKlUjxWq4UgjFdZtiWViJTLpVptVES4SHJ0M0xYMYQLlmHOYbI6JU466fp62xjGy5HbQpnZe99stowxWiQ5urXify/PG2NQfWynXVaNo2h+YbErR6ESUlV1kVtYWCxx/Rl7kFT7X7AZCSkRleL4w4+W/31+zjqTtAvXz0GqkXPvnvvg0uWOMwdVQ59+pGlasEfZZJBHWVWy1v5n7tKZdy6Vq2qMIQqFk2MjJ+VOknAfWuhG74g/8877jeWdrkOyizJKy80boV2uWXtUtd9O0mtL14OIMTbLBS1y2eNtsBo1TdM09UpFkUM4SUP/wwgb12nrnYsKI8c2ZCreqOygp6N53BmYzwEgB4AcAHIAyAEgB4AcAHIAyAEgB4AcAEAOADkA5ACQA0AOADnA/pHjvnOUsI3X0Mkm5kOYJmgd3y7NnZucdv9pHV5VGTLZxHxHciiRdTx/oSNSjUssonznp7FjEZ2/0LGOB3hTBQwv5vnJIRSXeO69zulf3fj8l0fJ8L3bI//9j2tz73VKZVZBhjMMOQaNeY7NiiqVynzurdb5d9vOMan+f3dkYvZe22uC7aiHnnBkE/Ph7Csbj7BPNO3cVRxlpnhkp/6CvGI+nPdWVIiZeiw4owQzHlz78qBjPtSXmtB25JKg7uZ+DlBUIAeAHAByAMgBIAeAHABy3Hoy1wf15T3EoOeVSxxykMO5frv9VclY4uLVbjrwkLp1nH0fY9aBZ0NLCwkz3Xe/ERW1ltZWQ7MRrC2WGREtL6ZpovetErqfpokuL6Y2801FMpVDglZq5i+vr87Ntg8ciEJQEep9BDWOx0ru9Z9cX1sN1pnCtC8iOlIxs2dbb76xMlWPVDYPgpCKTtWjN99YmT3bGqkYkUyjYKvVcqa/Z03zZvjXW82jT5QPH4njsoli7nGUTLslP//h1d/8eKlcMcXLPJjpn39bG38oOvbESLmySRBiJuI//W75Ry9dkaDZr/3MU4fqWbdkhtabEsX8+Ger5YoRuWeKmJKxdOVC59JsuzpmiQs4pMeGfKJJRx97qjI55ULoEQRraXnJf3C2FZfYxTnMfMhBjq4fItRuiYgy3T2bjYmUNC6ZuGwkFHaol5mYab0lwW8aBOt4pGJU83layWcd0m42Whk1W+yyoaIFNqObbKpSuWK2WJNUVSW/CTF5LlIrQpgDokK6W4OAHlIAOQDkAJADQA4AOQDkAJADQA4AOQDkAAByAMgBIAeAHAByAMgBIAeAHAByAMgBAOQAkANADgA5AOQAkANADgA5AOQAkAMAyAEgB4AcAHIAyAEgB4AcAHIAyAEgB9jH/A9kf9QElLm4RQAAAABJRU5ErkJggg==">
+<link rel="icon" href="data:image/png;base64,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">
+<link rel="manifest" href="data:application/manifest+json;base64,eyJuYW1lIjoiUkFDS0VEIFx1MjAxNCBXb3Jrb3V0IFRyYWNrZXIiLCJzaG9ydF9uYW1lIjoiUkFDS0VEIiwiZGVzY3JpcHRpb24iOiJCYXJiZWxsLWZpcnN0IHdvcmtvdXQgdHJhY2tlciB3aXRoIHBsYXRlIGxvYWRpbmcgYW5kIHJlc3QgdGltaW5nLiIsInN0YXJ0X3VybCI6Ii4iLCJzY29wZSI6Ii4iLCJkaXNwbGF5Ijoic3RhbmRhbG9uZSIsIm9yaWVudGF0aW9uIjoicG9ydHJhaXQiLCJiYWNrZ3JvdW5kX2NvbG9yIjoiIzE2MTUwRiIsInRoZW1lX2NvbG9yIjoiIzE2MTUwRiIsImljb25zIjpbeyJzcmMiOiJkYXRhOmltYWdlL3BuZztiYXNlNjQsaVZCT1J3MEtHZ29BQUFBTlNVaEVVZ0FBQU1BQUFBREFDQUlBQUFEZHZ2dFFBQUFJWFVsRVFWUjQydTJkejI4ZFZ4WEh6emwzZnZ2NU9ZbEpDRmFCU0ZVUzJpTDF0MEs2Q1FzMjNWUmtnY1NHRFYyd2d5MXIyQ0N4WmdHQy9nTUlxV1VkRmtnSVVWeEVxZG9rVFhIZFJLMVRrcERFZnZhYjV6ZDN6bUZoU3pTT0hmL0llTVl6L240MHV6em4zVG5uOCs2OWMzOE5uemcrUlFEc0ZVRUlBQVFDRUFoQUlBQ0JBSUJBQUFJQkNBUWdFQUFRQ0VBZ0FJRUFCQUlBQWdFSUJDQVFnRUFBUUNBQWdRQUVBaEFJUUNBQUlCQ0FRQUFDQVFnRUFBUUNFQWhBSUFDQkFJQkFBQUlCQ0FRZ0VBQVFDRUFnQUlFQUJBSVFDQUFJQkNBUWdFQUFBZ0VBZ1VCTkJBZWhFTXpiZk1Ec01PYW1GV0VKR28rUkNCZUZtVzRaREJZT1ExYTF3Nk5SaThMU3BFQWk1QXNiTEpmVEo4TXdadE5OdzBURnF2MzM4eUxyU1JDeTZpSG9WYlFxTEVHRFlScmxOblhNL2VTWFgzM3hRajlLMlhSanBXMUdMRFRPN1I5L1h2cnR6eGNXNzVaSjJuR0hXaGNXYnVTRmM4eFVscFNrOG92ZlAvblN0L3BMdVNjajJyVEpOeUttZmhxODg3ZWxuMzV2YnBTcmM1M3RFclV4TEc1aUltbmdXd01lM0N1Ly8rTXZYL3pCOGYvY0hqT3pLajNpV2xyeVo4NW05eGY5My8rMGxQYWNkYlFTYW1OWW1tbkNUQzBNK2RsWGVxTlNnNUMzZmR3SVFoNlYrdXdydlREa1IvUXIyMDRidzlMY09CQVRNL0dPdjUrRm1MZW96enZWakxVc0xCaElCQkFJUUNBQWdRQUVBZ0FDQVFnRUlCQ0FRQUJBSUxDL1ZEa1h4cnpsSWpvMUlrTzBhNFJKdHNpRldaWHo5a0dGOXZqQ2l2SG1SWXNURVhkSVY2WTJJQStUbGpRY2JUNDdIMFljaEZ4VkxvS3FTanhldFM5OUpUanpYTHBlc2pYOTE1WStyZXJsdC9QUlVDc3NOM2owTHpuSjVMa0x2U2dXMC8vbll1MWZyNzJiMzducG83aWFYRlFnRUF1TlIvYTFNL0ZycngvTkprVTNyS0F6RWtkUHZaUzkrZXU3dzRGS2dMWnNmMXV1MHRORTMzMzNSOGRtVG9WYVBqQlJiMFlpOU1LM0ovNzR1M3MzcnExR0NULytFaUo1L0JLYlVoanpoWXY5T09YbFJjMVhkTGo4aFd0RkIvZDA1bFI0L3RWZVVSZ3prcnkvMVU5UjJQbFhlek9ud3NFOUhUNllpM3hGbHhjMVR2bkN4Zjc2YW1zK0FEV1FLbVU5emlhbEdKdHptNVRKaUlxeDlhZWRDS3FmZmNaSWhQclRyaGlidU0zV0ZURVZZOHNtSlVsNXVHemlEc1pqdkJsWithaDlUTXhVZXFTM0prcS9UUzZzck95QnBycHhvTzBxUXpSZWRUWmtqNW1zSmdRQ2h4SUlCQ0FRZ0VBQUFnRUlCQUFFQWhBSVFDQUFnUUNBUUFBQ0FRZ0VJQkFBRUFoQUlBQ0JRSGNJMmxWY1hxZWJ5V0NtMXQxYjBLQUt1LzBUTXlzS1gzanA2bG5qSWxRVWUzbDNRWVBhQlUzWjQ3M1gzWnhNYTJaaEdKNDRQcDFPY0ljRnloTUx3M0JYRHFtYTl5VnoyTWlXbDZBUmV3cnZwNDhkNmZVeVZkM0pyNGVaeTFMNy9kNjVsNStQRXV2d1NmWGpFZmY3ZzdJc2RoZ1dWZTMxc3VsalI0YmpSZGZFcnMyZ2ZudkdZejh6Yy95Wk05OU1raFhWOGM2M0NKaVo5MTU4bHdYeW5uZGIvU1JKY3Y3Y0N4OWNlMzloNFhZVTFlMVFyUUl4a2FvbVNmejAyZE9tcEZydXFSUGQyU2VhdlhXaVZVc3pldnJzNmJ0M2w3d3ZhZzZQMUJ3aDc4c25aazZtYWVMTGtyRlZyS29PWlZtbWFmTEV6RW52eTVvMzROVTlEaVFpUjQ4ZU1UTzRVMjNWYm1aSGp4NFJxVDJoVFR4clFKN3VCTFp1Z1ZSMU1GaEI0N1VmRGRsZ3NLSzFqM0RVWHVNNStYVGhwdmNsTStPa2ptcXd0WEcxOHRPRm0rTHFUbWl0VDJGbUZqaTN1RFNZbTcvKzVOZFBFdy8zOEQrWWRmbnR1M3U1TmVZNGp1Ym1QMXBjR3NSUnVGcG9ad1ZhTXlBTWdybjU2eXNELzVxZTJGVmJ4c3hSRkVXUmRuZ2NpRlNZODEzRlJMVjg3LzBybjkvNUxBeUMrbjlielV4bE9KRzVqMi9jdjU4NE4yVlc4ZzdHRWtVa3owZFhyOTFPTXU3cUt5OVphRFMwUEo4VTJkRzhoSms1NSs3Zlg1ejcrRWIvU0tpSDU1V1hSQlNHd2M2ckh6TVRrZUV3di9yaHY3T2U2L0JjMkhDNUhBNi9JUktaS2U5c2pKNlp3N0N4UERiMnhYdWJjNDZpS0lxNlBCdnZJN2UzZFFwTnZmYXlaZXVCdXQySk5xUFczUnRXSkFJSUJDQVFnRUFBQWdFQWdRQUVBaEFJUUNBQUlCQ0FRQUFDQVFnRUFBUUNFQWhBSUFDQkFJQkE0S0FJdE8wcVhqTzhkTGMrbUxmZlgxWlZPb0pLaXVzTE15Vm1VbjJvWkV5cTVOejZaOEIrWTBxK01PZElsWVEzN2c0eUl4ZXNmNllTaHg2N0JqSVNSOE9CelY0YVJJbkVHVWNweDErNG9waXpTUm5sTm50cCtmRmZjdysyejZpajJVdkxvOXl5U1luaUIzT1JjcHh4bE1qc3BjRndZT0lxT0l3cXFFVDVLT1YzL3pKY0hka3o1N0lIVGo0MFlpRS90dGxMS3d1ZkZGSE1odjN3KzFyOUdJVVJMOHdYZi9qVjNaZS9NeEZFYlByQWhoOFIvdUR0NFpWMzhpaXRabjltUmR0NmpLS1lMOC9tVjJiekRmdVRtRWlWeEJIc3FjMmhLT2FiMThkdi9tWXM4bEFWWTJSRWNWSlpMb0lLeXgybld4eTR3VVJHc0tmbWVvaVl0a3BIaFozUktqY1dibGtzcU5PRVExdUd2ZEowWUJ3SVFDQUFnUUFFQWhBSUFBZ0VJQkNBUUFBQ0FYQ2dCZHJ0NU1ZaG1ReHBWMWlhRk1pNVhkeThHYm5Ec1Jxa1hXRnBSaUFXOW1PYnZ6cUtoRXUvZmJSS2I1SHcvTldSSHh0MzkxMHRiUXhMTXdLcFVwektXMi9jdVhXcm1Kb09WVTJWdHI1c2FqcThkYXQ0NjQwN2NkclpNMzViR2hZM01aRTAwYzVUR012dHo0cjMvcnI4MUl2WjlNa3dUaVNNZU5OTGhPY3Y1ei83NFNjZi9TdFBKNTFwaDkrVTBiNnc4SW5qVTQwMW40N3psVEtLNWV6eldacUo2a09IWlJ1SlVEN1VELzg1SEs5cU91RzA3SDVIdWwxaGFWSWdJaEloVlJvTlZkV1llRU1ZMWhhaWlYQ1N5ZG9uRDh1emNYdkMwdkJKOVdzM24vWGtVZHRNYkwwcmNIaG9VVmlDQXhNdkxGdHNaVmd3RWcwZ0VJQkFBQUlCQ0FRQUJBSVFDRUFnQUlFQWdFQUFBZ0VJQkNBUUFCQUlRQ0FBZ1FBRUFnQUNBUWdFSUJDQVFBQUNBUUNCQUFRQ0VBaEFJQUFnRUlCQUFBSUJDQVFBQkFJUUNFQWdBSUVBZ0VBQUFnRUlCQ0FRZ0VBQVFDQUFnUUFFQWhBSUFBZ0U2dUovcEtVKzc1UG95WmNBQUFBQVNVVk9SSzVDWUlJPSIsInNpemVzIjoiMTkyeDE5MiIsInR5cGUiOiJpbWFnZS9wbmciLCJwdXJwb3NlIjoiYW55In0seyJzcmMiOiJkYXRhOmltYWdlL3BuZztiYXNlNjQsaVZCT1J3MEtHZ29BQUFBTlNVaEVVZ0FBQWdBQUFBSUFDQUlBQUFCN0drT3RBQUFXWmtsRVFWUjQydTNkWFl4YzEySFk4WFBPdlRPN3M3TWZYRktVTEZFZkVGVi82TXVLUmRtMWJLV1Npc2lLNFJvcCtsQURSaDdhNXNrbzBnSXBDclJ1K21Ta0xSdzNxQi9hQWkwUUJJalExazJRR2cwSytTT0JyY0NJSk51aUZVcXlKVXVrYTVtaWFGR2k5bk4yZG1idU9YMmdraFpJMFpyVXpNN082dmNEOWFBSHJsYjNubnYrNTl4N1p6ZGVmWFFsQVBET2t4d0NBQUVBUUFBQUVBQUFCQUFBQVFCQUFBQVFBQUFFQUFBQkFFQUFBQkFBQUFRQUFBRUFRQUFBRUFBQUJBQUFBUUJBQUFBUUFBQUVBQUFCQUVBQUFCQUFBQUVBUUFBQUVBQUFCQUFBQVFCQUFBQVFBQUFFQUFBQkFFQUFBQkFBQUFRQUFBRUFRQUFBRUFBQUJBQUFBUUJBQUFBUUFBQUVBQUFCQUVBQUFCQUFBQUVBUUFBQUVBQUFCQUFBQVFCQUFBQVFBQUFFQUFBQkFFQUFBQkFBQUFRQUFBRUFRQUFBRUFBQUJBQUFBUUJBQUFBUUFBQUVBQUFCQUVBQUFCQUFBQVFBUUFBQUVBQUFCQUFBQVFCQUFBQVFBQUFFQUFBQkFFQUFBQkFBQUFRQUFBRUFRQUFBRUFBQUJBQUFBUUJBQUFBUUFBQUVBQUFCQUVBQUFCQUFBQVFBUUFBQUVBQUFCQUFBQVFCQUFBQVFBQUFFQUFBQkFFQUFBQkFBQUFRQUFBRUFRQUFBRUFBQUJBQUFBUUJBQUFBUUFBQUVBQUFCQUVBQUFCQUFBQVFBQUFFQUVBQUFCQUFBQVFCQUFBQVFBQUFFQUlBWlZUc0VFeGRESE92WEs4VXhaVitPOUxFTzlQTFdQd2pBYk03N0tjVVl3bWhVbW1hY0E3bXFZMVhIa2t2T2pqTFRsMUtJS1Rhak1ocU9jNXluS3RaMUxDSGtYSlJBQUdicWtxaGlNeXFiRzZPU3cvTGhlbm0xR3Rka0hXTll2emphWEd2cVZseFlTakVFR1dDS1UzOEpZWHN6ajRabFlTbXRIS25IdFQxTktXeHY1dldMbzVqQ3dtSlYxVEUzSWlBQXM2Q3E0K1phMDEydUh2aWwxWHNmWHJuMXhNS2hxK3FjeDdCQkxpWEVGSDc2OHVEVTQxdC8rdWo2cVNlMllneWRidFdNWEJ0TVlaenZiRGVsaEovNzZPSkhQcjd5L25zWHI3bXhYY1kwemxNS2E2K1BmdkJVNy9HdnJuLzNtNXRiNjgzU0llTjhBdmNwcmo2NjRpaU03V2pHRUVKWXY5amM5NG1WejN6dTJMdnZYSWdoREFhbEdaV3hQUWNvb2RXT2RSMkhvL0xrMTlmLzdXZGZPZlBjenZLUjJ2cUlQZDdqYnJ3eE9uNTc1Ky8vaTJOLzlhR1ZWaDFIb3pJY2pIT2NWM1ZzdDJNSjRjVm5ldi8rbjcveXJmK3h2bks0Q3A2QkNjQitEc0J3VUg3NUg3M3I3L3lUYTBNSXZhMG1oSkRpbUo4Q2x4SktMakdGNVpYNmpkZUd2L1ZyUC9ubWw5OWNXRXE1Y1FiWW05ay85RGJ6QTM5ejlkZCs2NFlqVjdjMjFrY2xoNWhpSFBQYkRpR1hFa0pZV0t4Q0NML3pyMTU5NUYrZmI3V2pBSXh6RzlmdHpqc0s0OW9ScjcvUi9OMS9ldTJ2L3ZyMTZ4dWowYUJVVlV3cHhoakcvaWVsR0dQYzZlWDVoZXJoVHgxKzlzbnQwOC90ZExwVjhUeUF5WS96emJYbXd3K3RmUDczL2txTXNiZlZUSFNjcHhTSHUzazBLSC85WTZ2OVVYNzhLeHNMUzhhNUFPeS9IZkhXZXZPUmo2Lzg0eS9ldEw0NWlpbW1GQ2YrSDAxeE5DcWxoQlAzTHovMjM5ZTIxcHVxanM0RkU5M2pEbmJMMGV2YS8vSS8zMUszNDJDUTkyREl4UlJEak5zN3pRY2ZYSDdoNmQ2WjUvcHpuV1FmTUo0NXhDRVl4d2dOemFoMGw2dlBmTzdZcGJzOWNhL200YXFLdXp2NXVodmJ2L0xaYTNkMzhoNVVoM2YwZkpIaTdrNytsYzllZTkyTjdkMmRYRlY3Tk43ZXVxQmkrTXpuam5XWHEzRStWQk1BM3Y1VjBkdks5enk0OU80N0ZucGJPVlY3T2phck9tNXQ1L3Mrc1hMc2xybmRmbzR1RENZMkMrLzI4N0ZiNXU3N3hNcldkdDdqN1dhcVltOHJ2L3VPaFhzZVhPcHRXZXNJd0g2Nk1FcFQ3djNZY294bDc5OVJpREdNaHZuUWtkYmRQNy9VNysxMWZuZ0hUUlpWN1BmeTNUKy9kT2hJYXpTY3hsS2psQmpMdlI5YkxrMngwQkdBL1RMN2o0WjUrVWg5MnozZHdiQk1aV0VTUzRpaDNQWFJ4Umk5SmNkRTU5OXcxMGNYWXloeEdxTXNwVGdZbHR2dTZTNGZxYWRUSUFIZ0w4dE5XRmhLaDY2cW0yR1l6cTNKR0hJSVI2OXJWeTB2eVRHNStUOVVyWGowdW5ZT1V4dm56VEFjdXFyMjByTUE3TE5ySTRlbUNkTjlNTldNL01nVUpqM1F3NVEvamh0RDB3U3ZnUXJBdmpQMURha2RNY1k1QWdDQUFBQWdBQUFJQUFBQ0FDQUFBQWdBQUFJQWdBQUFJQUFBQ0FBQUFnQ0FBQUFnQUFBSUFBQUNBSUFBQUNBQUFBZ0FBQUlBZ0FBQUlBQUFDQUFBQWdDQUFBQWdBQUFJQUFBQ0FDQUFBQWdBQUFJQWdBQUFjT0RVQitsL0pzWVFZeWdoaEhJRmZ6bkVFSEkySk9CQXIzblQyNW9pU2dtbEhKeWpjWEFDRUZOb2htV3dXMUlWVTd5ODgzdHA2aStsdE9kVHFrS1JBVGh3WWdxNUNUdmJPY2I0VmdZdWE0b29JVGVsUFJlclZqd3dVOFNCQ0VBTW9ZVGRYajUwdEw3bHp2bGp4OXR6OHpIbkVPTFA5dGRMU0ZYY1dtdGUvdUh1bWVmNk85dGxyaE0xQUE3WTdMKzdVenJkK0o2Zlc3anhQWE9MaDZyY2xNdVlJbExZN1pkWHpneE9QOU5mdXpCcXo2ZEwwNDRBVEgvMkx5VTB3L0tSVHl6ZmZmL0N3bUtWU3lrLzg1bjk4L01iVW94M2ZIamh6UXVqYi8zaDVnKysyNXZ2SmcyQUF6UDc5N2Z6cmZjczNQZkpwZFdqZFFnaGwzSzVVMFNNNFgxM2QrNzl4Y1dUai9XZStNcG0xWXB4OWhzdyt3RW9ZVFFvdi9DcGxSTVBkbmUyY204N3h5c1pJS0dVRWtKWVdxMCsrZmNPdGVmam4zMXJXd1Bnd016K2Q5M1hmZmpUSzZOUjJPbmxFTUtWemQwbGxLcU9mKzJYbHJyTDZZKyt0TjVxeDFrL09QV3NuOXJkbmZMQTMxbys4VUIzYXkybkZOS1Z2dFlVWXdnaGpBYWxHWWFIUDMxbzBDL1BuOXh4THdnT3dCUng2ejBMRDMvNjBPNU9MdVgvbUNJdWYvYU9JWlFjdHRieWlRZTZ3MEg1NWg5c3pQb1VrV2I2MUE3NjVkang5dDMzZDdjM2M2cXU1SXorNWE5WlNoaU44bjJmWE9wMFkyN0c4RFdCS2MwUklUZWgwNDMzZlhKcE5NcWxoSmpHOERWVEZiWTM4OTMzZDQ4ZGJ3LzZKYzd5dS9TekhJQVFtcWJjOXFGT1ZjY3h2cGdWVXhnT3d1clIrdmp0ODROK1RnSUFNenE3eFREbzUrTzN6NjhlclllRE1NYVp1cFJRMWZHMkQzV2Fwc3owRERHekFZaWhhVUtubTY2N3VkME1KekJOeDNEamUrY3MvMkhXTndHVHVKQlRETTB3WDNkenU5Tk56U3pmSjVqaEhVQXBZVzQrZHJwcDdKL2VpaUdVWExvckthVjRrRDcwQWU4b3BZU1VZbmNsbFR6K2RYck9vZE5OYy9PelBVV2tXVC9Ca3p2NnBYRUZ3ZXhuWUdJWDhnSDRWTENmQmZULzNBZ0FMdVNEU3dBQUJBQUFBUUJBQUFBUUFBQUVBQUFCQUVBQUFCQUFBQVFBQUFFQVFBQUFFQUFBQkFBQUFRQkFBQUFRQUFBRUFBQUJBRUFBQUJBQUFBUUFBQUVBUUFBQUJBQUFBUUJBQUFBUUFBQUVBQUFCQUVBQUFCQUFBQVFBQUFFQVFBQUFFQUFBQkFBQUFRQkFBQUFRQUFBRUFBQUJBRUFBQUJBQUFBUUFBQUVBUUFBQUJNQWhBQkFBQUFRQUFBRUFRQUFBRUFBQUJBQUFBUUJBQUFEWTMycUg0Q0FwYjNFa21NVG9Dc2FXQVBCL0VlTisrQjVpdTlWcXRWTE9UZ2pqbDFKb3QzTGNCMk45UDF4dUFzRC9ubm1iSms5eGNSUmpISTJhbFpXbCt6NzZvYmw1cXpRbU5lM3U5dVBLU244MGFxYVlnVkpLMCt5TERnbkFPLzZTQ0NHRU1Cd09WNWFQdEZyMWRLZmVQOThCQ0FDVENrQnBZb3k3VS93ZVNpbXRWcjJ5dkxUMitodFYzWW9oR093Q01MVUpOK2NjUXJqOTF2ZTg5N2JyWXR3T0lVOTNXZUlaQUJNZVlOTmZiOFdZVG56Z3pzVzVjeS8rNkV3b0lhVmt4QXZBRkdiL3BtbnF1ajd4Z1R0V1Z3NlhNakFLWWM5V09jZHZ2bW4xOE5KVDMzdDJOQnBWVmVYcXV6SmVBNzFDT2VkV3EvWEJ1OTkvNVBEcTdtRGdnTUJlMmgwTWpoeGUvZURkNzIrMVd0bHJEd0t3eDh2L1VzcGRkOTY2dXJveUdBeVM1MUd3eHpOWGpJUEJZSFYxNWE0N2J5MmxlQ1lzQUhzMysrOE9Cc2R2dnZHYW8xZnQ3ZzVpY2d4aEdsZGlTcnU3ZzJ1T1huWDg1aHQzQndNTkVJQzkwRFI1WlducDVwdHVHQTZIeWV3UFU1eS9VaG9PaHpmZmRNUEswbExUdUJFa0FKTmYvamROYzhQMTE4N1B6V1hQbldEYWNpbnpjM00zWEg5dDB6UTJBUUl3NGRHVzgvejgzRFZYWHpVY2pZdzIyQTlyc3VGb2RNM1ZWODNQejNrYUxBQVRYdjdudkxLODFPbDBERFhZUDh1eVRxZXpzcnpVWko4UUZvQkpLcmtzTHkybFpKREJmcHJJVWx4ZVdpclpYVmtCbVBBbVlIbDUwYWRPWUgrdHpFcFpYbDYwL0JlQVNRY2d0RnExbno4Qys2d0FvZFdxemY4Q3NCZHJEUWNCWEpnQ1lKd0JMa3dCZUdmSXVXeHVia1VQZ1dFL2lTbHVibTVsRDRFRllMTGpMTWFOalMxTERkaG55Lyt3c2JIbEliQUFUSGFQbWFxMHRyRTU4SU5IWUQ4dHl3YUR3ZHJHWnFyOGJnQUJtS1FxcFY2dmQrSDFpNjI2TnRSZ1B5ekxXblY5NGZXTHZWNnY4ck81QkdBUGxodG5Yem5mK0NRdzdBOU56bWRmT1c5VExnQjdzZHlvNi9yQzYyK2NPM2UrM2ZhYktHQ2Fjczd0ZHV2Y3VmTVhYbitqdGlrWGdEMXJ3UE12bnRuYTZ2a1Y3RERGSzdIVmFtMXQ5WjUvOFl6Wlh3RDI4S2lsT0JnTW5qNzEvZUZ3V1B0OXBEQ1ZkVmhWRFlmRHAwOTlmekFZK1BGY0FyRFhtNEMxOWZYdm5EdzFISTFhTGFzUDJPTzFmejBjamI1ejh0VGErcnJsdndCTVovdTV2cjd4K0pNbkw3NjUzbTYzSEJQWUcrMTI2K0tiNjQ4L2VYSjlmY050MkxlamRnamU1ajZndDdQejdlOCt2Ymx6TE1haisrRmJLc1hsd09RRzJQUy9oeGpERDU1LzZRZlB2UktyWXUwdkFOTnVRRlVObS96anMrZUd3OVZPckVzb2NXb1hScXhyVndRVG5IbHpIYWY0dG1XNTlQdS9ocU1mbnowWFFxaXJ5czkrRUlEcE55Q0UwS3JyNlg0UFZaVTJOcmFlL001TG5XNzBiaXFUa0ZMWTJTNFBiN3lycWpxbDVCaW1Wb0pXWFljd3ROSVJnUDJWZ2FtdXp1SndPSHp0d2hzTC9TUUFUQ2dBdmMwOEhCNkpjZUVkZnJrSkFQdHdoeDVicmJwVkN3Q1RDa0NyNVpmdUNnRDdlQ1BpSVRBVEcxMlczZ2N1Nmc0QmdBQUFJQUFBQ0FBQUFnQ0FBQUFnQUFBSUFBQUNBSUFBQUNBQUFBZ0FBQUlBZ0FBQUlBQUFDQUFBQWdDQUFBQWdBQUFJQUFBQ0FJQUFBQ0FBQUFnQWdBQUFJQUFBQ0FBQUFnQ0FBQUFnQUFBSUFBQUNBSUFBQUNBQUFBZ0FBQUlBZ0FBQUlBQUFDQUFBQWdDQUFBQWdBQUFJQUFBQ0FJQUFBQ0FBQUFnQWdBQUFJQUFBQ0FBQUFnQ0FBQUFnQUFBSUFBQUNBSUFBQUNBQUV4TmppSEdDWHh5WWRST2RJbVo5bGtnemZWNUh3ekFjbEltY2d4Z0cvVktLeXdkbVdDbGgwQzloQWxORWpHRTRLS1BoYkRkZ1pnTlFRa3FodDVsZk96dXNXbkc4TTNVSkljVjQ3a2ZEM0JUN0FKamROV0p1eXJrZkRWT000MTNMbFJLcVZuenQ3TEMzbVZNS1lXWlhpck44Q3lpR0VNSUxKM2ZpZU05dUNWVVZ0cmZ5UzZkMlduTXAyd1RBYk1vbHRPYlNTNmQydHJkeVZZMXptaTRoeEJoZk9MbnpGeE9SQU96NUhpQ0g5bnc4L1d6L3pMUDk3bUpxUm1NYU5EbDBGdFAzSHR0Kzg4S29iczF3MitHZHJvUzZGZDY4TVByZVk5dWR4WlR6ZUw1cU13cmR4WFRtMmY3cFovdnQrVmp5REIraDJYOElIT0tqajZ6OTVQU2d1NUp5RTBvT3BZUncrWDlLQ1RtSFVzTGlTbnJxRzl0UGZHVnpiajdOOUtrRlNnNXo4K21KcjJ3KzlZM3R4WlgwRjVmNWxVMFJKWWZjaE81SytzbnB3YU9Qck1VUVovMFdjVDNiWjdlRXFoWDZ2ZnpsLzNEeDQ3OTg2UGdkODZXVVpoaXU0T2x0VExGdXhXWlVudmphMW1QL2JhTnV4UkF0LzJIMnhWRFY4WSsrdEQ0Y2xMdnY3MVoxSEExTHVmeDd1ekhHcWhWaWpLZFA5Ujk5WkszZnk2MTJuUFUxWWozcko3ZmswR3JId1U3NThuKzhlTXZ0OCs4OTBibjYrbGFyZlhtUGhXTUsvYTNtbFRPRDczK245OHFaWVh2TzdBOEhaaGNRWWdxdGR2em1IMnk4K1BUT2JSOWNPSGE4UGI5NGVmdjdHTU53a0Y4N08zemhxWjNUei9WamlBZGc5ajhJQWJqVWdLb09KY1FmUHQzLzRkUDloYVZVMVRHVW4vbmRyeEppaXJ2OTNOL09xWXB6blZpeTJSOE9WQU5DQ0hPZGVPNUh3N012cmMxMzA5eDhLdmt5cG9nUVl6TXF2YzBjUW1oM1lnemhZTndmcmcvSStiMTBnaGRpQ0dFNEtJUGRjcmwvUDZYUTZhWkx0L21BQTFpQkhOcHpNY2FZbTlEYnpKZjU5azZKOGEwWnB1U0RzejZzRDlnSnZyUlppMWZ3Ykx1RWJPcUhnOTJBRWtvSklZWjBCVFBmUVZ3ZDFnZjBQQnZxZ0NuaS84TVBnd01RQUFBRUFBQUJBRUFBQUJBQUFBUUFBQUVBUUFBQUVBQUFCQUFBQVFCQUFBQVFBQUFFQUFBQkFFQUFBQkFBQUFRQUFBRUFRQUFBRUFBQUJBQUFBUUFRQUFBRUFBQUJBRUFBQUJBQUFBUUFBQUVBUUFEZXNjcTAvL3ZGT2VBZE1NeU1jd0hZYjJJTXNacnk5MUJWemdNSGY1akZLc1RvUEFqQWZwcjlCN3VsdjUzVDlBNW5ER0Y3TTVjY2dtdURpUTJ5a3NQMlpwN2lFRXNwOUxmellMZG9nQURzbHgxeHF4M1hMZ3hmUE5WcnQyUEpaU3JmUTR6eG1TZTNSc01TWFJsTWFxRVRSOFB5ekpOYk1jYXAzQWdxdWJUYjhjVlR2YlVMdzFZN3V1Y3BBUHZseXNnNWZQdVBONmQxWVZSMTNONXFUajYyMmU3RW5GMFdURVRPcGQySkp4L2IzTjVxcW5vSzY0eExDNTF2Ly9GbXpzRnRJQUhZTnhkR1V6cmQ5TVRYMWw5N2RkQ2VUM3ZjZ0daVUZoYlRNMDlzblg1MnA3T1FTblpDbU5BQ1BIUVcwdWxuZDU1NVltdGhNVFdqUFIzb3BZVDJmSHJ0MWNFVFgxdnZkRk51TEhRRVlKOWNHQ1cwNTlQNWx3ZVBmT0Y4dDdPbkYwWXBJVlZ4c0ZOKyt6ZGVMU1Y0QXNDa2Q3dWxoTi8ralZjSE95VlZlN3JmYlVhbDIwbVBmT0g4K1plbnNNdzZxS3B1ZDk1UkdNdmlhRzRoL2RtZmJ0L3czdmtQbkZqYzJHcFNtdmpkK0p4REtlV3FsZFlYLzluWnIvL2VtOHVydFdVUmsxNXd6SFhTLzN5aHY5dlBELzJOMWUyZEpvU0pqL05Td21oWXJqblNldlQzTC82N1gzOWxjYVhLalZNaEFQdHRhUlJEak9Ia1k1czMzanIvdmpzWEJvUFNqRXFjd09WUlNpZ2xOS015MTBrTDNmUzdYenovdTc5NXZydFVaVGQvMkpPMXpud25QZlBFVnQySkorNWZDaUVNZHN1bE8vTGpIK281NUtha0txNGVxdi9rcSt1LytROWV2dlN2UGdvZ0FQdnd5Z2gxSGZ1OS9OWC9jbkdVdy9zL3NyaThYSWNxTnFPUzgxdXo5bGorVkhYb0xLVEZidlhhdWNIbmYvWGwvL1J2ZnRwZDhoRUE5blN0VTdmaW4vemgrc3N2N3Q3NTRlNDE3MnFuVnN5NTVHYWM0enpHTU5kSmk5MXFPQ3EvOC9uelgvaUhMemVqMG1wSFQ3bkdlU3F2UHJyaUtJenpnS1lRU3RoOHMzbmZpWVdIL3ZiaGV4NWN2djZXdVU1M25MY3NOOWVhTTkvZmVmeXI2MS8vMHNXZi9tU3dmTGplNDhkeEVFS282cmh4Y1hUTkRlMkhQblg0M29kWGp0L1dXVG8wdG9WSWpHRm5PNTg5dmZ2ZGIyeDgvYjllZlA2cDN0SnFkZW1EQ0FqQXZyODJxcml6M2V6Mnk5SktkZU43NWc5ZlhUZk5PQjdRbHBCU09QZmp3Ymt6dS8yZHZMQ1kybk9wY2QrZjZZM3p3Vzd1YmVYNVRycnUrTngxTjdWekhzODRyNnB3OGJYUnl6L3NiNjQzYy9PeDA2Mk1jd0dZc2ExQVNyRVpsZDErdnZRdzRPMlAzeGhDQ2FYVlR1MjVtS3FZbStKZENLWTh6bU80TkJRSHUyVTR5R01jNTFVZDUrWlRWY2VjaTRXL0FNeHdDY2I3SUxoazh6NzdzUVF4alhXY0YvUCt4TlVPd2FTVkhJcTNGamp3NDd5RTRpN05yUEZCTUFBQkFFQUFBQkFBQUFRQUFBRUFRQUFBRUFBQUJBQUFBUUJBQUFBUUFBQUVBQUFCQUVBQUFCQUFBQVFBQUFFQVFBQUFFQUFBQkFBQUFRQkFBQUFRQUFBQkFFQUFBQkFBQUFRQUFBRUFRQUFBRUFBQUJBQUFBUUJBQUFBUUFBQUVBQUFCQUVBQUFCQUFBQVFBQUFFQVFBQUFFQUFBQkFBQUFRQkFBQUFRQUFBQmNBZ0FCQUFBQVFCQUFBQVFBQUFFQUFBQkFFQUFBQkFBQUFRQUFBRUFRQUFBRUFBQUJBQUFBUUJBQUFBUUFBQUVBQUFCQUVBQUFCQUFBQVFBQUFFQVFBQUFCQUFBQVFCQUFBQVFBQUFFQUFBQkFFQUFBQkFBQUFRQUFBRUFRQUFBRUFBQUJBQUFBUUJBQUFBUUFBQUVBQUFCQUVBQUFCQUFBQVFBQUFFQVFBQUFCQUFBQVFCQUFBQVFBQUFFQUFBQkFFQUFBQkFBQUFRQUFBRUFRQUFBRUFBQUJBQUFBUUJBQUFBUUFBQUVBQUFCQUVBQUFCQUFBQVFBQUFFQVFBQUFFQUFBQVFCQUFBQVFBQUFFQUFBQkFFQUFBSmhWL3dzZmpsYVBpajE3ekFBQUFBQkpSVTVFcmtKZ2dnPT0iLCJzaXplcyI6IjUxMng1MTIiLCJ0eXBlIjoiaW1hZ2UvcG5nIiwicHVycG9zZSI6ImFueSJ9XX0=">
+
 <style>
   :root{
     --bg: #16150F;
@@ -17,19 +30,29 @@
     --rest: #FF5A36;
     --rest-dim: #5C271A;
     --radius: 22px;
+    --safe-t: env(safe-area-inset-top, 0px);
+    --safe-b: env(safe-area-inset-bottom, 0px);
+    --safe-l: env(safe-area-inset-left, 0px);
+    --safe-r: env(safe-area-inset-right, 0px);
   }
 
   *{ box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   html,body{
     height:100%; margin:0; overscroll-behavior:none;
     touch-action: manipulation; user-select:none; -webkit-user-select:none;
+    -webkit-touch-callout:none;
   }
+  html{ background:var(--bg); }
   body{
     background:var(--bg); color:var(--text);
     font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     font-variant-numeric: tabular-nums;
+    -webkit-font-smoothing:antialiased;
     display:flex; align-items:center; justify-content:center;
-    width:100vw; height:100vh; overflow:hidden;
+    width:100vw; overflow:hidden;
+    /* iOS Safari: dvh tracks the collapsing URL bar; fill-available covers older iOS */
+    height:100vh; height:-webkit-fill-available; height:100dvh;
+    position:fixed; inset:0;
   }
   #stage{
     position:relative; width:100%; height:100%; max-width:640px; margin:0 auto;
@@ -38,7 +61,10 @@
   }
   .num{ font-weight:800; letter-spacing:-0.03em; }
 
-  /* ---------- Fullscreen expansion ---------- */
+  /* Keyboard focus stays visible even though taps don't ring */
+  :focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+
+  /* ---------- Fullscreen expansion (desktop / Android) ---------- */
   body:fullscreen #stage,
   body:-webkit-full-screen #stage{
     max-width:980px;
@@ -57,9 +83,16 @@
     border:1px solid var(--line); color:var(--text-dim); font-size:16px;
     display:flex; align-items:center; justify-content:center; cursor:pointer;
     flex:none; transition: transform .15s ease, color .15s ease;
+    position:relative;
+  }
+  /* 44pt minimum touch target without growing the visible circle */
+  .fs-btn::after, .close-btn::after{
+    content:""; position:absolute; top:50%; left:50%;
+    width:44px; height:44px; transform:translate(-50%,-50%);
   }
   .fs-btn:active{ transform:scale(.9); }
   .fs-btn.is-on{ color:var(--accent); border-color:var(--accent-dim); }
+  .fs-btn.is-hidden{ display:none; }
   .fs-btn svg, .close-btn svg{ width:18px; height:18px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; pointer-events:none; }
   .close-btn svg{ width:16px; height:16px; }
   .btn-icon{ width:17px; height:17px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; flex:none; }
@@ -75,6 +108,20 @@
   /* ---------- Header icon row / clock ---------- */
   .icon-row{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; justify-content:flex-end; }
   .clock-pill{ color:var(--text-dim); font-size:13px; font-variant-numeric:tabular-nums; min-width:44px; text-align:right; }
+  .icon-row{ flex-wrap:nowrap; }
+  /* Standalone already shows the iOS status-bar clock — no need for a second one */
+  @media (display-mode: standalone){ .clock-pill{ display:none; } }
+  /* iOS always shows the system clock in the status bar, so the in-app one
+     is redundant on a phone — the header stays on one line instead */
+  @media (max-width:480px){ .clock-pill{ display:none; } }
+  @media (max-width:420px){ .brand h1{ font-size:22px; } .date-pill{ font-size:12px; } }
+  .date-pill{ white-space:nowrap; }
+  .brand{ gap:10px; }
+  .brand h1{ flex:none; }
+  @media (max-width:420px){
+    .icon-row{ gap:6px; }
+    .fs-btn{ width:36px; height:36px; }
+  }
 
   /* ---------- Sleep mode ---------- */
   #sleep-overlay{
@@ -84,9 +131,33 @@
   }
   #sleep-overlay.active{ opacity:1; pointer-events:auto; }
   .sleep-clock{ font-size:64px; font-weight:800; color:#2a2a2a; letter-spacing:-0.02em; transition:color .6s ease; }
-  .sleep-clock.dim{ color:#1c1c1c; }
   .sleep-date{ font-size:14px; color:#333; margin-top:8px; }
-  .sleep-hint{ position:absolute; bottom:40px; font-size:12px; color:#2a2a2a; letter-spacing:.04em; }
+  .sleep-hint{ position:absolute; bottom:calc(40px + var(--safe-b)); font-size:12px; color:#2a2a2a; letter-spacing:.04em; }
+  .sleep-rest{ margin-top:22px; font-size:34px; font-weight:800; color:#3a3a3a; letter-spacing:-0.02em; display:none; }
+  .sleep-rest.show{ display:block; }
+
+  /* ---------- Resume / install bars ---------- */
+  .banner{
+    position:absolute; left:14px; right:14px; z-index:45;
+    background:var(--surface-2); border:1px solid var(--line); border-radius:16px;
+    padding:13px 14px; display:flex; align-items:center; gap:12px;
+    box-shadow:0 8px 28px rgba(0,0,0,.45);
+    transform:translateY(20px); opacity:0; pointer-events:none;
+    transition:transform .3s cubic-bezier(.2,.8,.2,1), opacity .3s ease;
+  }
+  .banner.show{ transform:translateY(0); opacity:1; pointer-events:auto; }
+  .banner-bottom{ bottom:calc(14px + var(--safe-b)); }
+  .banner .txt{ flex:1; font-size:13px; line-height:1.4; color:var(--text-dim); }
+  .banner .txt b{ color:var(--text); display:block; font-size:14px; margin-bottom:2px; font-weight:700; }
+  .banner .act{
+    flex:none; background:var(--accent); color:#141308; font-weight:800; font-size:13px;
+    border:none; border-radius:11px; padding:10px 14px; cursor:pointer;
+  }
+  .banner .dismiss{
+    flex:none; width:30px; height:30px; border-radius:50%; background:transparent; border:1px solid var(--line);
+    color:var(--text-dim); font-size:15px; line-height:1; display:flex; align-items:center; justify-content:center; cursor:pointer;
+  }
+  .share-glyph{ display:inline-block; vertical-align:-2px; width:13px; height:13px; stroke:var(--accent); fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
 
   /* ---------- Stats screen ---------- */
   .stat-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:18px; }
@@ -97,21 +168,28 @@
   /* ---------- Data viewing: tabs + panes ---------- */
   #screen-stats{ overflow:hidden; }
   .data-tabs{ display:flex; gap:6px; margin-top:18px; background:var(--surface-2); border-radius:14px; padding:4px; flex:none; }
-  .data-tab{ flex:1; text-align:center; font-size:13px; font-weight:700; color:var(--text-dim); padding:9px 0; border-radius:11px; cursor:pointer; transition:background .15s ease, color .15s ease; }
+  .data-tab{ flex:1; text-align:center; font-size:13px; font-weight:700; color:var(--text-dim); padding:11px 0; border-radius:11px; cursor:pointer; transition:background .15s ease, color .15s ease; }
   .data-tab.is-active{ background:var(--surface); color:var(--text); }
-  .data-pane{ display:none; flex-direction:column; flex:1; min-height:0; overflow-y:auto; padding-bottom:10px; margin-top:4px; }
+  .data-pane{
+    display:none; flex-direction:column; flex:1; min-height:0; overflow-y:auto;
+    -webkit-overflow-scrolling:touch; overscroll-behavior:contain;
+    padding-bottom:calc(10px + var(--safe-b)); margin-top:4px;
+  }
   .data-pane.is-active{ display:flex; }
 
   .chart-box{ background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:16px; margin-top:14px; flex:none; }
   .chart-box-head{ display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
   .chart-box .l{ font-size:11.5px; color:var(--text-dim); font-weight:700; }
   .chart-range{ display:flex; gap:4px; background:var(--surface-2); border-radius:8px; padding:3px; }
-  .chart-range-opt{ font-size:10.5px; font-weight:800; color:var(--text-dim); padding:3px 8px; border-radius:6px; cursor:pointer; }
+  .chart-range-opt{ font-size:10.5px; font-weight:800; color:var(--text-dim); padding:6px 10px; border-radius:6px; cursor:pointer; }
   .chart-range-opt.is-active{ background:var(--accent); color:#141308; }
   .chart-bars{ display:flex; align-items:flex-end; gap:4px; height:90px; }
   .chart-bars i{ flex:1; background:var(--accent); border-radius:4px 4px 0 0; min-height:3px; opacity:.9; transition:height .4s ease; cursor:pointer; }
   .chart-bars i.empty{ background:var(--line); cursor:default; }
+  .chart-bars i.is-picked{ background:#fff; }
   .chart-axis{ display:flex; justify-content:space-between; margin-top:6px; font-size:10px; color:var(--text-dim); }
+  .chart-callout{ margin-top:8px; font-size:12px; color:var(--text-dim); min-height:16px; }
+  .chart-callout b{ color:var(--accent); font-weight:800; }
 
   .pr-list{ display:flex; flex-direction:column; gap:8px; margin-top:2px; }
   .pr-row{ background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:12px 14px; display:flex; justify-content:space-between; align-items:center; }
@@ -119,13 +197,13 @@
   .pr-row .d{ font-size:11.5px; color:var(--text-dim); margin-top:2px; }
   .pr-row .v{ font-weight:800; color:var(--accent); font-size:15px; }
 
-  .filter-row{ display:flex; gap:8px; overflow-x:auto; padding:2px 0 4px; flex:none; }
-  .filter-chip{ flex:none; font-size:12.5px; font-weight:700; color:var(--text-dim); background:var(--surface); border:1px solid var(--line); padding:7px 14px; border-radius:20px; cursor:pointer; white-space:nowrap; }
+  .filter-row{ display:flex; gap:8px; overflow-x:auto; -webkit-overflow-scrolling:touch; padding:2px 0 4px; flex:none; }
+  .filter-chip{ flex:none; font-size:12.5px; font-weight:700; color:var(--text-dim); background:var(--surface); border:1px solid var(--line); padding:9px 14px; border-radius:20px; cursor:pointer; white-space:nowrap; }
   .filter-chip.is-active{ background:var(--accent); color:#141308; border-color:var(--accent); }
 
   .log-list{ margin-top:10px; display:flex; flex-direction:column; gap:8px; }
   .log-row{ background:var(--surface); border:1px solid var(--line); border-radius:14px; overflow:hidden; }
-  .log-row-head{ padding:12px 14px; display:flex; justify-content:space-between; align-items:center; cursor:pointer; }
+  .log-row-head{ padding:12px 14px; display:flex; justify-content:space-between; align-items:center; cursor:pointer; min-height:56px; }
   .log-row .t{ font-weight:700; font-size:14px; }
   .log-row .d{ font-size:12px; color:var(--text-dim); margin-top:2px; }
   .log-row .v{ font-weight:800; color:var(--accent); font-size:14px; text-align:right; }
@@ -145,21 +223,40 @@
   .settings-panel .l{ font-size:11.5px; color:var(--text-dim); font-weight:700; margin-bottom:8px; }
   .settings-panel input{
     width:100%; background:var(--bg); border:1px solid var(--line); border-radius:10px;
-    color:var(--text); padding:11px 12px; font-size:13.5px; margin-bottom:8px; font-family:inherit;
+    color:var(--text); padding:12px; margin-bottom:8px; font-family:inherit;
+    /* 16px keeps iOS from zooming the page when the field takes focus */
+    font-size:16px;
   }
   .settings-panel .status{ font-size:12px; color:var(--text-dim); margin-top:6px; }
   .settings-panel .status.ok{ color:var(--accent); }
   .settings-panel .status.err{ color:var(--rest); }
+  .setting-row{ display:flex; justify-content:space-between; align-items:center; gap:14px; }
+  .setting-row .d{ font-size:11.5px; color:var(--text-dim); margin-top:3px; line-height:1.35; }
+  .setting-row .t{ font-size:14px; font-weight:700; }
+  .toggle{
+    flex:none; width:52px; height:32px; border-radius:20px; background:var(--surface-2);
+    border:1px solid var(--line); position:relative; cursor:pointer; transition:background .2s ease;
+  }
+  .toggle b{
+    position:absolute; top:3px; left:3px; width:24px; height:24px; border-radius:50%;
+    background:var(--text-dim); transition:transform .2s cubic-bezier(.2,.8,.2,1), background .2s ease;
+  }
+  .toggle.is-on{ background:rgba(199,242,61,.16); border-color:var(--accent-dim); }
+  .toggle.is-on b{ transform:translateX(20px); background:var(--accent); }
 
   /* ---------- Screen management ---------- */
   .screen{
     position:absolute; inset:0; display:flex; flex-direction:column;
-    padding: max(20px, env(safe-area-inset-top)) 22px max(20px, env(safe-area-inset-bottom));
+    padding: max(18px, var(--safe-t)) max(22px, var(--safe-r)) max(18px, var(--safe-b)) max(22px, var(--safe-l));
     opacity:0; pointer-events:none; transform: scale(1.03);
     transition: opacity .32s ease, transform .38s cubic-bezier(.2,.8,.2,1);
   }
   .screen.active{ opacity:1; pointer-events:auto; transform: scale(1); }
   .screen.exit-left{ transform: translateX(-6%) scale(.98); }
+  /* Standalone mode has no browser chrome, so the status bar needs its own room */
+  @media (display-mode: standalone){
+    .screen{ padding-top: max(26px, var(--safe-t)); }
+  }
 
   /* ---------- Home ---------- */
   .brand{ display:flex; align-items:baseline; justify-content:space-between; margin-bottom:6px; }
@@ -167,10 +264,12 @@
   .brand h1 span{ color:var(--accent); }
   .date-pill{ color:var(--text-dim); font-size:13px; }
 
+  #screen-home{ overflow-y:auto; -webkit-overflow-scrolling:touch; overscroll-behavior:contain; }
+
   .hero-card{
     margin-top:22px; background:linear-gradient(160deg, var(--surface-2), var(--surface));
     border:1px solid var(--line); border-radius: var(--radius); padding:26px;
-    position:relative; overflow:hidden;
+    position:relative; overflow:hidden; flex:none;
   }
   .hero-eyebrow{ color:var(--accent); font-size:13px; font-weight:700; }
   .hero-title{ font-size:40px; margin:6px 0 4px; font-weight:800; letter-spacing:-0.02em; }
@@ -181,69 +280,76 @@
   .btn{
     border:none; border-radius:16px; font-weight:800; letter-spacing:-.01em;
     display:flex; align-items:center; justify-content:center; gap:8px;
-    cursor:pointer; -webkit-tap-highlight-color:transparent;
+    cursor:pointer; -webkit-tap-highlight-color:transparent; font-family:inherit;
   }
   .btn:active{ transform: scale(.97); }
   .btn-primary{ background:var(--accent); color:#141308; font-size:18px; height:60px; width:100%; transition: transform .12s; }
   .btn-ghost{ background:transparent; color:var(--text); border:1px solid var(--line); height:52px; font-size:15px; }
 
-  .rest-note{ display:flex; gap:12px; align-items:center; background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:16px 18px; margin-top:22px; }
+  .rest-note{ display:flex; gap:12px; align-items:center; background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:16px 18px; margin-top:22px; flex:none; }
   .rest-note .dot{ width:10px; height:10px; border-radius:50%; background:var(--rest); flex:none; }
   .rest-note p{ margin:0; font-size:13.5px; color:var(--text-dim); line-height:1.4; }
 
-  .section-label{ margin:26px 0 10px; font-size:12.5px; color:var(--text-dim); font-weight:700; letter-spacing:.02em; }
-  .day-row{ display:flex; gap:10px; }
+  .section-label{ margin:26px 0 10px; font-size:12.5px; color:var(--text-dim); font-weight:700; letter-spacing:.02em; flex:none; }
+  .day-row{ display:flex; gap:10px; flex:none; }
   .day-chip{
     flex:1; background:var(--surface); border:1px solid var(--line); border-radius:14px;
     padding:14px 10px; text-align:center; font-size:13px; font-weight:700; color:var(--text-dim);
   }
   .day-chip.is-today{ border-color:var(--accent); color:var(--accent); }
   .day-chip small{ display:block; font-weight:500; color:var(--text-dim); margin-top:3px; font-size:11px; }
+  #pick-row{ padding-bottom:10px; }
 
   /* ---------- Workout screen ---------- */
-  .wk-top{ display:flex; justify-content:space-between; align-items:flex-start; }
+  .wk-top{ display:flex; justify-content:space-between; align-items:flex-start; flex:none; }
   .wk-tag{ font-size:12.5px; color:var(--accent); font-weight:700; }
   .wk-exercise{ font-size:32px; font-weight:800; letter-spacing:-0.02em; margin:6px 0 2px; line-height:1.05; }
   .wk-progress-txt{ color:var(--text-dim); font-size:13.5px; }
-  .close-btn{ width:38px; height:38px; border-radius:50%; background:var(--surface); border:1px solid var(--line); color:var(--text-dim); font-size:18px; display:flex; align-items:center; justify-content:center; }
+  .close-btn{ width:38px; height:38px; border-radius:50%; background:var(--surface); border:1px solid var(--line); color:var(--text-dim); font-size:18px; display:flex; align-items:center; justify-content:center; position:relative; flex:none; }
 
-  .barwrap{ display:flex; gap:6px; margin:14px 0 4px; }
+  #screen-workout{ overflow-y:auto; -webkit-overflow-scrolling:touch; overscroll-behavior:contain; }
+
+  .barwrap{ display:flex; gap:6px; margin:14px 0 4px; flex:none; }
   .barwrap i{ flex:1; height:5px; border-radius:3px; background:var(--line); overflow:hidden; }
   .barwrap i b{ display:block; height:100%; width:0%; background:var(--accent); transition: width .4s ease; }
 
-  .prev-row{ display:flex; gap:10px; margin-top:16px; }
+  .prev-row{ display:flex; gap:10px; margin-top:16px; flex:none; }
   .prev-box{ flex:1; background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:10px 14px; }
   .prev-box .l{ font-size:11px; color:var(--text-dim); font-weight:700; }
   .prev-box .v{ font-size:17px; font-weight:800; margin-top:2px; }
 
-  .control-card{ background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:18px 20px 20px; margin-top:14px; }
+  .control-card{ background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:18px 20px 20px; margin-top:14px; flex:none; }
   .control-head{ display:flex; justify-content:space-between; align-items:flex-end; }
   .control-label{ font-size:12.5px; color:var(--text-dim); font-weight:700; letter-spacing:.02em; }
   .control-value{ font-size:44px; font-weight:800; letter-spacing:-0.03em; display:flex; align-items:baseline; gap:6px; }
-  .control-value span{ font-size:16px; color:var(--text-dim); font-weight:600; }
+  .control-value span + span{ font-size:16px; color:var(--text-dim); font-weight:600; }
 
   .stepper{ display:flex; align-items:center; gap:14px; margin-top:6px; }
-  .step-btn{ width:46px; height:46px; border-radius:14px; background:var(--surface-2); border:1px solid var(--line); color:var(--text); font-size:22px; font-weight:700; flex:none; display:flex; align-items:center; justify-content:center; line-height:1; padding:0; }
+  .step-btn{
+    width:52px; height:52px; border-radius:15px; background:var(--surface-2); border:1px solid var(--line);
+    color:var(--text); font-size:24px; font-weight:700; flex:none;
+    display:flex; align-items:center; justify-content:center; line-height:1; padding:0;
+  }
   .step-btn:active{ background:var(--line); }
 
   input[type=range]{
-    -webkit-appearance:none; appearance:none; width:100%; height:46px; background:transparent; flex:1;
+    -webkit-appearance:none; appearance:none; width:100%; height:52px; background:transparent; flex:1;
   }
   input[type=range]::-webkit-slider-runnable-track{ height:10px; border-radius:6px; background:var(--surface-2); }
   input[type=range]::-webkit-slider-thumb{
-    -webkit-appearance:none; width:32px; height:32px; border-radius:50%;
-    background:var(--accent); border:5px solid #141308; margin-top:-11px;
+    -webkit-appearance:none; width:36px; height:36px; border-radius:50%;
+    background:var(--accent); border:5px solid #141308; margin-top:-13px;
     box-shadow:0 2px 8px rgba(0,0,0,.4);
   }
   input[type=range].rep-slider::-webkit-slider-thumb{ background:#7FD9FF; }
   input[type=range]::-moz-range-track{ height:10px; border-radius:6px; background:var(--surface-2); }
-  input[type=range]::-moz-range-thumb{ width:32px; height:32px; border-radius:50%; background:var(--accent); border:5px solid #141308; }
+  input[type=range]::-moz-range-thumb{ width:36px; height:36px; border-radius:50%; background:var(--accent); border:5px solid #141308; }
 
   .real-weight{ display:flex; justify-content:space-between; align-items:center; margin-top:14px; background:var(--surface-2); border-radius:12px; padding:12px 16px; }
   .real-weight .l{ font-size:12.5px; color:var(--text-dim); }
   .real-weight .v{ font-size:22px; font-weight:800; color:var(--accent); }
 
-  .complete-btn{ margin-top:auto; margin-bottom:4px; }
+  .complete-btn{ margin-top:auto; margin-bottom:4px; flex:none; }
 
   /* ---------- Rest screen ---------- */
   .rest-screen{ background:var(--bg); justify-content:center; align-items:center; text-align:center; }
@@ -318,6 +424,7 @@
   @media (prefers-reduced-motion: reduce){
     .hero-card,.control-card,.day-row .day-chip,.wk-exercise-swap,.done-badge{ animation:none !important; }
     .rest-count.urgent{ animation:none !important; }
+    .confetti{ display:none; }
   }
 
   /* ---------- Modal overlays (plate visualizer / type picker / peek) ---------- */
@@ -328,13 +435,17 @@
   }
   .modal-overlay.active{ opacity:1; pointer-events:auto; }
   .modal-sheet{
-    width:100%; max-width:640px; max-height:88vh; overflow-y:auto;
+    width:100%; max-width:640px; max-height:88vh; max-height:88dvh; overflow-y:auto;
+    -webkit-overflow-scrolling:touch; overscroll-behavior:contain;
     background:var(--surface); border:1px solid var(--line);
-    border-radius:26px 26px 0 0; padding:20px 22px max(20px, env(safe-area-inset-bottom));
+    border-radius:26px 26px 0 0; padding:10px 22px max(20px, var(--safe-b));
     transform:translateY(24px); transition:transform .3s cubic-bezier(.2,.8,.2,1);
   }
   .modal-overlay.active .modal-sheet{ transform:translateY(0); }
-  .modal-sheet-small{ max-height:70vh; }
+  .modal-sheet.dragging{ transition:none; }
+  .modal-sheet-small{ max-height:70vh; max-height:70dvh; }
+  /* Grab handle — the sheet can be flicked down to dismiss */
+  .sheet-grip{ width:40px; height:5px; border-radius:3px; background:var(--line); margin:0 auto 12px; flex:none; }
   .modal-head{ display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:14px; }
   .modal-eyebrow{ font-size:12px; color:var(--accent); font-weight:700; letter-spacing:.02em; }
   .modal-title{ font-size:22px; font-weight:800; letter-spacing:-0.02em; margin-top:3px; }
@@ -357,16 +468,21 @@
     flex:none; border-radius:6px; display:flex; align-items:center; justify-content:center;
     color:#141308; font-weight:800; font-size:11px; cursor:grab;
     box-shadow: inset 0 0 0 2px rgba(0,0,0,.18);
+    touch-action:none;
   }
   .plate-disc:active{ cursor:grabbing; }
   .bar-sleeve .plate-disc + .plate-disc{ margin-left:-4px; }
   .bar-sleeve-left .plate-disc + .plate-disc{ margin-left:0; margin-right:-4px; }
   .plate-hint{ font-size:12px; color:var(--text-dim); text-align:center; line-height:1.4; margin-top:8px; }
-  .plate-tray{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:18px; padding-top:16px; border-top:1px dashed var(--line); }
+  .plate-tray{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:18px; padding-top:16px; border-top:1px dashed var(--line); }
   .tray-plate{ display:flex; flex-direction:column; align-items:center; gap:6px; }
-  .tray-plate .plate-disc{ width:52px; height:52px; }
+  .tray-plate .plate-disc{ width:46px; height:46px; }
   .tray-plate .lbl{ font-size:10.5px; color:var(--text-dim); font-weight:700; }
   .plate-disc.dragging{ opacity:.35; }
+  .plate-disc.ghost{
+    position:fixed; z-index:60; pointer-events:none; opacity:.9;
+    transform:translate(-50%,-50%); box-shadow:0 10px 24px rgba(0,0,0,.5);
+  }
   .plate-disc.pop{ animation:platePop .22s cubic-bezier(.2,1.4,.4,1); }
   @keyframes platePop{ 0%{ transform:scale(.5); } 60%{ transform:scale(1.12); } 100%{ transform:scale(1); } }
 
@@ -391,6 +507,15 @@
   .peek-row .badge{ font-size:11px; font-weight:800; padding:4px 10px; border-radius:20px; background:var(--surface); color:var(--text-dim); flex:none; }
   .peek-row.is-current .badge{ background:var(--accent); color:#141308; }
   .peek-row.is-done .badge{ color:var(--accent-dim); }
+
+  /* Landscape on a phone is short — tighten the big numerals */
+  @media (max-height:520px){
+    .rest-count{ font-size:76px; }
+    .hero-title{ font-size:30px; }
+    .wk-exercise{ font-size:24px; }
+    .control-value{ font-size:34px; }
+    .done-badge{ width:64px; height:64px; margin-bottom:14px; }
+  }
 </style>
 </head>
 <body>
@@ -403,7 +528,7 @@
       <div class="icon-row">
         <div class="clock-pill" id="clock-pill"></div>
         <div class="date-pill" id="today-pill"></div>
-        <div class="fs-btn" id="stats-btn" title="Stats & log"><svg viewBox="0 0 24 24"><line x1="18" x2="18" y1="20" y2="10"/><line x1="12" x2="12" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="14"/></svg></div>
+        <div class="fs-btn" id="stats-btn" title="Stats and log"><svg viewBox="0 0 24 24"><line x1="18" x2="18" y1="20" y2="10"/><line x1="12" x2="12" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="14"/></svg></div>
         <div class="fs-btn is-on" id="sound-btn" title="Toggle sound"><svg viewBox="0 0 24 24"><path d="M11 5 6 9H2v6h4l5 4V5Z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg></div>
         <div class="fs-btn" id="fs-btn" title="Toggle fullscreen"><svg viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg></div>
         <div class="fs-btn" id="sleep-btn" title="Sleep mode"><svg viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></div>
@@ -465,7 +590,7 @@
         <div class="l" id="real-weight-label">= 95 lb total on bar</div>
         <div class="v" id="real-weight-val">95 lb</div>
       </div>
-      <button class="btn btn-ghost" id="plate-open-btn" style="width:100%; margin-top:12px; height:44px; font-size:13.5px;">
+      <button class="btn btn-ghost" id="plate-open-btn" style="width:100%; margin-top:12px; height:46px; font-size:13.5px;">
         <svg class="btn-icon" viewBox="0 0 24 24"><path d="M4 9v6M2 10v4M7 7v10"/><path d="M20 9v6M22 10v4M17 7v10"/><line x1="7" y1="12" x2="17" y2="12"/></svg>
         Open Plate Visualizer
       </button>
@@ -525,7 +650,7 @@
     <div class="wk-top">
       <div>
         <div class="wk-tag">YOUR PROGRESS</div>
-        <div class="wk-exercise" style="font-size:28px;">Stats & Log</div>
+        <div class="wk-exercise" style="font-size:28px;">Stats &amp; Log</div>
       </div>
       <div class="close-btn" id="stats-close-btn"><svg viewBox="0 0 24 24"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg></div>
     </div>
@@ -551,6 +676,7 @@
         </div>
         <div class="chart-bars" id="chart-bars"></div>
         <div class="chart-axis" id="chart-axis"></div>
+        <div class="chart-callout" id="chart-callout">Tap a bar for that session.</div>
       </div>
 
       <div class="section-label">Personal records</div>
@@ -567,13 +693,24 @@
 
     <!-- SYNC -->
     <div class="data-pane" id="pane-sync">
-      <div class="section-label" style="margin-top:4px;">Cloud sync</div>
+      <div class="section-label" style="margin-top:4px;">On this phone</div>
+      <div class="settings-panel">
+        <div class="setting-row">
+          <div>
+            <div class="t">Keep the screen awake</div>
+            <div class="d">Holds the display on while you're mid-workout so the timer stays visible between sets.</div>
+          </div>
+          <div class="toggle is-on" id="wake-toggle"><b></b></div>
+        </div>
+      </div>
+
+      <div class="section-label">Cloud sync</div>
       <div class="settings-panel">
         <div class="l">SUPABASE PROJECT URL</div>
-        <input type="text" id="sb-url" placeholder="https://xxxx.supabase.co" autocomplete="off">
+        <input type="url" id="sb-url" placeholder="https://xxxx.supabase.co" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" inputmode="url">
         <div class="l">SUPABASE ANON KEY</div>
-        <input type="text" id="sb-key" placeholder="public anon key" autocomplete="off">
-        <button class="btn btn-ghost" id="sb-save" style="width:100%; margin-top:4px;">Save & Sync</button>
+        <input type="text" id="sb-key" placeholder="public anon key" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+        <button class="btn btn-ghost" id="sb-save" style="width:100%; margin-top:4px;">Save &amp; Sync</button>
         <div class="status ok" id="sb-status">Connected — syncing to your Supabase project.</div>
       </div>
 
@@ -588,16 +725,31 @@
     </div>
   </div>
 
+  <!-- RESUME BANNER (unfinished session found on launch) -->
+  <div class="banner banner-bottom" id="resume-banner">
+    <div class="txt"><b id="resume-title">Upper A in progress</b><span id="resume-sub">Set 5 of 14</span></div>
+    <button class="act" id="resume-go">Resume</button>
+    <button class="dismiss" id="resume-drop" aria-label="Discard">✕</button>
+  </div>
+
+  <!-- ADD TO HOME SCREEN HINT -->
+  <div class="banner banner-bottom" id="a2hs-banner">
+    <div class="txt"><b>Add RACKED to your Home Screen</b>Tap <svg class="share-glyph" viewBox="0 0 24 24"><path d="M12 16V3"/><path d="m8 7 4-4 4 4"/><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/></svg> then “Add to Home Screen” to run it full screen, offline.</div>
+    <button class="dismiss" id="a2hs-close" aria-label="Dismiss">✕</button>
+  </div>
+
   <!-- SLEEP OVERLAY -->
   <div id="sleep-overlay">
     <div class="sleep-clock" id="sleep-clock">12:00</div>
     <div class="sleep-date" id="sleep-date">Monday, Sep 7</div>
+    <div class="sleep-rest" id="sleep-rest"></div>
     <div class="sleep-hint">Tap to wake</div>
   </div>
 
   <!-- PLATE VISUALIZER MODAL -->
   <div class="modal-overlay" id="plate-overlay">
-    <div class="modal-sheet">
+    <div class="modal-sheet" data-sheet>
+      <div class="sheet-grip"></div>
       <div class="modal-head">
         <div>
           <div class="modal-eyebrow">PLATE LOADER</div>
@@ -626,7 +778,8 @@
 
   <!-- EXERCISE TYPE PICKER MODAL -->
   <div class="modal-overlay" id="type-overlay">
-    <div class="modal-sheet modal-sheet-small">
+    <div class="modal-sheet modal-sheet-small" data-sheet>
+      <div class="sheet-grip"></div>
       <div class="modal-head">
         <div>
           <div class="modal-eyebrow">EXERCISE TYPE</div>
@@ -635,13 +788,14 @@
         <div class="close-btn" id="type-close-btn"><svg viewBox="0 0 24 24"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg></div>
       </div>
       <div class="type-grid" id="type-grid"></div>
-      <div class="plate-hint" style="margin-top:2px;">Changes how the real load is calculated (bar +45, cable ÷2, dumbbell ×2, etc). Saved for this exercise.</div>
+      <div class="plate-hint" style="margin-top:12px;">Changes how the real load is calculated (bar +45, cable ÷2, dumbbell ×2, etc). Saved for this exercise.</div>
     </div>
   </div>
 
   <!-- PEEK-AHEAD MODAL -->
   <div class="modal-overlay" id="peek-overlay">
-    <div class="modal-sheet">
+    <div class="modal-sheet" data-sheet>
+      <div class="sheet-grip"></div>
       <div class="modal-head">
         <div>
           <div class="modal-eyebrow">FULL WORKOUT</div>
@@ -654,18 +808,26 @@
   </div>
 
 </div>
-
 <script>
 (function(){
   "use strict";
 
+  /* ================= Safe storage (iOS private mode throws on write) ========= */
+  const store = {
+    get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } },
+    set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} },
+    del(k){ try{ localStorage.removeItem(k); }catch(e){} }
+  };
+
+  /* ================= Platform ================= */
+  const isIOS = /iP(hone|ad|od)/.test(navigator.platform) ||
+                (navigator.userAgent.includes("Mac") && "ontouchend" in document);
+  const isStandalone = window.navigator.standalone === true ||
+                       window.matchMedia("(display-mode: standalone)").matches;
+
   /* ================= CSV DATA (minimal-code data source) ================= */
   // day,exercise,tag,sets,reps_range,reps_default,weight
   // tag: bar (barbell +45), cable (2:1 pulley, halves the stack), dumbbell (paired, doubles), body (bodyweight + added load), plate/none (as-is)
-  // reps_range is the display target (e.g. "6-10"); reps_default seeds the slider.
-  // Built from your Week 1 Upper A / Lower A / Upper B / Lower B sheet. Blank weights in your
-  // sheet got a reasonable starting estimate below — tweak the CSV or just adjust the slider,
-  // and your actual numbers get remembered for next time either way.
   const CSV = `day,exercise,tag,sets,reps_range,reps_default,weight
 Upper A,Bench Press,bar,4,6-10,8,50
 Upper A,Barbell Row,bar,4,6-10,8,70
@@ -706,20 +868,37 @@ Lower B,Core,body,3,-,30,0`;
     });
   }
 
+  /* ================= Haptics (Android; a no-op on iOS) ================= */
+  function buzz(ms){ try{ navigator.vibrate && navigator.vibrate(ms); }catch(e){} }
+
   /* ================= Sound (WebAudio, no assets) ================= */
   const SOUND_KEY = "racked_sound_v1";
   const Sound = (function(){
     let ctx = null;
-    let enabled = localStorage.getItem(SOUND_KEY) !== "off";
+    let enabled = store.get(SOUND_KEY) !== "off";
     function ensureCtx(){
-      if(!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)();
+      if(!ctx){
+        const AC = window.AudioContext || window.webkitAudioContext;
+        if(!AC) return null;
+        ctx = new AC();
+      }
       if(ctx.state === "suspended") ctx.resume();
       return ctx;
+    }
+    // iOS only starts audio inside a user gesture, and suspends it whenever the
+    // app goes to the background. Prime it on the first touch, revive on return.
+    function unlock(){
+      const c = ensureCtx();
+      if(!c) return;
+      const b = c.createBuffer(1,1,22050);
+      const src = c.createBufferSource();
+      src.buffer = b; src.connect(c.destination); src.start(0);
     }
     function tone(freq, dur, {type="sine", gain=0.08, delay=0, glideTo=null} = {}){
       if(!enabled) return;
       try{
         const c = ensureCtx();
+        if(!c) return;
         const t0 = c.currentTime + delay;
         const osc = c.createOscillator();
         const g = c.createGain();
@@ -741,9 +920,19 @@ Lower B,Core,body,3,-,30,0`;
       restEnd(){ tone(520, 0.12, {type:"triangle", gain:0.09}); tone(780, 0.22, {type:"triangle", gain:0.08, delay:0.1}); },
       finish(){ [523,659,784,1046].forEach((f,i)=> tone(f, 0.22, {type:"sine", gain:0.08, delay:i*0.09})); },
       isEnabled(){ return enabled; },
-      toggle(){ enabled = !enabled; localStorage.setItem(SOUND_KEY, enabled ? "on" : "off"); if(enabled) ensureCtx(); return enabled; }
+      unlock, resume(){ if(ctx && ctx.state === "suspended") ctx.resume(); },
+      toggle(){ enabled = !enabled; store.set(SOUND_KEY, enabled ? "on" : "off"); if(enabled) unlock(); return enabled; }
     };
   })();
+
+  document.addEventListener("touchstart", function once(){
+    Sound.unlock();
+    document.removeEventListener("touchstart", once);
+  }, { passive:true });
+  document.addEventListener("click", function once(){
+    Sound.unlock();
+    document.removeEventListener("click", once);
+  }, { once:true });
 
   const ICON_VOLUME_ON = '<svg viewBox="0 0 24 24"><path d="M11 5 6 9H2v6h4l5 4V5Z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>';
   const ICON_VOLUME_OFF = '<svg viewBox="0 0 24 24"><path d="M11 5 6 9H2v6h4l5 4V5Z"/><line x1="22" x2="16" y1="9" y2="15"/><line x1="16" x2="22" y1="9" y2="15"/></svg>';
@@ -758,8 +947,10 @@ Lower B,Core,body,3,-,30,0`;
   syncSoundBtn();
   soundBtn.addEventListener("click", ()=>{ Sound.toggle(); syncSoundBtn(); });
 
-  /* ================= Fullscreen ================= */
+  /* ================= Fullscreen (hidden where iOS can't do it) ============ */
   const fsBtn = document.getElementById("fs-btn");
+  const fsSupported = !!(document.documentElement.requestFullscreen || document.documentElement.webkitRequestFullscreen);
+  if(!fsSupported || isStandalone) fsBtn.classList.add("is-hidden");
   function isFullscreen(){ return !!(document.fullscreenElement || document.webkitFullscreenElement); }
   function syncFsBtn(){
     fsBtn.innerHTML = isFullscreen() ? ICON_MINIMIZE : ICON_MAXIMIZE;
@@ -777,32 +968,53 @@ Lower B,Core,body,3,-,30,0`;
   document.addEventListener("fullscreenchange", syncFsBtn);
   document.addEventListener("webkitfullscreenchange", syncFsBtn);
 
+  /* ================= Screen wake lock ================= */
+  const WAKE_KEY = "racked_wake_v1";
+  let wakeWanted = store.get(WAKE_KEY) !== "off";
+  let wakeLock = null;
+  async function acquireWake(){
+    if(!wakeWanted || !("wakeLock" in navigator)) return;
+    try{
+      wakeLock = await navigator.wakeLock.request("screen");
+      wakeLock.addEventListener("release", ()=>{ wakeLock = null; });
+    }catch(e){ wakeLock = null; }
+  }
+  function releaseWake(){
+    if(wakeLock){ try{ wakeLock.release(); }catch(e){} wakeLock = null; }
+  }
+  const wakeToggle = document.getElementById("wake-toggle");
+  function syncWakeToggle(){ wakeToggle.classList.toggle("is-on", wakeWanted); }
+  wakeToggle.addEventListener("click", ()=>{
+    Sound.tap();
+    wakeWanted = !wakeWanted;
+    store.set(WAKE_KEY, wakeWanted ? "on" : "off");
+    syncWakeToggle();
+    if(wakeWanted && session) acquireWake(); else releaseWake();
+  });
+  syncWakeToggle();
+
   const rows = parseCSV(CSV);
-  const workouts = {}; // { Upper: [rows...], Lower: [rows...] }
+  const workouts = {}; // { "Upper A": [rows...], ... }
   rows.forEach(r=>{
     (workouts[r.day] = workouts[r.day] || []).push(r);
   });
 
-  /* ================= History (localStorage) ================= */
+  /* ================= History (per-exercise last numbers) ================= */
   const HISTORY_KEY = "racked_history_v1";
   function loadHistory(){
-    try{ return JSON.parse(localStorage.getItem(HISTORY_KEY)) || {}; }catch(e){ return {}; }
+    try{ return JSON.parse(store.get(HISTORY_KEY)) || {}; }catch(e){ return {}; }
   }
-  function saveHistory(h){ localStorage.setItem(HISTORY_KEY, JSON.stringify(h)); }
+  function saveHistory(h){ store.set(HISTORY_KEY, JSON.stringify(h)); }
   let history = loadHistory();
 
   /* ================= Manual exercise-type overrides ================= */
-  // Lets you correct the CSV's guess (barbell/cable/dumbbell/plate/body/none)
-  // per exercise name, persisted across sessions.
   const TYPE_OVERRIDES_KEY = "racked_type_overrides_v1";
   function loadTypeOverrides(){
-    try{ return JSON.parse(localStorage.getItem(TYPE_OVERRIDES_KEY)) || {}; }catch(e){ return {}; }
+    try{ return JSON.parse(store.get(TYPE_OVERRIDES_KEY)) || {}; }catch(e){ return {}; }
   }
-  function saveTypeOverrides(o){ localStorage.setItem(TYPE_OVERRIDES_KEY, JSON.stringify(o)); }
+  function saveTypeOverrides(o){ store.set(TYPE_OVERRIDES_KEY, JSON.stringify(o)); }
   let typeOverrides = loadTypeOverrides();
-  function effectiveTag(row){
-    return typeOverrides[row.exercise] || row.tag;
-  }
+  function effectiveTag(row){ return typeOverrides[row.exercise] || row.tag; }
   const TAG_INFO = {
     bar:      { label:"Barbell",  desc:"Plates added, +45 lb bar" },
     cable:    { label:"Cable",    desc:"Stack setting, ÷2 pulley ratio" },
@@ -810,41 +1022,60 @@ Lower B,Core,body,3,-,30,0`;
     none:     { label:"None",     desc:"Weight as shown, no adjustment" }
   };
 
-  /* ================= Workout log + stats ================= */
+  /* ================= Workout log ================= */
   const LOG_KEY = "racked_log_v1";
-  const SB_KEY = "racked_sb_v1"; // {url, key} — only set if user overrides the built-in project
+  const SB_KEY = "racked_sb_v1";
   const DEFAULT_SB = {
     url: "https://euhijmxntwbclsjoguiu.supabase.co",
     key: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV1aGlqbXhudHdiY2xzam9ndWl1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg3ODYyODAsImV4cCI6MjEwNDM2MjI4MH0.W5w3XJgkKNRlwWFAFi3jL0xhZdrKE-jtudFKN9257Wg"
   };
-  function loadLog(){ try{ return JSON.parse(localStorage.getItem(LOG_KEY)) || []; }catch(e){ return []; } }
-  function saveLog(l){ localStorage.setItem(LOG_KEY, JSON.stringify(l)); }
+  function loadLog(){ try{ return JSON.parse(store.get(LOG_KEY)) || []; }catch(e){ return []; } }
+  function saveLog(l){ store.set(LOG_KEY, JSON.stringify(l)); }
   let workoutLog = loadLog();
 
   function loadSbConfig(){
     try{
-      const stored = JSON.parse(localStorage.getItem(SB_KEY));
+      const stored = JSON.parse(store.get(SB_KEY));
       if(stored && stored.url && stored.key) return stored;
     }catch(e){}
     return DEFAULT_SB;
   }
   function saveSbConfig(c){
-    if(c) localStorage.setItem(SB_KEY, JSON.stringify(c));
-    else localStorage.removeItem(SB_KEY);
+    if(c) store.set(SB_KEY, JSON.stringify(c));
+    else store.del(SB_KEY);
   }
+
+  // Anything that fails to reach Supabase waits in a queue and goes out on the
+  // next launch or the next time the phone comes back online.
+  const PENDING_KEY = "racked_pending_v1";
+  function loadPending(){ try{ return JSON.parse(store.get(PENDING_KEY)) || []; }catch(e){ return []; } }
+  function savePending(p){ store.set(PENDING_KEY, JSON.stringify(p)); }
 
   function addLogEntry(entry){
     workoutLog.push(entry);
     saveLog(workoutLog);
-    syncToSupabase([entry]).catch(()=>{});
+    syncToSupabase([entry]).catch(()=>{
+      const pending = loadPending();
+      pending.push(entry);
+      savePending(pending);
+    });
   }
+  async function flushPending(){
+    const pending = loadPending();
+    if(!pending.length) return;
+    try{
+      await syncToSupabase(pending);
+      savePending([]);
+    }catch(e){ /* still offline — try again later */ }
+  }
+  window.addEventListener("online", flushPending);
 
   /* ---- optional free backend: Supabase REST (no SDK needed) ---- */
   async function syncToSupabase(entries){
     const cfg = loadSbConfig();
     if(!cfg || !cfg.url || !cfg.key) return;
     const url = cfg.url.replace(/\/$/,"") + "/rest/v1/racked_logs";
-    await fetch(url, {
+    const res = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -854,6 +1085,7 @@ Lower B,Core,body,3,-,30,0`;
       },
       body: JSON.stringify(entries.map(e=>({ id:e.id, date:e.date, type:e.type, sets:e.sets, volume:e.volume, minutes:e.minutes, exercises:e.exercises })))
     });
+    if(!res.ok) throw new Error("HTTP " + res.status);
   }
   async function pullFromSupabase(){
     const cfg = loadSbConfig();
@@ -875,33 +1107,23 @@ Lower B,Core,body,3,-,30,0`;
     return h ? h : { weight: fallbackWeight, reps: fallbackReps };
   }
 
-  /* ================= Rotation (progress-based, not calendar-based) ================= */
-  // The order you cycle through. No "Rest" in here — since you won't be around
-  // to tap Complete on a rest day, rest days aren't a slot the app waits on.
-  // Whatever the last *logged* workout was, the next one up is next in this list.
+  /* ================= Rotation (progress-based, not calendar-based) ======== */
   const ROTATION = ["Upper A","Lower A","Upper B","Lower B"];
   const ROTATION_KEY = "racked_rotation_v1";
 
   function loadRotationIndex(){
-    const raw = localStorage.getItem(ROTATION_KEY);
+    const raw = store.get(ROTATION_KEY);
     const i = raw === null ? 0 : parseInt(raw,10);
     return Number.isFinite(i) ? ((i % ROTATION.length) + ROTATION.length) % ROTATION.length : 0;
   }
   function saveRotationIndex(i){
-    localStorage.setItem(ROTATION_KEY, String(((i % ROTATION.length) + ROTATION.length) % ROTATION.length));
+    store.set(ROTATION_KEY, String(((i % ROTATION.length) + ROTATION.length) % ROTATION.length));
   }
   function advanceRotation(completedType){
-    // Whatever you just finished — suggested or manually picked — becomes the
-    // new "last completed" slot, and the rotation queues up the one right after it.
-    // e.g. finish Lower A -> Upper B is next, even if Upper A was queued before.
     const completedIdx = ROTATION.indexOf(completedType);
-    if(completedIdx !== -1){
-      saveRotationIndex(completedIdx + 1);
-    }
+    if(completedIdx !== -1) saveRotationIndex(completedIdx + 1);
   }
-  function todayType(){
-    return ROTATION[loadRotationIndex()];
-  }
+  function todayType(){ return ROTATION[loadRotationIndex()]; }
 
   /* ================= Real-weight math ================= */
   function computeReal(tag, val){
@@ -925,9 +1147,12 @@ Lower B,Core,body,3,-,30,0`;
     done: document.getElementById("screen-done"),
     stats: document.getElementById("screen-stats"),
   };
+  let currentScreen = "home";
   function show(name){
     Object.values(screens).forEach(s=>s.classList.remove("active"));
     screens[name].classList.add("active");
+    screens[name].scrollTop = 0;
+    currentScreen = name;
   }
 
   /* ================= HOME rendering ================= */
@@ -942,12 +1167,12 @@ Lower B,Core,body,3,-,30,0`;
   const dayRow = document.getElementById("day-row");
   const pickRow = document.getElementById("pick-row");
 
-  let suggestedType = todayType(); // refreshed in renderHome() from the rotation pointer
-  let activePlan = null; // the day type currently loaded into the workout screen
+  let suggestedType = todayType();
+  let activePlan = null;
 
   function renderHome(){
     const now = new Date();
-    todayPill.textContent = now.toLocaleDateString(undefined,{ weekday:'long', month:'short', day:'numeric' });
+    todayPill.textContent = now.toLocaleDateString(undefined,{ weekday:'short', month:'short', day:'numeric' });
 
     suggestedType = todayType();
     heroCard.style.display = "block";
@@ -955,7 +1180,7 @@ Lower B,Core,body,3,-,30,0`;
     const plan = workouts[suggestedType] || [];
     const totalSets = plan.reduce((s,r)=>s+r.sets,0);
     heroEyebrow.textContent = "UP NEXT";
-    heroTitle.textContent = suggestedType + " Body";
+    heroTitle.textContent = suggestedType;
     heroSub.textContent = `${plan.length} exercises · ${totalSets} sets`;
     heroList.innerHTML = plan.map(r=>{
       const p = prevFor(r.exercise, r.weight, r.reps_default);
@@ -978,31 +1203,73 @@ Lower B,Core,body,3,-,30,0`;
   startBtn.addEventListener("click", ()=>{ Sound.tap(); startWorkout(suggestedType); });
 
   /* ================= WORKOUT session state ================= */
+  const SESSION_KEY = "racked_session_v1";
   let session = null;
-  /*
-    session = {
-      type, exercises: [...rows], flatSets: [{exIndex, setIndex}],
-      cursor: 0, startTime, results: [{exercise, weight, reps}]
-    }
-  */
 
   function buildSession(type){
-    // clone rows (with any manual type override applied) so we never mutate
-    // the shared `workouts` data just because this session's tag was edited
     const exercises = workouts[type].map(ex => ({ ...ex, tag: effectiveTag(ex) }));
     const flatSets = [];
     exercises.forEach((ex, exIndex)=>{
       for(let s=0; s<ex.sets; s++) flatSets.push({ exIndex, setIndex:s });
     });
-    return { type, exercises, flatSets, cursor:0, startTime:Date.now(), results:[] };
+    return { type, exercises, flatSets, cursor:0, startTime:Date.now(), results:[], restEndsAt:null };
+  }
+
+  // iOS drops backgrounded web apps out of memory without warning, so the live
+  // session is written to storage after every meaningful change and picked back
+  // up on the next launch.
+  function persistSession(){
+    if(!session){ store.del(SESSION_KEY); return; }
+    store.set(SESSION_KEY, JSON.stringify({
+      type: session.type,
+      cursor: session.cursor,
+      startTime: session.startTime,
+      results: session.results,
+      restEndsAt: session.restEndsAt,
+      restTotal: session.restTotal || null,
+      savedAt: Date.now()
+    }));
+  }
+  function readSavedSession(){
+    try{
+      const s = JSON.parse(store.get(SESSION_KEY));
+      if(!s || !workouts[s.type]) return null;
+      // anything older than 12 hours isn't a workout you're still in
+      if(Date.now() - (s.savedAt || 0) > 12*60*60*1000) return null;
+      if(!s.cursor) return null;
+      return s;
+    }catch(e){ return null; }
+  }
+  function restoreSession(saved){
+    session = buildSession(saved.type);
+    session.cursor = Math.min(saved.cursor, session.flatSets.length - 1);
+    session.startTime = saved.startTime || Date.now();
+    session.results = saved.results || [];
+    activePlan = saved.type;
+    acquireWake();
+    const restLeft = saved.restEndsAt ? (saved.restEndsAt - Date.now())/1000 : 0;
+    if(restLeft > 1){
+      renderCurrentSet();
+      startRest(restLeft, saved.restTotal || REST_SECONDS_DEFAULT);
+    } else {
+      renderCurrentSet();
+      show("workout");
+    }
   }
 
   function startWorkout(type){
     if(!workouts[type]) return;
     session = buildSession(type);
     activePlan = type;
+    persistSession();
+    acquireWake();
     show("workout");
     renderCurrentSet();
+  }
+  function endSession(){
+    session = null;
+    store.del(SESSION_KEY);
+    releaseWake();
   }
 
   /* ---- workout screen elements ---- */
@@ -1030,7 +1297,10 @@ Lower B,Core,body,3,-,30,0`;
   function renderCurrentSet(){
     const { exIndex, setIndex } = session.flatSets[session.cursor];
     currentEx = session.exercises[exIndex];
-    const prev = prevFor(currentEx.exercise, currentEx.weight, currentEx.reps_default);
+    // reuse this session's own numbers for the exercise before falling back
+    const done = session.results.filter(r=>r.exercise === currentEx.exercise).pop();
+    const prev = done ? { weight:done.weight, reps:done.reps }
+                      : prevFor(currentEx.exercise, currentEx.weight, currentEx.reps_default);
 
     wkTag.textContent = `${session.type.toUpperCase()} · EXERCISE ${exIndex+1} OF ${session.exercises.length}`;
     if(wkExercise.textContent !== currentEx.exercise){
@@ -1061,8 +1331,6 @@ Lower B,Core,body,3,-,30,0`;
     updatePlateAffordance();
   }
 
-  // Show the plate-loading shortcut for everything except dumbbells — a
-  // paired, per-hand implement isn't something you load plates onto here.
   function updatePlateAffordance(){
     const showPlates = currentEx.tag !== "dumbbell";
     plateOpenBtn.style.display = showPlates ? "flex" : "none";
@@ -1090,14 +1358,46 @@ Lower B,Core,body,3,-,30,0`;
 
   weightSlider.addEventListener("input", updateWeightUI);
   repsSlider.addEventListener("input", updateRepsUI);
-  document.getElementById("w-minus").addEventListener("click", (e)=>{ Sound.step(); pressFx(e.currentTarget); weightSlider.value = Math.max(0, parseFloat(weightSlider.value)-2.5); updateWeightUI(); });
-  document.getElementById("w-plus").addEventListener("click", (e)=>{ Sound.step(); pressFx(e.currentTarget); weightSlider.value = Math.min(400, parseFloat(weightSlider.value)+2.5); updateWeightUI(); });
-  document.getElementById("r-minus").addEventListener("click", (e)=>{ Sound.step(); pressFx(e.currentTarget); repsSlider.value = Math.max(1, parseInt(repsSlider.value)-1); updateRepsUI(); });
-  document.getElementById("r-plus").addEventListener("click", (e)=>{ Sound.step(); pressFx(e.currentTarget); repsSlider.value = Math.min(30, parseInt(repsSlider.value)+1); updateRepsUI(); });
 
-  closeBtn.addEventListener("click", ()=>{ Sound.tap(); session = null; show("home"); renderHome(); });
+  // Press-and-hold ramps the value instead of making you tap 20 times.
+  function wireStepper(btn, apply){
+    let holdTimer = null, repeatTimer = null, speed = 180;
+    function once(){ Sound.step(); pressFx(btn); apply(); }
+    function stop(){
+      clearTimeout(holdTimer); clearInterval(repeatTimer);
+      holdTimer = repeatTimer = null; speed = 180;
+    }
+    btn.addEventListener("pointerdown", (e)=>{
+      e.preventDefault();
+      once();
+      holdTimer = setTimeout(function ramp(){
+        repeatTimer = setInterval(()=>{
+          apply();
+          if(speed > 45){ // accelerate the longer it's held
+            speed -= 12;
+            clearInterval(repeatTimer);
+            repeatTimer = setInterval(apply, speed);
+          }
+        }, speed);
+      }, 420);
+    });
+    ["pointerup","pointercancel","pointerleave"].forEach(ev=> btn.addEventListener(ev, stop));
+  }
+  wireStepper(document.getElementById("w-minus"), ()=>{ weightSlider.value = Math.max(0, parseFloat(weightSlider.value)-2.5); updateWeightUI(); });
+  wireStepper(document.getElementById("w-plus"),  ()=>{ weightSlider.value = Math.min(400, parseFloat(weightSlider.value)+2.5); updateWeightUI(); });
+  wireStepper(document.getElementById("r-minus"), ()=>{ repsSlider.value = Math.max(1, parseInt(repsSlider.value)-1); updateRepsUI(); });
+  wireStepper(document.getElementById("r-plus"),  ()=>{ repsSlider.value = Math.min(30, parseInt(repsSlider.value)+1); updateRepsUI(); });
 
-  /* ================= Exercise type picker (manual edit) ================= */
+  closeBtn.addEventListener("click", ()=>{
+    Sound.tap();
+    const midway = session && session.results.length > 0;
+    if(midway && !confirm("Leave this workout? Your finished sets are kept as your latest numbers, but the session won't be logged.")) return;
+    endSession();
+    show("home");
+    renderHome();
+  });
+
+  /* ================= Exercise type picker ================= */
   const typeOverlay = document.getElementById("type-overlay");
   const typeModalExercise = document.getElementById("type-modal-exercise");
   const typeGrid = document.getElementById("type-grid");
@@ -1120,7 +1420,7 @@ Lower B,Core,body,3,-,30,0`;
         Sound.step();
         typeOverrides[currentEx.exercise] = tag;
         saveTypeOverrides(typeOverrides);
-        currentEx.tag = tag; // update the live session row too
+        currentEx.tag = tag;
         weightTagLabelEl.textContent = weightTagLabel(currentEx.tag);
         updateWeightUI();
         updatePlateAffordance();
@@ -1134,8 +1434,7 @@ Lower B,Core,body,3,-,30,0`;
   typeCloseBtn.addEventListener("click", ()=>{ Sound.tap(); closeTypeModal(); });
   typeOverlay.addEventListener("click", (e)=>{ if(e.target === typeOverlay) closeTypeModal(); });
 
-  /* ================= Plate visualizer (tap to open, drag plates) ================= */
-  // Standard gym plate set. `lb` doubles as the internal id; color/size are just visual weight cues.
+  /* ================= Plate visualizer ================= */
   const PLATE_SET = [
     { lb:45, color:"#C7F23D", size:78 },
     { lb:35, color:"#FF9036", size:70 },
@@ -1155,10 +1454,6 @@ Lower B,Core,body,3,-,30,0`;
   const plateDoneBtn = document.getElementById("plate-done-btn");
   const plateHint = document.getElementById("plate-hint");
 
-  // Plates loaded on each sleeve independently. For a true barbell ("bar"),
-  // both sides are kept mirrored since a real bar has to stay symmetric.
-  // For anything else (cable stack, single-sided loading, etc.) the two
-  // sides are tracked and edited independently — no mirroring assumed.
   let plateLoadedLeft = [];
   let plateLoadedRight = [];
   function requiresSymmetry(){ return currentEx && currentEx.tag === "bar"; }
@@ -1172,9 +1467,63 @@ Lower B,Core,body,3,-,30,0`;
     el.style.height = size+"px";
     el.style.background = info.color;
     el.textContent = lb;
-    el.draggable = true;
     el.setAttribute("data-lb", lb);
     return el;
+  }
+
+  // HTML5 drag-and-drop never fires on iOS touch, so dragging is done with
+  // pointer events and a floating ghost. A short press with no movement is
+  // treated as a tap, which keeps the one-handed flow working.
+  function makeDraggablePlate(el, lb, onTap){
+    let ghost = null, startX = 0, startY = 0, moved = false, dragging = false;
+    el.addEventListener("pointerdown", (e)=>{
+      if(e.button === 1 || e.button === 2) return;
+      startX = e.clientX; startY = e.clientY; moved = false; dragging = true;
+      el.setPointerCapture(e.pointerId);
+    });
+    el.addEventListener("pointermove", (e)=>{
+      if(!dragging) return;
+      const dx = e.clientX - startX, dy = e.clientY - startY;
+      if(!moved && Math.hypot(dx,dy) < 8) return;
+      if(!moved){
+        moved = true;
+        el.classList.add("dragging");
+        ghost = plateDiscEl(lb, false);
+        ghost.classList.add("ghost");
+        document.body.appendChild(ghost);
+      }
+      e.preventDefault();
+      ghost.style.left = e.clientX + "px";
+      ghost.style.top = e.clientY + "px";
+      const over = sleeveUnder(e.clientX, e.clientY);
+      sleeveLeft.classList.toggle("drag-over", over === "left");
+      sleeveRight.classList.toggle("drag-over", over === "right");
+    });
+    function finish(e){
+      if(!dragging) return;
+      dragging = false;
+      el.classList.remove("dragging");
+      sleeveLeft.classList.remove("drag-over");
+      sleeveRight.classList.remove("drag-over");
+      if(ghost){ ghost.remove(); ghost = null; }
+      if(!moved){ onTap(); return; }
+      const side = sleeveUnder(e.clientX, e.clientY);
+      if(side) addPlate(side, lb);
+    }
+    el.addEventListener("pointerup", finish);
+    el.addEventListener("pointercancel", ()=>{
+      dragging = false; moved = false;
+      el.classList.remove("dragging");
+      if(ghost){ ghost.remove(); ghost = null; }
+    });
+  }
+  function sleeveUnder(x,y){
+    const l = sleeveLeft.getBoundingClientRect();
+    const r = sleeveRight.getBoundingClientRect();
+    const inside = (b)=> x>=b.left && x<=b.right && y>=b.top && y<=b.bottom;
+    if(inside(l)) return "left";
+    if(inside(r)) return "right";
+    return null;
   }
 
   function renderTray(){
@@ -1183,16 +1532,8 @@ Lower B,Core,body,3,-,30,0`;
       const wrap = document.createElement("div");
       wrap.className = "tray-plate";
       const disc = plateDiscEl(p.lb, true);
-      disc.addEventListener("dragstart", (e)=>{
-        e.dataTransfer.setData("text/plain", String(p.lb));
-        disc.classList.add("dragging");
-      });
-      disc.addEventListener("dragend", ()=> disc.classList.remove("dragging"));
-      // Tap-to-add on touch devices: symmetric exercises add to both sides
-      // at once; asymmetric ones add to whichever side has less on it so a
-      // single tap still does something sensible without a drag gesture.
-      disc.addEventListener("click", ()=>{
-        if(requiresSymmetry()){ addPlate("left", p.lb); addPlate("right", p.lb); }
+      makeDraggablePlate(disc, p.lb, ()=>{
+        if(requiresSymmetry()){ addPlate("left", p.lb); }
         else{
           const side = plateTotalFor("left") <= plateTotalFor("right") ? "left" : "right";
           addPlate(side, p.lb);
@@ -1211,12 +1552,12 @@ Lower B,Core,body,3,-,30,0`;
     sleeveRight.innerHTML = "";
     plateLoadedLeft.forEach(lb=>{
       const el = plateDiscEl(lb, false);
-      el.addEventListener("click", ()=> removePlate("left", lb));
+      makeDraggablePlate(el, lb, ()=> removePlate("left", lb));
       sleeveLeft.appendChild(el);
     });
     plateLoadedRight.forEach(lb=>{
       const el = plateDiscEl(lb, false);
-      el.addEventListener("click", ()=> removePlate("right", lb));
+      makeDraggablePlate(el, lb, ()=> removePlate("right", lb));
       sleeveRight.appendChild(el);
     });
   }
@@ -1225,18 +1566,15 @@ Lower B,Core,body,3,-,30,0`;
   function plateTotalFor(side){ return sleeveArr(side).reduce((s,lb)=>s+lb, 0); }
 
   function refreshPlateReadout(){
-    const tag = currentEx && currentEx.tag;
     let total;
     if(requiresSymmetry()){
-      // symmetric: one side's total × 2 = total plates added to the bar
       total = plateTotalFor("left") * 2;
       plateReadoutLabel.textContent = "PLATES ADDED (BOTH SIDES)";
     } else {
-      // asymmetric: sides can differ, so just add what's actually loaded
       total = plateTotalFor("left") + plateTotalFor("right");
       plateReadoutLabel.textContent = "TOTAL LOAD (BOTH SIDES SHOWN)";
     }
-    plateReadoutVal.textContent = total;
+    plateReadoutVal.textContent = Math.round(total*10)/10;
   }
 
   function addPlate(side, lb){
@@ -1250,14 +1588,13 @@ Lower B,Core,body,3,-,30,0`;
     }
     renderSleeves();
     refreshPlateReadout();
-    Sound.step();
+    Sound.step(); buzz(8);
     const sleeveEl = side === "left" ? sleeveLeft : sleeveRight;
     const last = sleeveEl.lastElementChild;
     if(last){ last.classList.add("pop"); setTimeout(()=>last.classList.remove("pop"), 220); }
   }
   function removePlate(side, lb){
     if(requiresSymmetry()){
-      // keep both sides in lockstep for a real barbell
       const li = plateLoadedLeft.indexOf(lb);
       const ri = plateLoadedRight.indexOf(lb);
       if(li !== -1) plateLoadedLeft.splice(li,1);
@@ -1269,10 +1606,9 @@ Lower B,Core,body,3,-,30,0`;
     }
     renderSleeves();
     refreshPlateReadout();
-    Sound.step();
+    Sound.step(); buzz(8);
   }
 
-  // Break an arbitrary weight value down into the fewest standard plates.
   function decomposeToPlates(target){
     let remaining = Math.max(0, target);
     const out = [];
@@ -1285,17 +1621,6 @@ Lower B,Core,body,3,-,30,0`;
     return out;
   }
 
-  [ [sleeveLeft, "left"], [sleeveRight, "right"] ].forEach(([sleeve, side])=>{
-    sleeve.addEventListener("dragover", (e)=>{ e.preventDefault(); sleeve.classList.add("drag-over"); });
-    sleeve.addEventListener("dragleave", ()=> sleeve.classList.remove("drag-over"));
-    sleeve.addEventListener("drop", (e)=>{
-      e.preventDefault();
-      sleeve.classList.remove("drag-over");
-      const lb = parseFloat(e.dataTransfer.getData("text/plain"));
-      if(!isNaN(lb)) addPlate(side, lb);
-    });
-  });
-
   function openPlateModal(){
     if(!currentEx) return;
     Sound.tap();
@@ -1307,8 +1632,6 @@ Lower B,Core,body,3,-,30,0`;
       plateLoadedRight = perSide.slice();
       plateHint.textContent = "Drag a plate onto either sleeve to load it — both sides stay matched. Tap a plate to remove it.";
     } else {
-      // no assumed symmetry — seed one side with the full current value and
-      // leave the other empty; the person can redistribute freely
       plateLoadedLeft = decomposeToPlates(currentTotal);
       plateLoadedRight = [];
       plateHint.textContent = "Each side loads independently — drag plates onto whichever sleeve you actually loaded. Tap a plate to remove it.";
@@ -1337,7 +1660,7 @@ Lower B,Core,body,3,-,30,0`;
     closePlateModal();
   });
 
-  /* ================= Peek ahead (view full workout mid-session) ================= */
+  /* ================= Peek ahead ================= */
   const peekOverlay = document.getElementById("peek-overlay");
   const peekModalTitle = document.getElementById("peek-modal-title");
   const peekList = document.getElementById("peek-list");
@@ -1367,20 +1690,43 @@ Lower B,Core,body,3,-,30,0`;
   peekCloseBtn.addEventListener("click", ()=>{ Sound.tap(); closePeek(); });
   peekOverlay.addEventListener("click", (e)=>{ if(e.target === peekOverlay) closePeek(); });
 
+  /* ---- Swipe a sheet down to dismiss (the iOS gesture people expect) ---- */
+  document.querySelectorAll("[data-sheet]").forEach(sheet=>{
+    let startY = 0, dy = 0, tracking = false;
+    sheet.addEventListener("pointerdown", (e)=>{
+      if(e.target.closest(".plate-disc, .bar-rig, input, button, .type-option")) return;
+      if(sheet.scrollTop > 0) return;
+      startY = e.clientY; dy = 0; tracking = true;
+      sheet.classList.add("dragging");
+    });
+    sheet.addEventListener("pointermove", (e)=>{
+      if(!tracking) return;
+      dy = Math.max(0, e.clientY - startY);
+      sheet.style.transform = `translateY(${dy}px)`;
+    });
+    function release(){
+      if(!tracking) return;
+      tracking = false;
+      sheet.classList.remove("dragging");
+      sheet.style.transform = "";
+      if(dy > 110) sheet.closest(".modal-overlay").classList.remove("active");
+    }
+    sheet.addEventListener("pointerup", release);
+    sheet.addEventListener("pointercancel", release);
+  });
+
   /* ---- completing a set ---- */
   const REST_SECONDS_DEFAULT = 90;
-  let restTimer = null;
 
   completeBtn.addEventListener("click", ()=>{
     const weight = parseFloat(weightSlider.value);
     const reps = parseInt(repsSlider.value,10);
 
-    // persist as "previous" for next time
     history[currentEx.exercise] = { weight, reps };
     saveHistory(history);
     session.results.push({ exercise: currentEx.exercise, weight, reps, tag: currentEx.tag });
 
-    Sound.complete();
+    Sound.complete(); buzz([12,40,12]);
     flash.classList.add("show");
     setTimeout(()=>{
       flash.classList.remove("show");
@@ -1400,80 +1746,92 @@ Lower B,Core,body,3,-,30,0`;
   const restMinus = document.getElementById("rest-minus");
   const restPlus = document.getElementById("rest-plus");
   const restSkip = document.getElementById("rest-skip");
+  const sleepRest = document.getElementById("sleep-rest");
 
-  let restRemaining = REST_SECONDS_DEFAULT;
+  let restEndsAt = null;
   let restTotal = REST_SECONDS_DEFAULT;
   let restInterval = null;
+  let lastWholeSec = null;
 
   function fmt(sec){
     sec = Math.max(0, Math.round(sec));
     const m = Math.floor(sec/60), s = sec%60;
     return `${m}:${s.toString().padStart(2,"0")}`;
   }
+  function restRemaining(){ return restEndsAt ? Math.max(0, (restEndsAt - Date.now())/1000) : 0; }
 
-  function startRest(){
+  function paintRestBar(){
+    const frac = restTotal ? restRemaining()/restTotal : 0;
+    restBar.style.transition = "none";
+    restBar.style.width = (frac*100) + "%";
+    void restBar.offsetWidth;
+    restBar.style.transition = `width ${restRemaining()}s linear`;
+    restBar.style.width = "0%";
+  }
+
+  function startRest(seconds, total){
     show("rest");
-    restTotal = REST_SECONDS_DEFAULT;
-    restRemaining = REST_SECONDS_DEFAULT;
-    restCount.textContent = fmt(restRemaining);
+    restTotal = total || seconds || REST_SECONDS_DEFAULT;
+    const left = seconds || REST_SECONDS_DEFAULT;
+    // an absolute end time means the countdown stays true through a lock
+    // screen, an app switch, or an iOS memory purge
+    restEndsAt = Date.now() + left*1000;
+    session.restEndsAt = restEndsAt;
+    session.restTotal = restTotal;
+    persistSession();
 
+    restCount.textContent = fmt(left);
     const next = session.flatSets[session.cursor];
     const nextEx = session.exercises[next.exIndex];
     restNext.textContent = `Next: ${nextEx.exercise} · Set ${next.setIndex+1}`;
 
-    restBar.style.transition = "none";
-    restBar.style.width = "100%";
-    // force reflow so the transition below actually animates
-    void restBar.offsetWidth;
-    restBar.style.transition = `width ${restTotal}s linear`;
-    restBar.style.width = "0%";
-
+    paintRestBar();
     restCount.classList.remove("urgent");
-    let lastWholeSec = Math.ceil(restRemaining);
+    lastWholeSec = Math.ceil(left);
+    sleepRest.classList.add("show");
     clearInterval(restInterval);
-    const tickStart = Date.now();
-    restInterval = setInterval(()=>{
-      const elapsed = (Date.now()-tickStart)/1000;
-      restRemaining = Math.max(0, restTotal - elapsed);
-      restCount.textContent = fmt(restRemaining);
+    restInterval = setInterval(tickRest, 200);
+  }
 
-      const wholeSec = Math.ceil(restRemaining);
-      if(wholeSec !== lastWholeSec){
-        lastWholeSec = wholeSec;
-        if(wholeSec > 0 && wholeSec <= 3) Sound.restTick();
-      }
-      restCount.classList.toggle("urgent", restRemaining <= 3 && restRemaining > 0);
+  function tickRest(){
+    const left = restRemaining();
+    restCount.textContent = fmt(left);
+    sleepRest.textContent = fmt(left) + " rest";
 
-      if(restRemaining <= 0){
-        clearInterval(restInterval);
-        restCount.classList.remove("urgent");
-        Sound.restEnd();
-        renderCurrentSet();
-        show("workout");
-      }
-    }, 200);
+    const wholeSec = Math.ceil(left);
+    if(wholeSec !== lastWholeSec){
+      lastWholeSec = wholeSec;
+      if(wholeSec > 0 && wholeSec <= 3){ Sound.restTick(); buzz(10); }
+    }
+    restCount.classList.toggle("urgent", left <= 3 && left > 0);
+
+    if(left <= 0) endRest(true);
+  }
+
+  function endRest(announce){
+    clearInterval(restInterval);
+    restInterval = null;
+    restEndsAt = null;
+    restCount.classList.remove("urgent");
+    sleepRest.classList.remove("show");
+    if(session){ session.restEndsAt = null; persistSession(); }
+    if(announce){ Sound.restEnd(); buzz([20,60,20]); }
+    if(!session) return;
+    renderCurrentSet();
+    show("workout");
   }
 
   function adjustRest(deltaSec){
-    const elapsedFraction = 1 - (restRemaining/restTotal);
+    if(!restEndsAt) return;
     restTotal = Math.max(15, restTotal + deltaSec);
-    restRemaining = Math.max(0, restRemaining + deltaSec);
-    restCount.textContent = fmt(restRemaining);
-    restBar.style.transition = "none";
-    restBar.style.width = (restRemaining/restTotal*100) + "%";
-    void restBar.offsetWidth;
-    restBar.style.transition = `width ${restRemaining}s linear`;
-    restBar.style.width = "0%";
+    restEndsAt = Math.max(Date.now(), restEndsAt + deltaSec*1000);
+    if(session){ session.restEndsAt = restEndsAt; session.restTotal = restTotal; persistSession(); }
+    restCount.textContent = fmt(restRemaining());
+    paintRestBar();
   }
   restMinus.addEventListener("click", ()=>{ Sound.step(); adjustRest(-15); });
   restPlus.addEventListener("click", ()=>{ Sound.step(); adjustRest(15); });
-  restSkip.addEventListener("click", ()=>{
-    Sound.tap();
-    clearInterval(restInterval);
-    restCount.classList.remove("urgent");
-    renderCurrentSet();
-    show("workout");
-  });
+  restSkip.addEventListener("click", ()=>{ Sound.tap(); endRest(false); });
 
   /* ================= DONE screen ================= */
   const doneSets = document.getElementById("done-sets");
@@ -1505,19 +1863,20 @@ Lower B,Core,body,3,-,30,0`;
     });
 
     advanceRotation(session.type);
+    endSession();
 
     show("done");
-    Sound.finish();
+    Sound.finish(); buzz([15,50,15,50,25]);
     fireConfetti();
   }
   doneBtn.addEventListener("click", ()=>{
     Sound.tap();
-    session = null;
     show("home");
     renderHome();
   });
 
   function fireConfetti(){
+    if(window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const colors = ["#C7F23D","#FF5A36","#7FD9FF","#EDEAE1"];
     for(let i=0;i<26;i++){
       const el = document.createElement("div");
@@ -1536,6 +1895,7 @@ Lower B,Core,body,3,-,30,0`;
   const chartBars = document.getElementById("chart-bars");
   const chartAxis = document.getElementById("chart-axis");
   const chartRange = document.getElementById("chart-range");
+  const chartCallout = document.getElementById("chart-callout");
   const prList = document.getElementById("pr-list");
   const prEmpty = document.getElementById("pr-empty");
   const filterRow = document.getElementById("filter-row");
@@ -1551,16 +1911,15 @@ Lower B,Core,body,3,-,30,0`;
   const exportBtn = document.getElementById("export-btn");
   const resetBtn = document.getElementById("reset-btn");
 
-  let chartRangeSize = 8;   // 8 | 20 | 'all'
+  let chartRangeSize = 8;
   let historyFilter = "All";
-  let openLogRowId = null;  // which history row is expanded, if any
+  let openLogRowId = null;
 
   function computeStreak(log){
     if(!log.length) return 0;
     const days = new Set(log.map(e=> new Date(e.date).toDateString()));
     let streak = 0;
     let cursor = new Date();
-    // allow today to be "not yet worked out" without breaking streak
     if(!days.has(cursor.toDateString())) cursor.setDate(cursor.getDate()-1);
     while(days.has(cursor.toDateString())){
       streak++;
@@ -1569,7 +1928,6 @@ Lower B,Core,body,3,-,30,0`;
     return streak;
   }
 
-  /* ---- tab switching ---- */
   function switchDataTab(tab){
     dataTabs.querySelectorAll(".data-tab").forEach(el=> el.classList.toggle("is-active", el.getAttribute("data-tab")===tab));
     document.querySelectorAll(".data-pane").forEach(el=> el.classList.toggle("is-active", el.id === "pane-"+tab));
@@ -1581,7 +1939,6 @@ Lower B,Core,body,3,-,30,0`;
     switchDataTab(tab.getAttribute("data-tab"));
   });
 
-  /* ---- overview: stat cards + chart ---- */
   function renderOverview(log){
     const totalWorkouts = log.length;
     const totalVolume = log.reduce((s,e)=>s+e.volume,0);
@@ -1600,28 +1957,40 @@ Lower B,Core,body,3,-,30,0`;
     renderPRs(log);
   }
 
+  let chartSlice = [];
   function renderChart(log){
     const n = chartRangeSize === "all" ? log.length : chartRangeSize;
-    const slice = n ? log.slice(-n) : [];
-    const maxV = Math.max(1, ...slice.map(e=>e.volume));
-    const fillerSlots = chartRangeSize === "all" ? 0 : Math.max(0, chartRangeSize - slice.length);
+    chartSlice = n ? log.slice(-n) : [];
+    const maxV = Math.max(1, ...chartSlice.map(e=>e.volume));
+    const fillerSlots = chartRangeSize === "all" ? 0 : Math.max(0, chartRangeSize - chartSlice.length);
 
     chartBars.innerHTML =
       Array.from({length:fillerSlots}).map(()=>`<i class="empty" style="height:6%"></i>`).join("") +
-      slice.map(e=>{
-        const d = new Date(e.date);
-        const label = `${e.type} · ${Math.round(e.volume).toLocaleString()} lb · ${d.toLocaleDateString(undefined,{month:'short',day:'numeric'})}`;
-        return `<i style="height:${Math.max(6, Math.round(e.volume/maxV*100))}%" title="${label}"></i>`;
-      }).join("");
+      chartSlice.map((e,i)=>
+        `<i data-i="${i}" style="height:${Math.max(6, Math.round(e.volume/maxV*100))}%"></i>`
+      ).join("");
 
-    if(slice.length){
-      const first = new Date(slice[0].date);
-      const last = new Date(slice[slice.length-1].date);
+    if(chartSlice.length){
+      const first = new Date(chartSlice[0].date);
+      const last = new Date(chartSlice[chartSlice.length-1].date);
       chartAxis.innerHTML = `<span>${first.toLocaleDateString(undefined,{month:'short',day:'numeric'})}</span><span>${last.toLocaleDateString(undefined,{month:'short',day:'numeric'})}</span>`;
+      chartCallout.textContent = "Tap a bar for that session.";
     } else {
       chartAxis.innerHTML = "";
+      chartCallout.textContent = "Your first logged workout shows up here.";
     }
   }
+  // Touch has no hover, so a tapped bar writes its detail out underneath.
+  chartBars.addEventListener("click", (e)=>{
+    const bar = e.target.closest("i[data-i]");
+    if(!bar) return;
+    Sound.tap();
+    chartBars.querySelectorAll("i").forEach(el=>el.classList.remove("is-picked"));
+    bar.classList.add("is-picked");
+    const entry = chartSlice[parseInt(bar.getAttribute("data-i"),10)];
+    const d = new Date(entry.date);
+    chartCallout.innerHTML = `${d.toLocaleDateString(undefined,{month:'short',day:'numeric'})} · ${entry.type} · <b>${entry.volume.toLocaleString()} lb</b> · ${entry.sets} sets`;
+  });
 
   chartRange.addEventListener("click", (e)=>{
     const opt = e.target.closest(".chart-range-opt");
@@ -1632,9 +2001,8 @@ Lower B,Core,body,3,-,30,0`;
     renderChart(workoutLog.slice().sort((a,b)=> new Date(a.date)-new Date(b.date)));
   });
 
-  /* ---- personal records: best logged weight per exercise ---- */
   function renderPRs(log){
-    const best = {}; // exercise -> { weight, reps, date }
+    const best = {};
     log.forEach(e=>{
       (e.exercises||[]).forEach(x=>{
         const cur = best[x.exercise];
@@ -1643,9 +2011,9 @@ Lower B,Core,body,3,-,30,0`;
         }
       });
     });
-    const rows = Object.entries(best).sort((a,b)=> b[1].weight - a[1].weight);
-    prEmpty.style.display = rows.length ? "none" : "block";
-    prList.innerHTML = rows.map(([name, r])=>{
+    const prRows = Object.entries(best).sort((a,b)=> b[1].weight - a[1].weight);
+    prEmpty.style.display = prRows.length ? "none" : "block";
+    prList.innerHTML = prRows.map(([name, r])=>{
       const d = new Date(r.date);
       return `<div class="pr-row">
         <div>
@@ -1657,7 +2025,6 @@ Lower B,Core,body,3,-,30,0`;
     }).join("");
   }
 
-  /* ---- history: filter chips + expandable rows ---- */
   function renderFilters(log){
     const types = ["All", ...ROTATION.filter(t=> log.some(e=>e.type===t))];
     filterRow.innerHTML = types.map(t=>
@@ -1708,23 +2075,42 @@ Lower B,Core,body,3,-,30,0`;
     renderHistory();
   });
 
-  /* ---- sync pane ---- */
   function renderSyncPane(){
     const cfg = loadSbConfig();
     if(cfg){ sbUrlInput.value = cfg.url || ""; sbKeyInput.value = cfg.key || ""; }
-    sbStatus.textContent = cfg && cfg.url ? "Connected — syncing to your Supabase project." : "Not connected — data is stored on this device only.";
-    sbStatus.className = "status" + (cfg && cfg.url ? " ok" : "");
+    const pending = loadPending().length;
+    if(pending){
+      sbStatus.textContent = `${pending} workout${pending>1?'s':''} waiting to upload — they'll go out when you're back online.`;
+      sbStatus.className = "status";
+    } else {
+      sbStatus.textContent = cfg && cfg.url ? "Connected — syncing to your Supabase project." : "Not connected — data is stored on this device only.";
+      sbStatus.className = "status" + (cfg && cfg.url ? " ok" : "");
+    }
   }
 
-  exportBtn.addEventListener("click", ()=>{
+  // Safari in standalone mode ignores anchor downloads, so share the file where
+  // the share sheet exists and fall back to a download elsewhere.
+  exportBtn.addEventListener("click", async ()=>{
     Sound.tap();
-    const blob = new Blob([JSON.stringify(workoutLog, null, 2)], { type:"application/json" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "racked-log-" + new Date().toISOString().slice(0,10) + ".json";
-    document.body.appendChild(a); a.click(); a.remove();
-    URL.revokeObjectURL(url);
+    const json = JSON.stringify(workoutLog, null, 2);
+    const name = "racked-log-" + new Date().toISOString().slice(0,10) + ".json";
+    try{
+      const file = new File([json], name, { type:"application/json" });
+      if(navigator.canShare && navigator.canShare({ files:[file] })){
+        await navigator.share({ files:[file], title:"RACKED log" });
+        return;
+      }
+    }catch(e){ if(e && e.name === "AbortError") return; }
+    try{
+      const blob = new Blob([json], { type:"application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url; a.download = name;
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(()=>URL.revokeObjectURL(url), 1000);
+    }catch(e){
+      try{ await navigator.clipboard.writeText(json); alert("Log copied to the clipboard."); }catch(_){}
+    }
   });
   resetBtn.addEventListener("click", ()=>{
     Sound.tap();
@@ -1747,10 +2133,11 @@ Lower B,Core,body,3,-,30,0`;
 
   sbSaveBtn.addEventListener("click", async ()=>{
     Sound.tap();
+    sbUrlInput.blur(); sbKeyInput.blur();
     const url = sbUrlInput.value.trim();
     const key = sbKeyInput.value.trim();
     if(!url || !key){
-      saveSbConfig(null); // reverts to the built-in project
+      saveSbConfig(null);
       sbUrlInput.value = DEFAULT_SB.url;
       sbKeyInput.value = DEFAULT_SB.key;
       sbStatus.textContent = "Reverted to the built-in project.";
@@ -1763,13 +2150,14 @@ Lower B,Core,body,3,-,30,0`;
     sbStatus.className = "status";
     try{
       await syncToSupabase(workoutLog);
+      savePending([]);
       const remote = await pullFromSupabase();
       if(remote) mergeLogs(remote);
       sbStatus.textContent = "Connected — synced " + workoutLog.length + " workouts.";
       sbStatus.className = "status ok";
       renderStats();
     }catch(e){
-      sbStatus.textContent = "Couldn't connect. Check the URL/key and that the racked_logs table exists.";
+      sbStatus.textContent = "Couldn't connect. Check the URL and key, and that the racked_logs table exists.";
       sbStatus.className = "status err";
     }
   });
@@ -1791,28 +2179,109 @@ Lower B,Core,body,3,-,30,0`;
   /* ================= Sleep mode ================= */
   const sleepBtn = document.getElementById("sleep-btn");
   const sleepOverlay = document.getElementById("sleep-overlay");
-
   function enterSleep(){
     sleepOverlay.classList.add("active");
     sleepClock.classList.remove("dim");
   }
-  function exitSleep(){
-    sleepOverlay.classList.remove("active");
-  }
+  function exitSleep(){ sleepOverlay.classList.remove("active"); }
   sleepBtn.addEventListener("click", ()=>{ Sound.tap(); enterSleep(); });
   sleepOverlay.addEventListener("click", exitSleep);
-  // subtle breathing dim while asleep
   setInterval(()=>{
     if(sleepOverlay.classList.contains("active")) sleepClock.classList.toggle("dim");
   }, 2200);
 
+  /* ================= Resume banner ================= */
+  const resumeBanner = document.getElementById("resume-banner");
+  const resumeTitle = document.getElementById("resume-title");
+  const resumeSub = document.getElementById("resume-sub");
+  let pendingSession = null;
+
+  function offerResume(saved){
+    pendingSession = saved;
+    const plan = workouts[saved.type];
+    const total = plan.reduce((s,r)=>s+r.sets,0);
+    resumeTitle.textContent = saved.type + " in progress";
+    resumeSub.textContent = `Set ${Math.min(saved.cursor+1,total)} of ${total} · ${timeAgo(saved.savedAt)}`;
+    resumeBanner.classList.add("show");
+  }
+  function timeAgo(ts){
+    const mins = Math.round((Date.now()-ts)/60000);
+    if(mins < 1) return "just now";
+    if(mins < 60) return mins + " min ago";
+    return Math.round(mins/60) + " hr ago";
+  }
+  document.getElementById("resume-go").addEventListener("click", ()=>{
+    Sound.tap();
+    resumeBanner.classList.remove("show");
+    if(pendingSession) restoreSession(pendingSession);
+    pendingSession = null;
+  });
+  document.getElementById("resume-drop").addEventListener("click", ()=>{
+    Sound.tap();
+    resumeBanner.classList.remove("show");
+    store.del(SESSION_KEY);
+    pendingSession = null;
+  });
+
+  /* ================= Add to Home Screen hint ================= */
+  const A2HS_KEY = "racked_a2hs_v1";
+  const a2hsBanner = document.getElementById("a2hs-banner");
+  document.getElementById("a2hs-close").addEventListener("click", ()=>{
+    Sound.tap();
+    a2hsBanner.classList.remove("show");
+    store.set(A2HS_KEY, "dismissed");
+  });
+  function maybeOfferInstall(){
+    if(isStandalone || !isIOS || store.get(A2HS_KEY) === "dismissed") return;
+    setTimeout(()=>{ if(!resumeBanner.classList.contains("show")) a2hsBanner.classList.add("show"); }, 2500);
+  }
+
+  /* ================= Lifecycle: background, foreground, orientation ======= */
+  document.addEventListener("visibilitychange", ()=>{
+    if(document.hidden){
+      persistSession();
+      return;
+    }
+    Sound.resume();
+    if(wakeWanted && session) acquireWake();
+    flushPending();
+    // catch up a rest timer that ran down while the app was away
+    if(session && restEndsAt){
+      if(restRemaining() <= 0) endRest(true);
+      else { restCount.textContent = fmt(restRemaining()); paintRestBar(); }
+    }
+    tickClock();
+  });
+  window.addEventListener("pagehide", persistSession);
+  window.addEventListener("beforeunload", persistSession);
+
+  // Pinch-zoom and double-tap-zoom make a gym app unusable with sweaty hands
+  document.addEventListener("gesturestart", (e)=> e.preventDefault());
+  let lastTouchEnd = 0;
+  document.addEventListener("touchend", (e)=>{
+    const now = Date.now();
+    if(now - lastTouchEnd < 320) e.preventDefault();
+    lastTouchEnd = now;
+  }, { passive:false });
+
+  // Block rubber-band scrolling except inside things that genuinely scroll
+  document.addEventListener("touchmove", (e)=>{
+    if(e.touches.length > 1){ e.preventDefault(); return; }
+    const scrollable = e.target.closest(".data-pane, .modal-sheet, .filter-row, #screen-home, #screen-workout");
+    if(!scrollable) e.preventDefault();
+  }, { passive:false });
+
   /* ================= init ================= */
   renderHome();
+  const saved = readSavedSession();
+  if(saved) offerResume(saved); else maybeOfferInstall();
+
   (async ()=>{
     try{
       const remote = await pullFromSupabase();
       if(remote) mergeLogs(remote);
     }catch(e){ /* offline or not configured */ }
+    flushPending();
   })();
 })();
 </script>
